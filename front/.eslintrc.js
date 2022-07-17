@@ -34,4 +34,4 @@ module.exports = {
     'sort-keys': 'error',
     'sort-vars': 'error',
   },
-}
+};
