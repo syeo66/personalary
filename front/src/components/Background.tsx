@@ -12,7 +12,9 @@ const Background: React.FC<PropsWithChildren> = ({ children }) => {
 
   // TODO move this into a configurabel part to be able to fetch from different sources
   const { data } = useQuery(['nasa-apod', date], () =>
-    axios.get(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=${date}`).then((res) => res.data)
+    axios
+      .get(`https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_NASA_API}&start_date=${date}`)
+      .then((res) => res.data)
   )
 
   const urls: string[] = useMemo(() => data?.map(({ hdurl }: { hdurl: string }) => hdurl) || [], [data])
