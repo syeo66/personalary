@@ -50,11 +50,11 @@ const Background: React.FC<PropsWithChildren> = ({ children }) => {
 }
 
 const Copyright = styled.div`
-  position: absolute;
   bottom: 1rem;
-  left: 1rem;
   color: white;
   font-size: 85%;
+  left: 1rem;
+  position: absolute;
 `
 
 interface BackgroundRendererProps {
@@ -62,10 +62,10 @@ interface BackgroundRendererProps {
 }
 
 const BackgroundRenderer = styled.div<BackgroundRendererProps>`
-  background: black ${({ url }) => (url ? `url(${url})` : '')} no-repeat center center;
   background-size: cover;
-  width: 100%;
+  background: black ${({ url }) => (url ? `url(${url})` : '')} no-repeat center center;
   height: 100%;
+  width: 100%;
 `
 
 export default Background
