@@ -1,7 +1,51 @@
+import axios from 'axios'
+import { format, sub } from 'date-fns'
+import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react'
+import { useQuery } from 'react-query'
 import styled from 'styled-components'
 
-const Background = styled.div`
-  background: black url(https://science.nasa.gov/download/file/fid/227780) no-repeat center center;
+const IMAGE_ROTATION = 120000
+
+const Background: React.FC<PropsWithChildren> = ({ children }) => {
+  const [index, setIndex] = useState(0)
+  const [date] = useState(format(sub(new Date(), { days: 7 }), 'yyyy-MM-dd'))
+
+  // TODO move this into a configurabel part to be able to fetch from different sources
+  const { data } = useQuery(['nasa-apod', date], () =>
+    axios.get(`https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=${date}`).then((res) => res.data)
+  )
+
+  const urls: string[] = useMemo(() => data?.map(({ hdurl }: { hdurl: string }) => hdurl) || [], [data])
+  const current = urls[index]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!urls.length) {
+        return
+      }
+
+      setIndex((prev) => {
+        const next = (prev + 1) % urls.length
+
+        const img = new Image()
+        img.src = urls[(next + 1) % urls.length]
+
+        return next
+      })
+    }, IMAGE_ROTATION)
+
+    return () => clearInterval(interval)
+  }, [urls])
+
+  return <BackgroundRenderer url={current}>{children}</BackgroundRenderer>
+}
+
+interface BackgroundRendererProps {
+  url: string
+}
+
+const BackgroundRenderer = styled.div<BackgroundRendererProps>`
+  background: black ${({ url }) => (url ? `url(${url})` : '')} no-repeat center center;
   background-size: cover;
   width: 100%;
   height: 100%;
