@@ -19,6 +19,7 @@ const Background: React.FC<PropsWithChildren> = ({ children }) => {
 
   const urls: string[] = useMemo(() => data?.map(({ hdurl }: { hdurl: string }) => hdurl) || [], [data])
   const current = urls[index]
+  const copyright = data?.[index]?.copyright
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,8 +40,21 @@ const Background: React.FC<PropsWithChildren> = ({ children }) => {
     return () => clearInterval(interval)
   }, [urls])
 
-  return <BackgroundRenderer url={current}>{children}</BackgroundRenderer>
+  return (
+    <BackgroundRenderer url={current}>
+      {children}
+      {copyright && <Copyright>&copy; {copyright}</Copyright>}
+    </BackgroundRenderer>
+  )
 }
+
+const Copyright = styled.div`
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  color: white;
+  font-size: 85%;
+`
 
 interface BackgroundRendererProps {
   url: string
