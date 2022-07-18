@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { format, sub } from 'date-fns'
 import React, { PropsWithChildren, useEffect, useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
 import styled from 'styled-components'
@@ -8,12 +7,11 @@ const IMAGE_ROTATION = 120000
 
 const Background: React.FC<PropsWithChildren> = ({ children }) => {
   const [index, setIndex] = useState(0)
-  const [date] = useState(format(sub(new Date(), { days: 7 }), 'yyyy-MM-dd'))
 
   // TODO move this into a configurabel part to be able to fetch from different sources
-  const { data } = useQuery(['nasa-apod', date], () =>
+  const { data } = useQuery('nasa-apod', () =>
     axios
-      .get(`https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_NASA_API}&start_date=${date}`)
+      .get(`https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_NASA_API}&count=10`)
       .then((res) => res.data)
   )
 
