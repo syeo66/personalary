@@ -11,7 +11,7 @@ const Background: React.FC<PropsWithChildren> = ({ children }) => {
   // TODO move this into a configurabel part to be able to fetch from different sources
   const { data } = useQuery('nasa-apod', () =>
     axios
-      .get(`https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_NASA_API}&count=10`)
+      .get(`https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_NASA_API}&count=20`)
       .then((res) => res.data)
   )
 
