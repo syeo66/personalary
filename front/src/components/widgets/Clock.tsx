@@ -34,9 +34,11 @@ const Time = styled.div`
   font-size: 4rem;
   display: flex;
   justify-content: flex-start;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 `
 
 const DateView = styled.div`
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   font-size: 1.5rem;
 `
 
