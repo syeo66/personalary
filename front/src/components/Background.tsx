@@ -9,10 +9,13 @@ const Background: React.FC<PropsWithChildren> = ({ children }) => {
   const [index, setIndex] = useState(0)
 
   // TODO move this into a configurabel part to be able to fetch from different sources
-  const { data } = useQuery('nasa-apod', () =>
-    axios
-      .get(`https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_NASA_API}&count=20`)
-      .then((res) => res.data)
+  const { data } = useQuery(
+    'nasa-apod',
+    () =>
+      axios
+        .get(`https://api.nasa.gov/planetary/apod?api_key=${process.env.REACT_APP_NASA_API}&count=20`)
+        .then((res) => res.data),
+    { refetchOnWindowFocus: false }
   )
 
   const urls: string[] = useMemo(() => data?.map(({ hdurl }: { hdurl: string }) => hdurl) || [], [data])
