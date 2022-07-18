@@ -8,7 +8,7 @@
   "license": "0BSD",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q build/index.js\""
+    "dev": "nodemon -q src/index.ts"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.30.6",

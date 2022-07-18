@@ -25,5 +25,5 @@ test: node_modules
 ######################################################################
 
 node_modules : yarn.lock package.json
-	yarn install 
+	yarn install
 	touch node_modules

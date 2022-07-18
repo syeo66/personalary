@@ -62,8 +62,8 @@ interface BackgroundRendererProps {
 }
 
 const BackgroundRenderer = styled.div<BackgroundRendererProps>`
-  background-size: cover;
   background: black ${({ url }) => (url ? `url(${url})` : '')} no-repeat center center;
+  background-size: cover;
   height: 100%;
   width: 100%;
 `
