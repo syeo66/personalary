@@ -8,6 +8,7 @@
   "license": "0BSD",
   "private": true,
   "scripts": {
+    "build": "tsc",
     "dev": "nodemon -q src/index.ts"
   },
   "devDependencies": {
