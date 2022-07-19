@@ -9,6 +9,7 @@
   "private": true,
   "scripts": {
     "build": "tsc",
+    "serve": "node build/index.js",
     "dev": "nodemon -q src/index.ts"
   },
   "devDependencies": {
