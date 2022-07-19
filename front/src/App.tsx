@@ -4,17 +4,20 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import Background from './components/Background'
 import Screen from './components/Screen'
 import Clock from './components/widgets/Clock'
+import WebsocketProvider from './providers/WebsocketProvider'
 
 const queryClient = new QueryClient()
 
 const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Screen>
-        <Background>
-          <Clock />
-        </Background>
-      </Screen>
+      <WebsocketProvider>
+        <Screen>
+          <Background>
+            <Clock />
+          </Background>
+        </Screen>
+      </WebsocketProvider>
     </QueryClientProvider>
   )
 }
