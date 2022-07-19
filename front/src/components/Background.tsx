@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState } from 'react'
+import React, { PropsWithChildren, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import useWebsocket from '../hooks/useWebsocket'
@@ -7,17 +7,24 @@ const Background: React.FC<PropsWithChildren> = ({ children }) => {
   const [current, setCurrent] = useState('')
 
   const ws = useWebsocket()
-  ws.addEventListener('message', (event) => {
-    if (!event.data.startsWith('SetBackground')) {
-      return
+
+  useEffect(() => {
+    const messageHandler = (event: MessageEvent) => {
+      if (!event.data.startsWith('SetBackground')) {
+        return
+      }
+
+      const [, background] = event.data.split(' ')
+
+      const img = new Image()
+      img.src = background
+      img.onload = () => setCurrent(background)
     }
 
-    const [, background] = event.data.split(' ')
+    ws.addEventListener('message', messageHandler)
 
-    const img = new Image()
-    img.src = background
-    img.onload = () => setCurrent(background)
-  })
+    return () => ws.removeEventListener('message', messageHandler)
+  }, [ws])
 
   return <BackgroundRenderer url={current}>{children}</BackgroundRenderer>
 }
