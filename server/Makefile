@@ -20,3 +20,4 @@ start: node_modules
 
 node_modules : yarn.lock package.json
 	yarn
+	touch node_modules

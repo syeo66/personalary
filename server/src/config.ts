@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 import ConfigType from './ConfigType'
 
 const config: ConfigType = {

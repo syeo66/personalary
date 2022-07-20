@@ -1,4 +1,4 @@
-import React, { createContext, PropsWithChildren, useState } from 'react'
+import React, { createContext, PropsWithChildren, useCallback, useState } from 'react'
 import styled from 'styled-components'
 
 const ws = new WebSocket('ws://localhost:8080')
@@ -7,8 +7,11 @@ export const WebsocketContext = createContext(ws)
 const WebsocketProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [isConnected, setIsConnected] = useState(false)
 
-  ws.onopen = () => setIsConnected(true)
-  ws.onclose = () => setIsConnected(false)
+  const handleOpen = useCallback(() => setIsConnected(true), [])
+  const handleClose = useCallback(() => setIsConnected(false), [])
+
+  ws.addEventListener('open', handleOpen)
+  ws.addEventListener('close', handleClose)
 
   return (
     <WebsocketContext.Provider value={ws}>

@@ -3,3 +3,4 @@ public/*
 !public/.gitkeep
 build/*
 !build/.gitkeep
+.env
