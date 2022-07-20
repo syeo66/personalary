@@ -22,6 +22,7 @@ interface ConfigType {
     url: string
     refetchInterval: number
     rotationInterval: number
+    dateFormat: string
   }
 }
 

@@ -5,9 +5,7 @@ import { concatMap, distinctUntilChanged, filter, from, map, timer } from 'rxjs'
 
 import config from '../../config'
 
-const { url, refetchInterval, rotationInterval } = config.messages
-
-const dateFormat = 'dd.MM.yyyy HH:mm:ss'
+const { url, refetchInterval, rotationInterval, dateFormat } = config.messages
 
 const csvDownload = () => {
   return timer(0, refetchInterval * 1000)

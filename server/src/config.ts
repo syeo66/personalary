@@ -10,6 +10,7 @@ const config: ConfigType = {
     service: 'NasaApotd',
   },
   messages: {
+    dateFormat: 'dd.MM.yyyy HH:mm:ss',
     refetchInterval: 3 * 60 * 60,
     rotationInterval: 1,
     service: 'CsvDownload',
