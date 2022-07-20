@@ -9,6 +9,12 @@ const config: ConfigType = {
     rotationInterval: 3 * 60,
     service: 'NasaApotd',
   },
+  messages: {
+    refetchInterval: 3 * 60 * 60,
+    rotationInterval: 1,
+    service: 'CsvDownload',
+    url: process.env.CSV_DOWNLOAD_URL || '',
+  },
 }
 
 export default config

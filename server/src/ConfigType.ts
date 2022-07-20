@@ -17,6 +17,12 @@ interface ConfigType {
      */
     rotationInterval: number
   }
+  messages: {
+    service: 'CsvDownload'
+    url: string
+    refetchInterval: number
+    rotationInterval: number
+  }
 }
 
 export default ConfigType
