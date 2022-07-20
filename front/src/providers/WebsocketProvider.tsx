@@ -1,7 +1,7 @@
 import React, { createContext, PropsWithChildren, useCallback, useState } from 'react'
 import styled from 'styled-components'
 
-const ws = new WebSocket('ws://localhost:8080')
+const ws = new WebSocket(process.env.REACT_APP_WS_URL || `ws://${document.location.host}`)
 export const WebsocketContext = createContext(ws)
 
 const WebsocketProvider: React.FC<PropsWithChildren> = ({ children }) => {
