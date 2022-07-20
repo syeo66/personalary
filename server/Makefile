@@ -12,6 +12,9 @@ build/index.js:
 clean:
 	rm -rf build/*
 
+serve: build
+	yarn serve
+
 start:
 	yarn dev
 
