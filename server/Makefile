@@ -5,7 +5,7 @@ help:
 
 build: build/index.js
 
-build/index.js:
+build/index.js: node_modules
 	yarn build
 	touch build
 
@@ -15,6 +15,8 @@ clean:
 serve: build
 	yarn serve
 
-start:
+start: node_modules
 	yarn dev
 
+node_modules : yarn.lock package.json
+	yarn
