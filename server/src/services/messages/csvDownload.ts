@@ -60,7 +60,7 @@ const csvDownload = () => {
         )
       )
     )
-    .pipe(filter((message): message is string => message !== null))
+    .pipe(filter((message): message is string => typeof message === 'string'))
     .pipe(distinctUntilChanged())
 }
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { concatMap, from, map, timer } from 'rxjs'
+import { concatMap, distinctUntilChanged, filter, from, map, timer } from 'rxjs'
 
 import config from '../../config'
 
@@ -12,10 +12,18 @@ const nasaApotd = () => {
     .pipe(concatMap(() => from(axios.get(url))))
     .pipe(
       map((res) => {
-        return res.data?.map(({ hdurl }: { hdurl: string }) => hdurl)
+        return res.data?.map(({ hdurl }: { hdurl: string }) => hdurl).filter(Boolean)
       })
     )
-    .pipe(concatMap((ev) => timer(0, rotationInterval * 1000).pipe(map((i) => `SetBackground ${ev[i % ev.length]}`))))
+    .pipe(
+      concatMap((ev) =>
+        timer(0, rotationInterval * 1000).pipe(
+          map((i) => (ev[i % ev.length] ? `SetBackground ${ev[i % ev.length]}` : null))
+        )
+      )
+    )
+    .pipe(filter(Boolean))
+    .pipe(distinctUntilChanged())
 }
 
 export default nasaApotd
