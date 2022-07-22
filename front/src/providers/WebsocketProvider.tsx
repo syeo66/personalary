@@ -26,7 +26,7 @@ const WebsocketProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
     socket.onclose = () => {
       setIsConnected(false)
-      setTimeout(connect, timeout.current++ * 1000)
+      setTimeout(connect, Math.min(timeout.current++, 20) * 1000)
       isConnecting.current = false
     }
 
