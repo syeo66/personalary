@@ -55,7 +55,9 @@ const csvDownload = () => {
               return null
             }
 
-            return `ShowMessage ${resp[0][2]}`
+            const [[fromDate, toDate, message]] = resp
+
+            return `ShowMessage ${JSON.stringify({ fromDate, toDate, message })}`
           })
         )
       )
