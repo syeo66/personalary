@@ -17,10 +17,12 @@ const wsServer = new ws.Server({ noServer: true })
 wsServer.on('connection', (socket) => {
   socket.on('message', (message) => {
     // eslint-disable-next-line no-console
-    console.log(message.toString())
+    console.log('Received message:', message.toString())
   })
 
   merge(...providers).subscribe((message) => {
+    // eslint-disable-next-line no-console
+    console.log('Sending message:', message)
     socket.send(message)
   })
 })
