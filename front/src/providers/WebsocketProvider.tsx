@@ -5,9 +5,24 @@ export const WebsocketContext = createContext<WebSocket | null>(null)
 
 const WebsocketProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [isConnected, setIsConnected] = useState(false)
+  const [isOnline, setIsOnline] = useState(navigator.onLine)
   const [ws, setWs] = useState<WebSocket | null>(null)
+
   const timeout = useRef(1)
   const isConnecting = useRef(false)
+
+  useEffect(() => {
+    const online = () => setIsOnline(true)
+    const offline = () => setIsOnline(false)
+
+    window.addEventListener('online', online)
+    window.addEventListener('offline', offline)
+
+    return () => {
+      window.removeEventListener('online', online)
+      window.removeEventListener('offline', offline)
+    }
+  }, [])
 
   const connect = useCallback(() => {
     if (isConnecting.current) {
@@ -43,7 +58,8 @@ const WebsocketProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <WebsocketContext.Provider value={ws}>
-      {!isConnected && <Disconnected>Server is not connected.</Disconnected>}
+      {!isOnline && <Disconnected>You are offline.</Disconnected>}
+      {isOnline && !isConnected && <Disconnected>Server is not connected.</Disconnected>}
       {children}
     </WebsocketContext.Provider>
   )
