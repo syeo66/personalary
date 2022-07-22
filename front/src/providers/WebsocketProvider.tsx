@@ -1,17 +1,45 @@
-import React, { createContext, PropsWithChildren, useCallback, useState } from 'react'
+import React, { createContext, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
-const ws = new WebSocket(process.env.REACT_APP_WS_URL || `ws://${document.location.host}`)
-export const WebsocketContext = createContext(ws)
+export const WebsocketContext = createContext<WebSocket | null>(null)
 
 const WebsocketProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [isConnected, setIsConnected] = useState(false)
+  const [ws, setWs] = useState<WebSocket | null>(null)
+  const timeout = useRef(1)
+  const isConnecting = useRef(false)
 
-  const handleOpen = useCallback(() => setIsConnected(true), [])
-  const handleClose = useCallback(() => setIsConnected(false), [])
+  const connect = useCallback(() => {
+    if (isConnecting.current) {
+      return
+    }
 
-  ws.addEventListener('open', handleOpen)
-  ws.addEventListener('close', handleClose)
+    isConnecting.current = true
+    const socket = new WebSocket(process.env.REACT_APP_WS_URL || `ws://${document.location.host}`)
+
+    socket.onopen = () => {
+      setWs(socket)
+      timeout.current = 1
+      setIsConnected(true)
+      isConnecting.current = false
+    }
+
+    socket.onclose = () => {
+      setIsConnected(false)
+      setTimeout(connect, timeout.current++ * 1000)
+      isConnecting.current = false
+    }
+
+    socket.onerror = () => {
+      socket.close()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!ws || ws.readyState === WebSocket.CLOSED) {
+      connect()
+    }
+  }, [connect, ws])
 
   return (
     <WebsocketContext.Provider value={ws}>

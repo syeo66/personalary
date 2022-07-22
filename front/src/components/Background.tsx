@@ -21,9 +21,9 @@ const Background: React.FC<PropsWithChildren> = ({ children }) => {
       img.onload = () => setCurrent(background)
     }
 
-    ws.addEventListener('message', messageHandler)
+    ws?.addEventListener('message', messageHandler)
 
-    return () => ws.removeEventListener('message', messageHandler)
+    return () => ws?.removeEventListener('message', messageHandler)
   }, [ws])
 
   return <BackgroundRenderer url={current}>{children}</BackgroundRenderer>
