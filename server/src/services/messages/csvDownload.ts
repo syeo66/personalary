@@ -23,7 +23,7 @@ const csvDownload = () => {
     }),
     concatMap((ev) =>
       timer(0, rotationInterval * 1000).pipe(
-        take(Math.ceil(refetchInterval / rotationInterval)),
+        take(Math.ceil(refetchInterval / rotationInterval) - 1),
         map(() => {
           const now = new Date()
 

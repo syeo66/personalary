@@ -30,7 +30,7 @@ wsServer.on('connection', (socket) => {
 app.use(express.static(path.join(__dirname, '../public')))
 
 // Handling '/' Request
-app.get('/echo', (_req, _res) => {
+app.get('/', (_req, _res) => {
   _res.send('TypeScript With Expresss')
 })
 
