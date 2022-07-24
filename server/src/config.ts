@@ -11,7 +11,7 @@ const config: ConfigType = {
   },
   messages: {
     dateFormat: 'dd.MM.yyyy HH:mm:ss',
-    refetchInterval: 15,
+    refetchInterval: 1 * 60,
     rotationInterval: 1,
     service: 'CsvDownload',
     url: process.env.CSV_DOWNLOAD_URL || '',

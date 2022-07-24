@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { catchError, concatMap, distinctUntilChanged, filter, from, map, timer } from 'rxjs'
+import { catchError, concatMap, distinctUntilChanged, filter, from, map, take, timer } from 'rxjs'
 
 import config from '../../config'
 
@@ -9,6 +9,7 @@ const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=20`
 
 const nasaApotd = () => {
   return timer(0, refetchInterval * 1000).pipe(
+    take(Math.ceil(refetchInterval / rotationInterval) - 1),
     concatMap(() => from(axios.get(url))),
     catchError((err, caught) => caught),
     map((res) => {
