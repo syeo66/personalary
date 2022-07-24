@@ -9,7 +9,7 @@ const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=20`
 
 const nasaApotd = () => {
   return timer(0, refetchInterval * 1000).pipe(
-    take(Math.ceil(refetchInterval / rotationInterval) - 1),
+    take(Math.ceil(refetchInterval / rotationInterval)),
     concatMap(() => from(axios.get(url))),
     catchError((err, caught) => caught),
     map((res) => {
