@@ -5,7 +5,9 @@ import config from '../../config'
 
 const { apiKey, refetchInterval, rotationInterval } = config.background
 
-const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=20`
+const rotationCount = Math.floor(refetchInterval / Math.max(1, rotationInterval))
+
+const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=${rotationCount}`
 
 const nasaApotd = () => {
   return timer(0, refetchInterval * 1000).pipe(
@@ -16,7 +18,7 @@ const nasaApotd = () => {
     }),
     concatMap((ev) =>
       timer(0, rotationInterval * 1000).pipe(
-        take(Math.ceil(refetchInterval / rotationInterval)),
+        take(Math.ceil(rotationCount)),
         map((i) => (ev[i % ev.length] ? `SetBackground ${ev[i % ev.length]}` : null))
       )
     ),
