@@ -1,6 +1,6 @@
 import express from 'express'
 import path from 'path'
-import { merge } from 'rxjs'
+import { merge, Subject, takeUntil } from 'rxjs'
 import ws from 'ws'
 
 import providers from './providers'
@@ -11,26 +11,39 @@ const app: express.Application = express()
 // Take a port 3000 for running server.
 const PORT = process.env.PORT || 8080
 
-// Set up a headless websocket server that prints any
-// events that come in.
 const wsServer = new ws.Server({ noServer: true })
 wsServer.on('connection', (socket) => {
+  const connectionIsClosed$ = new Subject<boolean>()
+
   socket.on('message', (message) => {
     // eslint-disable-next-line no-console
     console.log('Received message:', message.toString())
   })
 
-  merge(...providers).subscribe((message) => {
+  socket.on('close', () => {
+    connectionIsClosed$.next(true)
+    connectionIsClosed$.complete()
+  })
+
+  const workload$ = merge(...providers)
+
+  workload$.pipe(takeUntil(connectionIsClosed$)).subscribe({
+    next: (message) => {
+      // eslint-disable-next-line no-console
+      console.log('Sending message:', message)
+      socket.send(message)
+    },
     // eslint-disable-next-line no-console
-    console.log('Sending message:', message)
-    socket.send(message)
+    error: (error) => console.error(error),
+    // eslint-disable-next-line no-console
+    complete: () => console.log('---------------------------------------------------'),
   })
 })
 
 app.use(express.static(path.join(__dirname, '../public')))
 
 // Handling '/' Request
-app.get('/echo', (_req, _res) => {
+app.get('/', (_req, _res) => {
   _res.send('TypeScript With Expresss')
 })
 
