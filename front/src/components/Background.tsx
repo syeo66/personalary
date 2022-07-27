@@ -45,11 +45,13 @@ const BackgroundRenderer = styled.div<BackgroundRendererProps>`
 `
 
 const Copyright = styled.div`
-  position: absolute;
   bottom: 1rem;
-  left: 1rem;
   color: white;
   font-size: 85%;
+  left: 1rem;
+  position: absolute;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.6), 0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(0, 0, 0, 0.3);
 `
 
 export default Background
