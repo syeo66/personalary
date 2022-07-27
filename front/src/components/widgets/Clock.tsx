@@ -1,9 +1,34 @@
 import { format } from 'date-fns'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
+
+import useWsMessage from '../../hooks/useWsMessage'
+
+interface ClockConfig {
+  dateFormat: string
+  position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
+  timeFormat: string
+}
 
 const Clock = () => {
   const [time, setTime] = useState(() => new Date())
+  const [config, setConfig] = useState<ClockConfig>({
+    dateFormat: 'E, dd.MM.yyyy',
+    position: 'bottom-right',
+    timeFormat: 'HH:mm',
+  })
+
+  const messageHandler = useCallback((event: MessageEvent) => {
+    try {
+      const value = JSON.parse(event.data?.replace('SetClockConfig ', ''))
+      setConfig(value)
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log('could not parse message', event.data, error)
+    }
+  }, [])
+
+  useWsMessage('SetClockConfig', messageHandler)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -13,19 +38,29 @@ const Clock = () => {
     return () => clearInterval(interval)
   }, [])
 
+  const [vertical, horizontal] = config.position.split('-')
+
+  // eslint-disable-next-line no-console
+  console.log(vertical, horizontal)
+
   return (
-    <ClockWrapper>
-      <Time>{format(time, 'HH:mm')}</Time>
-      <DateView>{format(time, 'E, dd.MM.yyyy')}</DateView>
+    <ClockWrapper horizontal={horizontal} vertical={vertical}>
+      <Time>{format(time, config.timeFormat)}</Time>
+      <DateView>{format(time, config.dateFormat)}</DateView>
     </ClockWrapper>
   )
 }
 
-const ClockWrapper = styled.div`
+interface ClockWrapperProps {
+  vertical?: 'top' | 'bottom' | string
+  horizontal?: 'left' | 'right' | string
+}
+
+const ClockWrapper = styled.div<ClockWrapperProps>`
   color: white;
   position: absolute;
-  right: clamp(2rem, 10vw, 5rem);
-  bottom: clamp(2rem, 10vw, 5rem);
+  ${({ horizontal = 'right' }) => horizontal}: clamp(2rem, 10vw, 5rem);
+  ${({ vertical = 'bottom' }) => vertical}: clamp(2rem, 10vw, 5rem);
   margin: 0;
   padding: 0;
 `

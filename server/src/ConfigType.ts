@@ -24,6 +24,13 @@ interface ConfigType {
     rotationInterval: number
     dateFormat: string
   }
+  clock: {
+    position: ClockPosition
+    timeFormat: string
+    dateFormat: string
+  }
 }
+
+export type ClockPosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 
 export default ConfigType

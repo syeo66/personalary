@@ -16,6 +16,11 @@ const config: ConfigType = {
     service: 'CsvDownload',
     url: process.env.CSV_DOWNLOAD_URL || '',
   },
+  clock: {
+    dateFormat: 'E, dd.MM.yyyy',
+    position: 'bottom-right',
+    timeFormat: 'HH:mm',
+  },
 }
 
 export default config

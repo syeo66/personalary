@@ -4,6 +4,7 @@ import useWebsocket from './useWebsocket'
 
 export const MessageType = {
   SetBackground: 'SetBackground',
+  SetClockConfig: 'SetClockConfig',
   ShowMessage: 'ShowMessage',
 }
 
