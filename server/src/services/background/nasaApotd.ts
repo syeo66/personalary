@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { catchError, concatMap, distinctUntilChanged, filter, from, map, take, timer } from 'rxjs'
+import { z } from 'zod'
 
 import config from '../../config'
 import BackgroundData from './BackgroundData'
@@ -10,20 +11,27 @@ const rotationCount = Math.floor(refetchInterval / Math.max(1, rotationInterval)
 
 const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&count=${rotationCount}`
 
-interface ApodData {
-  copyright?: string
-  hdurl: string
-}
+const ApodData = z.object({
+  copyright: z.optional(z.string()),
+  hdurl: z.optional(z.string()),
+})
+const ApodDataArray = z.array(ApodData)
 
 const nasaApotd = () => {
   return timer(0, refetchInterval * 1000).pipe(
-    concatMap(() => from(axios.get<ApodData[]>(url))),
+    concatMap(() => from(axios.get(url))),
     catchError((err, caught) => caught),
     map((res): BackgroundData[] => {
-      return res.data
-        ?.map<BackgroundData | null>(({ hdurl, copyright }: ApodData) =>
-          hdurl ? { url: hdurl, credits: copyright } : null
-        )
+      const data = ApodDataArray.safeParse(res.data)
+
+      if (!data.success) {
+        // eslint-disable-next-line no-console
+        console.warn(data.error)
+        return []
+      }
+
+      return data.data
+        ?.map<BackgroundData | null>(({ hdurl, copyright }) => (hdurl ? { url: hdurl, credits: copyright } : null))
         .filter((e): e is BackgroundData => Boolean(e))
     }),
     concatMap((ev) =>
