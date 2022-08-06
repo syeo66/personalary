@@ -1,8 +1,8 @@
 import { delay, from } from 'rxjs'
 
-import config from '../../config'
+import loadConfig from '../../loadConfig'
 
-const { dateFormat, timeFormat, position, enabled } = config.clock
+const { dateFormat, timeFormat, position, enabled } = loadConfig().clock
 
 const clockConfig = () => {
   return from([

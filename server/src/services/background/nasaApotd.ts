@@ -2,10 +2,10 @@ import axios from 'axios'
 import { catchError, concatMap, distinctUntilChanged, filter, from, map, take, timer } from 'rxjs'
 import { z } from 'zod'
 
-import config from '../../config'
+import loadConfig from '../../loadConfig'
 import BackgroundData from './BackgroundData'
 
-const { apiKey, refetchInterval, rotationInterval } = config.background
+const { apiKey, refetchInterval, rotationInterval } = loadConfig().background
 
 const rotationCount = Math.floor(refetchInterval / Math.max(1, rotationInterval))
 

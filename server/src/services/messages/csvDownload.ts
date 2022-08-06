@@ -3,9 +3,9 @@ import { parse } from 'csv-parse/sync'
 import { compareDesc, parse as parseDate } from 'date-fns'
 import { catchError, concatMap, distinctUntilChanged, EMPTY, filter, from, map, take, timer } from 'rxjs'
 
-import config from '../../config'
+import loadConfig from '../../loadConfig'
 
-const { url, refetchInterval, rotationInterval, dateFormat } = config.messages
+const { url, refetchInterval, rotationInterval, dateFormat } = loadConfig().messages
 
 const csvDownload = () => {
   if (!url) {
