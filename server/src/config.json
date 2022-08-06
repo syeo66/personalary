@@ -1,0 +1,20 @@
+{
+  "background": {
+    "apiKey": "DEMO_KEY",
+    "refetchInterval": 10800,
+    "rotationInterval": 180,
+    "service": "NasaApotd"
+  },
+  "messages": {
+    "dateFormat": "dd.MM.yyyy HH:mm:ss",
+    "refetchInterval": 600,
+    "rotationInterval": 1,
+    "service": "CsvDownload",
+    "url": ""
+  },
+  "clock": {
+    "dateFormat": "E, dd.MM.yyyy",
+    "position": "bottom-right",
+    "timeFormat": "HH:mm"
+  }
+}

@@ -1,26 +1,30 @@
 import 'dotenv/config'
 
-import ConfigType from './ConfigType'
+import configuration from './config.json'
+import Config, { ConfigType } from './ConfigType'
+
+let parsedConfig: ConfigType
+try {
+  parsedConfig = Config.parse(configuration)
+} catch (e) {
+  // eslint-disable-next-line no-console
+  console.error(e)
+  process.exit(1)
+}
 
 const config: ConfigType = {
+  ...parsedConfig,
   background: {
-    apiKey: process.env.NASA_API_KEY || 'DEMO_KEY',
-    refetchInterval: 3 * 60 * 60,
-    rotationInterval: 3 * 60,
-    service: 'NasaApotd',
+    ...parsedConfig.background,
+    apiKey: process.env.NASA_API_KEY || parsedConfig.background.apiKey,
   },
   messages: {
-    dateFormat: 'dd.MM.yyyy HH:mm:ss',
-    refetchInterval: 10 * 60,
-    rotationInterval: 1,
-    service: 'CsvDownload',
+    ...parsedConfig.messages,
     url: process.env.CSV_DOWNLOAD_URL || '',
   },
-  clock: {
-    dateFormat: 'E, dd.MM.yyyy',
-    position: 'bottom-right',
-    timeFormat: 'HH:mm',
-  },
 }
+
+// eslint-disable-next-line no-console
+console.log(config)
 
 export default config
