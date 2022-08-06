@@ -8,6 +8,7 @@ interface ClockConfig {
   dateFormat: string
   position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
   timeFormat: string
+  enabled?: boolean
 }
 
 const Clock = () => {
@@ -40,8 +41,9 @@ const Clock = () => {
 
   const [vertical, horizontal] = config.position.split('-')
 
-  // eslint-disable-next-line no-console
-  console.log(vertical, horizontal)
+  if (!(config.enabled ?? true)) {
+    return null
+  }
 
   return (
     <ClockWrapper horizontal={horizontal} vertical={vertical}>

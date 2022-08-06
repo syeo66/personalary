@@ -8,7 +8,7 @@ interface ConfigType {
     apiKey: string
 
     /**
-     * Interval in seconds to refetch the background image.
+     * Interval in seconds to refetch the background images.
      */
     refetchInterval: number
 
@@ -20,12 +20,17 @@ interface ConfigType {
   messages: {
     service: 'CsvDownload'
     url: string
+
+    /**
+     * Interval in seconds to refetch the csv data.
+     */
     refetchInterval: number
     rotationInterval: number
     dateFormat: string
   }
   clock: {
     position: ClockPosition
+    enabled?: boolean
     timeFormat: string
     dateFormat: string
   }
