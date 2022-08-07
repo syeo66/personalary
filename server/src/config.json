@@ -13,6 +13,7 @@
     "url": ""
   },
   "clock": {
+    "type": "digital",
     "dateFormat": "E, dd.MM.yyyy",
     "position": "bottom-right",
     "timeFormat": "HH:mm"

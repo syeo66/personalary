@@ -4,3 +4,5 @@ public/*
 build/*
 !build/.gitkeep
 .env
+./.vscode
+!./.vscode/settings.json

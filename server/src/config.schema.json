@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/syeo66/personalary/main/server/src/config.schema.json",
+  "title": "Personalary Configuration Schema",
+  "description": "Schema to validate the configuration file of personalary",
+  "type": "object",
+  "properties": {
+    "background": {
+      "description": "Defining the background image loader.",
+      "type": "object",
+
+      "properties": {
+        "service": {
+          "description": "The service to used for the background loading.",
+          "type": "string",
+          "enum": ["NasaApotd", "Unsplash"]
+        }
+      },
+      "required": ["service"],
+      "oneOf": [
+        {
+          "if": { "properties": { "service": { "const": "NasaApotd" } } },
+          "then": { "$ref": "#/$defs/background/NasaApotd" }
+        }
+      ]
+    },
+    "messages": {
+      "description": "Defining the message loader.",
+      "type": "object",
+
+      "properties": {
+        "service": {
+          "description": "The service to use for the message loading.",
+          "type": "string",
+          "enum": ["CsvDownload"]
+        }
+      },
+      "required": ["service"],
+      "oneOf": [
+        {
+          "if": { "properties": { "service": { "const": "CsvDownload" } } },
+          "then": { "$ref": "#/$defs/messages/CsvDownload" }
+        }
+      ]
+    },
+    "clock": {
+      "description": "Configuration for the clock",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of clock to be displayed",
+          "type": "string",
+          "enum": ["digital", "analog"]
+        }
+      },
+      "required": ["type"],
+      "oneOf": [
+        {
+          "if": { "properties": { "service": { "const": "digital" } } },
+          "then": { "$ref": "#/$defs/clock/digital" }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "background": {
+      "NasaApotd": {
+        "type": "object",
+        "properties": {
+          "apiKey": {
+            "description": "The api key for the NasaApotd loader.",
+            "type": "string"
+          },
+          "refetchInterval": {
+            "description": "The interval in seconds to refetch the list from the Apotd API.",
+            "type": "number"
+          },
+          "rotationInterval": {
+            "description": "The interval in seconds to rotate the images.",
+            "type": "number"
+          }
+        },
+        "required": ["apiKey", "refetchInterval", "rotationInterval"]
+      }
+    },
+    "messages": {
+      "CsvDownload": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "description": "The url to download the csv file.",
+            "type": "string"
+          },
+          "refetchInterval": {
+            "description": "The interval in seconds to refetch the csv file.",
+            "type": "number"
+          },
+          "rotationInterval": {
+            "description": "The interval in seconds to recheck for current messages.",
+            "type": "number"
+          },
+          "dateFormat": {
+            "description": "The format of the date in the csv file. See https://date-fns.org/v2.29.1/docs/format",
+            "type": "string"
+          }
+        },
+        "required": ["url"]
+      }
+    },
+    "clock": {
+      "digital": {
+        "type": "object",
+        "properties": {
+          "dateFormat": {
+            "description": "The format of the date portion of the clock. See https://date-fns.org/v2.29.1/docs/format",
+            "type": "string"
+          },
+          "position": {
+            "description": "The position of the clock.",
+            "type": "string",
+            "enum": ["top-left", "top-right", "bottom-left", "bottom-right"]
+          },
+          "timeFormat": {
+            "description": "The format of the time portion of the clock. See https://date-fns.org/v2.29.1/docs/format",
+            "type": "string"
+          }
+        },
+        "required": ["dateFormat"]
+      }
+    }
+  },
+  "required": ["background", "messages", "clock"]
+}
