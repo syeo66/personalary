@@ -24,12 +24,14 @@ const AnalogClock: React.FC<AnalogClockProps> = ({ config }) => {
     return () => clearInterval(interval)
   }, [time])
 
+  const isDark = config.style === 'dark'
+
   return (
     <Clock>
-      <Background>
-        <Hours time={time} />
-        <Minutes time={time} />
-        <Seconds time={time} />
+      <Background dark={isDark}>
+        <Hours time={time} dark={isDark} />
+        <Minutes time={time} dark={isDark} />
+        <Seconds time={time} dark={isDark} />
       </Background>
       <DateView>{format(time, config.dateFormat)}</DateView>
     </Clock>
@@ -42,53 +44,58 @@ const Clock = styled.div`
   align-items: center;
 `
 
-const Background = styled.div`
-  width: 100px;
-  height: 100px;
-  background-color: white;
-  border: black 1px solid;
+interface BackgroundProps {
+  dark?: boolean
+}
+
+const Background = styled.div<BackgroundProps>`
+  background-color: ${({ dark }) => (dark ? '#000' : '#fff')};
   border-radius: 50%;
-  position: relative;
+  border: ${({ dark }) => (dark ? '#eee' : '#000')} 1px solid;
+  height: 100px;
   margin-bottom: 0.5rem;
+  position: relative;
+  width: 100px;
 `
 
 interface DateProps {
+  dark?: boolean
   time: Date
 }
 
 const Hours = styled.div<DateProps>`
-  background-color: black;
-  width: 5px;
+  background-color: ${({ dark }) => (dark ? '#aaa' : '#000')};
+  border-radius: 2.5px;
   height: 30px;
   left: calc(50% - 2.5px);
-  top: 25px;
   position: absolute;
+  top: 25px;
   transform-origin: center calc(100% - 5px);
-  border-radius: 2.5px;
   transform: rotateZ(${({ time }) => ((time.getHours() % 12) * 60 + time.getMinutes()) * 0.5}deg);
+  width: 5px;
 `
 
 const Minutes = styled.div<DateProps>`
-  background-color: black;
+  background-color: ${({ dark }) => (dark ? '#aaa' : '#000')};
   border-radius: 2.5px;
-  width: 5px;
   height: 45px;
   left: calc(50% - 2.5px);
-  top: 10px;
   position: absolute;
+  top: 10px;
   transform-origin: center calc(100% - 5px);
   transform: rotateZ(${({ time }) => ((time.getMinutes() * 60 + time.getSeconds()) / 60) * 6}deg);
+  width: 5px;
 `
 
 const Seconds = styled.div<DateProps>`
   background-color: red;
-  width: 1px;
   height: 50px;
   left: calc(50% - 0.5px);
-  top: 5px;
   position: absolute;
+  top: 5px;
   transform-origin: center calc(100% - 5px);
   transform: rotateZ(${({ time }) => (time.getSeconds() + 1) * 6}deg);
+  width: 1px;
 `
 
 const DateView = styled.div`

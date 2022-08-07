@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useCallback, useState } from 'react'
+import React, { lazy, memo, Suspense, useCallback, useState } from 'react'
 import styled from 'styled-components'
 
 import useWsMessage from '../../../hooks/useWsMessage'
@@ -52,4 +52,4 @@ const ClockWrapper = styled.div<ClockWrapperProps>`
   padding: 0;
 `
 
-export default Clock
+export default memo(Clock)
