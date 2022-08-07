@@ -1,8 +1,10 @@
 import { format } from 'date-fns'
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { AnalogClockConfigType } from './ClockType'
+
+const TIMER_PRECISION = 250
 
 interface AnalogClockProps {
   config: AnalogClockConfigType
@@ -13,11 +15,14 @@ const AnalogClock: React.FC<AnalogClockProps> = ({ config }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTime(new Date())
-    }, 250)
+      const now = new Date()
+      if (Math.floor(time.getTime() / 1000) !== Math.floor(now.getTime() / 1000)) {
+        setTime(now)
+      }
+    }, TIMER_PRECISION)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [time])
 
   return (
     <Clock>
@@ -60,7 +65,7 @@ const Hours = styled.div<DateProps>`
   position: absolute;
   transform-origin: center calc(100% - 5px);
   border-radius: 2.5px;
-  transform: rotateZ(${({ time }) => (((time.getHours() % 12) * 60 + time.getMinutes()) / 60) * 0.5}deg);
+  transform: rotateZ(${({ time }) => ((time.getHours() % 12) * 60 + time.getMinutes()) * 0.5}deg);
 `
 
 const Minutes = styled.div<DateProps>`
@@ -91,4 +96,4 @@ const DateView = styled.div`
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 0, 0, 0.3);
 `
 
-export default AnalogClock
+export default memo(AnalogClock)

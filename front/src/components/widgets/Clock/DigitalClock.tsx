@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { DigitalClockConfigType } from './ClockType'
@@ -39,4 +39,4 @@ const DateView = styled.div`
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 0, 0, 0.3);
 `
 
-export default DigitalClock
+export default memo(DigitalClock)
