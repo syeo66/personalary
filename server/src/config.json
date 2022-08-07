@@ -13,7 +13,8 @@
     "url": ""
   },
   "clock": {
-    "type": "digital",
+    "type": "analog",
+    "style": "light",
     "dateFormat": "E, dd.MM.yyyy",
     "position": "bottom-right",
     "timeFormat": "HH:mm"

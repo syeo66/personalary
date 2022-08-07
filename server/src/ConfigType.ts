@@ -34,16 +34,32 @@ const Config = z.object({
   }),
   clock: z.discriminatedUnion('type', [
     z.object({
-      type: z.literal('digital'),
-      position: ClockPosition,
-      enabled: z.boolean().optional(),
-      timeFormat: z.string(),
+      /**
+       * The format of the date portion of the clock. See https://date-fns.org/v2.29.1/docs/format
+       */
       dateFormat: z.string(),
+      enabled: z.boolean().optional(),
+      position: ClockPosition,
+      timeFormat: z.string(),
+
+      /**
+       * Type of clock to be displayed
+       */
+      type: z.literal('digital'),
     }),
     z.object({
-      type: z.literal('analog'),
-      style: z.enum(['light', 'dark']),
+      /**
+       * The format of the date portion of the clock. See https://date-fns.org/v2.29.1/docs/format
+       */
+      dateFormat: z.string(),
       enabled: z.boolean().optional(),
+      position: ClockPosition,
+      style: z.enum(['light', 'dark']),
+
+      /**
+       * Type of clock to be displayed
+       */
+      type: z.literal('analog'),
     }),
   ]),
 })
