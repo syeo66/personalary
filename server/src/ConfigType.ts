@@ -32,12 +32,20 @@ const Config = z.object({
     rotationInterval: z.number(),
     dateFormat: z.string(),
   }),
-  clock: z.object({
-    position: ClockPosition,
-    enabled: z.boolean().optional(),
-    timeFormat: z.string(),
-    dateFormat: z.string(),
-  }),
+  clock: z.discriminatedUnion('type', [
+    z.object({
+      type: z.literal('digital'),
+      position: ClockPosition,
+      enabled: z.boolean().optional(),
+      timeFormat: z.string(),
+      dateFormat: z.string(),
+    }),
+    z.object({
+      type: z.literal('analog'),
+      style: z.enum(['light', 'dark']),
+      enabled: z.boolean().optional(),
+    }),
+  ]),
 })
 
 export type ConfigType = z.infer<typeof Config>
