@@ -4,6 +4,11 @@ const ClockPosition = z.enum(['top-left', 'top-right', 'bottom-left', 'bottom-ri
 
 const Config = z.object({
   background: z.object({
+    /**
+     * The service to use for the background.
+     *
+     * Currently only NasaApotd exists.
+     */
     service: z.literal('NasaApotd'),
 
     /**
