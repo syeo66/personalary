@@ -16,7 +16,7 @@ const AnalogClock: React.FC<AnalogClockProps> = ({ config }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date()
-      if (Math.floor(time.getTime() / 1000) !== Math.floor(now.getTime() / 1000)) {
+      if (time.getSeconds() !== now.getSeconds()) {
         setTime(now)
       }
     }, TIMER_PRECISION)
@@ -75,26 +75,18 @@ const Hours = styled.div<DateProps>`
   width: 5px;
 `
 
-const Minutes = styled.div<DateProps>`
-  background-color: ${({ dark }) => (dark ? '#aaa' : '#000')};
-  border-radius: 2.5px;
+const Minutes = styled(Hours)`
   height: 45px;
-  left: calc(50% - 2.5px);
-  position: absolute;
   top: 10px;
-  transform-origin: center calc(100% - 5px);
-  transform: rotateZ(${({ time }) => ((time.getMinutes() * 60 + time.getSeconds()) / 60) * 6}deg);
-  width: 5px;
+  transform: rotateZ(${({ time }) => (time.getMinutes() * 60 + time.getSeconds()) * 0.1}deg);
 `
 
-const Seconds = styled.div<DateProps>`
+const Seconds = styled(Hours)`
   background-color: red;
   height: 50px;
   left: calc(50% - 0.5px);
-  position: absolute;
   top: 5px;
-  transform-origin: center calc(100% - 5px);
-  transform: rotateZ(${({ time }) => (time.getSeconds() + 1) * 6}deg);
+  transform: rotateZ(${({ time }) => time.getSeconds() * 6}deg);
   width: 1px;
 `
 
