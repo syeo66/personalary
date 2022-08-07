@@ -63,7 +63,11 @@ interface DateProps {
   time: Date
 }
 
-const Hours = styled.div<DateProps>`
+const Hours = styled.div.attrs<DateProps>(({ time }) => ({
+  style: {
+    transform: `rotateZ(${((time.getHours() % 12) * 60 + time.getMinutes()) * 0.5}deg)`,
+  },
+}))<DateProps>`
   background-color: ${({ dark }) => (dark ? '#aaa' : '#000')};
   border-radius: 2.5px;
   height: 30px;
@@ -71,22 +75,23 @@ const Hours = styled.div<DateProps>`
   position: absolute;
   top: 25px;
   transform-origin: center calc(100% - 5px);
-  transform: rotateZ(${({ time }) => ((time.getHours() % 12) * 60 + time.getMinutes()) * 0.5}deg);
   width: 5px;
 `
 
-const Minutes = styled(Hours)`
+const Minutes = styled(Hours).attrs<DateProps>(({ time }) => ({
+  style: { transform: `rotateZ(${(time.getMinutes() * 60 + time.getSeconds()) * 0.1}deg)` },
+}))<DateProps>`
   height: 45px;
   top: 10px;
-  transform: rotateZ(${({ time }) => (time.getMinutes() * 60 + time.getSeconds()) * 0.1}deg);
 `
 
-const Seconds = styled(Hours)`
+const Seconds = styled(Hours).attrs<DateProps>(({ time }) => ({
+  style: { transform: `rotateZ(${time.getSeconds() * 6}deg)` },
+}))<DateProps>`
   background-color: red;
   height: 50px;
   left: calc(50% - 0.5px);
   top: 5px;
-  transform: rotateZ(${({ time }) => time.getSeconds() * 6}deg);
   width: 1px;
 `
 
