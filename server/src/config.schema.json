@@ -54,8 +54,7 @@
         },
         "position": {
           "description": "The position of the clock.",
-          "type": "string",
-          "enum": ["top-left", "top-right", "bottom-left", "bottom-right"]
+          "$ref": "#/$defs/enums/position"
         },
         "enabled": {
           "description": "Enable or disable the clock",
@@ -74,8 +73,31 @@
           "then": { "$ref": "#/$defs/clock/analog" }
         }
       ]
+    },
+    "musicPlayer": {
+      "description": "Configuration for the music player",
+      "type": "object",
+      "properties": {
+        "service": {
+          "description": "Type of music player",
+          "type": "string",
+          "enum": ["spotifyRemote"]
+        },
+        "position": {
+          "description": "The position of the clock.",
+          "$ref": "#/$defs/enums/position"
+        },
+        "enabled": {
+          "description": "Enable or disable the music player",
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "required": ["service", "position"]
     }
   },
+  "required": ["background", "messages", "clock"],
+
   "$defs": {
     "background": {
       "NasaApotd": {
@@ -151,7 +173,22 @@
         },
         "required": ["dateFormat", "timeFormat"]
       }
+    },
+    "enums": {
+      "position": {
+        "type": "string",
+        "enum": [
+          "top-left",
+          "top-center",
+          "top-right",
+          "center-left",
+          "center-center",
+          "center-right",
+          "bottom-left",
+          "bottom-center",
+          "bottom-right"
+        ]
+      }
     }
-  },
-  "required": ["background", "messages", "clock"]
+  }
 }

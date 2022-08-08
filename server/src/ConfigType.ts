@@ -1,6 +1,16 @@
 import { z } from 'zod'
 
-const ClockPosition = z.enum(['top-left', 'top-right', 'bottom-left', 'bottom-right'])
+const Position = z.enum([
+  'top-left',
+  'top-center',
+  'top-right',
+  'center-left',
+  'center-center',
+  'center-right',
+  'bottom-left',
+  'bottom-center',
+  'bottom-right',
+])
 
 const Config = z.object({
   background: z.object({
@@ -28,6 +38,10 @@ const Config = z.object({
   }),
   messages: z.object({
     service: z.literal('CsvDownload'),
+
+    /**
+     * The URL of the CSV document to download.
+     */
     url: z.string(),
 
     /**
@@ -44,7 +58,7 @@ const Config = z.object({
        */
       dateFormat: z.string(),
       enabled: z.boolean().optional(),
-      position: ClockPosition,
+      position: Position,
       timeFormat: z.string(),
 
       /**
@@ -58,7 +72,7 @@ const Config = z.object({
        */
       dateFormat: z.string(),
       enabled: z.boolean().optional(),
-      position: ClockPosition,
+      position: Position,
       style: z.enum(['light', 'dark']),
 
       /**
@@ -70,6 +84,6 @@ const Config = z.object({
 })
 
 export type ConfigType = z.infer<typeof Config>
-export type ClockPositionType = z.infer<typeof ClockPosition>
+export type PositionType = z.infer<typeof Position>
 
 export default Config
