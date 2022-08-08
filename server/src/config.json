@@ -16,7 +16,7 @@
     "type": "analog",
     "style": "light",
     "dateFormat": "E, dd.MM.yyyy",
-    "position": "top-center",
+    "position": "bottom-right",
     "timeFormat": "HH:mm"
   }
 }

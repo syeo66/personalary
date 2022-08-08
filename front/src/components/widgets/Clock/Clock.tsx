@@ -46,10 +46,23 @@ interface ClockWrapperProps {
 const ClockWrapper = styled.div<ClockWrapperProps>`
   color: white;
   position: absolute;
-  ${({ horizontal = 'right' }) => horizontal}: clamp(2rem, 10vw, 5rem);
-  ${({ vertical = 'bottom' }) => vertical}: clamp(2rem, 10vw, 5rem);
   margin: 0;
+  box-sizing: border-box;
   padding: 0;
+  ${({ horizontal = 'left' }) => (horizontal === 'right' ? 'right' : 'left')}: clamp(2rem, 10vw, 5rem);
+  ${({ vertical = 'top' }) => (vertical === 'bottom' ? 'bottom' : 'top')}: clamp(2rem, 10vw, 5rem);
+  ${({ horizontal }) =>
+    horizontal === 'center' &&
+    `
+    left: 50vw;
+    transform: translateX(-50%);
+  `}
+  ${({ vertical }) =>
+    vertical === 'center' &&
+    `
+    top: 50vh;
+    transform: translateY(-50%);
+  `}
 `
 
 export default memo(Clock)
