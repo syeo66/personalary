@@ -48,8 +48,8 @@ app.get('/', (_req, res) => {
   res.send('Personalary Background Service')
 })
 
-app.get('/admin', (_req, _res) => {
-  _res.send(loadConfig())
+app.get('/admin', (_req, res) => {
+  res.send(loadConfig())
 })
 
 // Server setup
