@@ -17,6 +17,7 @@
     "style": "light",
     "dateFormat": "E, dd.MM.yyyy",
     "position": "bottom-right",
-    "timeFormat": "HH:mm"
+    "timeFormat": "HH:mm",
+    "smooth": true
   }
 }

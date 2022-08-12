@@ -155,6 +155,11 @@
             "description": "The style of the clock.",
             "type": "string",
             "enum": ["light", "dark"]
+          },
+          "smooth": {
+            "description": "Set to true to move the seconds hand smoothly.",
+            "type": "boolean",
+            "default": false
           }
         },
         "required": ["style"]
