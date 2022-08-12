@@ -47,6 +47,7 @@ const AnalogClock: React.FC<AnalogClockProps> = ({ config }) => {
       ],
       {
         duration: 1000,
+        fill: 'both',
         iterations: 1,
       }
     )
