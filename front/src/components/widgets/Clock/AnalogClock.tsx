@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 
 import { AnalogClockConfigType } from './ClockType'
@@ -13,6 +13,8 @@ interface AnalogClockProps {
 const AnalogClock: React.FC<AnalogClockProps> = ({ config }) => {
   const [time, setTime] = useState(() => new Date())
 
+  const secondsRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date()
@@ -24,6 +26,32 @@ const AnalogClock: React.FC<AnalogClockProps> = ({ config }) => {
     return () => clearInterval(interval)
   }, [time])
 
+  useLayoutEffect(() => {
+    if (!secondsRef.current) {
+      return
+    }
+
+    if (!config.smooth) {
+      secondsRef.current.style.transform = `rotateZ(${time.getSeconds() * 6}deg)`
+      return
+    }
+
+    secondsRef.current.animate(
+      [
+        {
+          transform: `rotateZ(${time.getSeconds() * 6}deg)`,
+        },
+        {
+          transform: `rotateZ(${(time.getSeconds() + 1) * 6}deg)`,
+        },
+      ],
+      {
+        duration: 1000,
+        iterations: 1,
+      }
+    )
+  }, [config.smooth, time])
+
   const isDark = config.style === 'dark'
 
   return (
@@ -31,7 +59,7 @@ const AnalogClock: React.FC<AnalogClockProps> = ({ config }) => {
       <Background dark={isDark}>
         <Hours time={time} dark={isDark} />
         <Minutes time={time} dark={isDark} />
-        <Seconds time={time} dark={isDark} />
+        <Seconds time={time} dark={isDark} ref={secondsRef} />
       </Background>
       <DateView>{format(time, config.dateFormat)}</DateView>
     </Clock>
@@ -85,13 +113,13 @@ const Minutes = styled(Hours).attrs<DateProps>(({ time }) => ({
   top: 10px;
 `
 
-const Seconds = styled(Hours).attrs<DateProps>(({ time }) => ({
-  style: { transform: `rotateZ(${time.getSeconds() * 6}deg)` },
-}))<DateProps>`
+const Seconds = styled.div<DateProps>`
   background-color: red;
   height: 50px;
   left: calc(50% - 0.5px);
+  position: absolute;
   top: 5px;
+  transform-origin: center calc(100% - 5px);
   width: 1px;
 `
 

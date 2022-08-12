@@ -6,6 +6,7 @@ const AnalogClockConfig = z.object({
   dateFormat: z.string(),
   enabled: z.boolean().optional(),
   position: ClockPosition,
+  smooth: z.boolean().optional(),
   style: z.enum(['light', 'dark']),
   type: z.literal('analog'),
 })
