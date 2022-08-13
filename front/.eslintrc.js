@@ -20,7 +20,7 @@ module.exports = {
     complexity: ['warn', 10],
     eqeqeq: 'error',
     'linebreak-style': ['error', 'unix'],
-    'no-console': 'error',
+    'no-console': 'off',
     'no-else-return': 'error',
     'no-empty': 'error',
     'no-shadow': 'error',
@@ -34,4 +34,4 @@ module.exports = {
     'sort-keys': 'error',
     'sort-vars': 'error',
   },
-};
+}

@@ -37,16 +37,21 @@ interface BackgroundRendererProps {
   url?: string
 }
 
-const BackgroundRenderer = styled.div<BackgroundRendererProps>`
-  background: black ${({ url }) => (url ? `url(${url})` : '')} no-repeat center center;
+const BackgroundRenderer = styled.div.attrs<BackgroundRendererProps>(({ url }) => {
+  return {
+    style: { backgroundColor: 'black', ...(url ? { backgroundImage: `url(${url})` } : {}) },
+  }
+})<BackgroundRendererProps>`
+  background-position: center center;
   background-size: cover;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
+  background-repeat: no-repeat;
   bottom: 0;
+  height: 100%;
+  left: 0;
   position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
 `
 
 const Copyright = styled.div`
