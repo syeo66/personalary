@@ -5,7 +5,7 @@ import Pause from '../../../icons/Pause'
 import Play from '../../../icons/Play'
 import PositionWrapper from '../../PositionWrapper'
 
-const config = { enabled: false, position: 'bottom-left' }
+const config = { enabled: true, position: 'bottom-left' }
 
 const MusicPlayer: React.FC = () => {
   const isPlaying = false
@@ -48,7 +48,7 @@ const Player = styled.div`
   grid-template-areas:
     "artwork artwork"
     "button info"
-    "button progress";
+    "progress progress";
 `
 
 const Artwork = styled.img`
