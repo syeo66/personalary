@@ -1,3 +1,4 @@
+import cors from 'cors'
 import express from 'express'
 import path from 'path'
 import { merge, Subject, takeUntil } from 'rxjs'
@@ -42,6 +43,7 @@ wsServer.on('connection', (socket) => {
 })
 
 app.use(express.static(path.join(__dirname, '../public')))
+app.use(cors())
 
 // Handling '/' Request
 app.get('/', (_req, res) => {
