@@ -75,6 +75,9 @@ const AdminSidebar = styled.nav`
 
 const AdminContent = styled.main`
   grid-area: content;
+  & > *:first-child {
+    margin-top: 0;
+  }
 `
 
 export default AdminLayout

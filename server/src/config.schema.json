@@ -81,10 +81,10 @@
         "service": {
           "description": "Type of music player",
           "type": "string",
-          "enum": ["spotifyRemote"]
+          "enum": ["SpotifyRemote"]
         },
         "position": {
-          "description": "The position of the clock.",
+          "description": "The position of the music player.",
           "$ref": "#/$defs/enums/position"
         },
         "enabled": {

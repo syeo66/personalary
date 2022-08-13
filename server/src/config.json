@@ -19,5 +19,10 @@
     "position": "bottom-right",
     "timeFormat": "HH:mm",
     "smooth": true
+  },
+  "musicPlayer": {
+    "service": "SpotifyRemote",
+    "position": "bottom-left",
+    "enabled": true
   }
 }

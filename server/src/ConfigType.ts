@@ -58,6 +58,9 @@ const Config = z.object({
        */
       dateFormat: z.string(),
       enabled: z.boolean().optional().default(true),
+      /**
+       * The position of the clock.
+       */
       position: Position,
       timeFormat: z.string(),
 
@@ -82,6 +85,24 @@ const Config = z.object({
       type: z.literal('analog'),
     }),
   ]),
+  musicPlayer: z.object({
+    /**
+     * The service to use for the music player.
+     *
+     * Currently only SpotifyRemote exists.
+     */
+    service: z.literal('SpotifyRemote'),
+
+    /**
+     * The position of the music player.
+     */
+    position: Position,
+
+    /**
+     * Enable or disable the music player.
+     */
+    enabled: z.boolean().optional(),
+  }),
 })
 
 export type ConfigType = z.infer<typeof Config>
