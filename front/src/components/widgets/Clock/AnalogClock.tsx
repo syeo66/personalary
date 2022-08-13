@@ -31,22 +31,17 @@ const AnalogClock: React.FC<AnalogClockProps> = ({ config }) => {
       return
     }
 
-    if (!config.smooth) {
-      secondsRef.current.style.transform = `rotateZ(${time.getSeconds() * 6}deg)`
-      return
-    }
-
     secondsRef.current.animate(
       [
         {
-          transform: `rotateZ(${time.getSeconds() * 6}deg)`,
+          transform: `rotateZ(${(time.getSeconds() + (config.smooth ? 0 : -1)) * 6}deg)`,
         },
         {
-          transform: `rotateZ(${(time.getSeconds() + 1) * 6}deg)`,
+          transform: `rotateZ(${(time.getSeconds() + (config.smooth ? 1 : 0)) * 6}deg)`,
         },
       ],
       {
-        duration: 1000,
+        duration: config.smooth ? 1000 : 10,
         fill: 'both',
         iterations: 1,
       }
