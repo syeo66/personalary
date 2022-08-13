@@ -13,18 +13,18 @@ const PositionWrapper = styled.div<PositionWrapperProps>`
   padding: 0;
   ${({ horizontal = 'left' }) => (horizontal === 'right' ? 'right' : 'left')}: clamp(2rem, 10vw, 5rem);
   ${({ vertical = 'top' }) => (vertical === 'bottom' ? 'bottom' : 'top')}: clamp(2rem, 10vw, 5rem);
-  ${({ horizontal }) =>
-    horizontal === 'center' &&
+  ${({ vertical, horizontal }) => {
+    const horizontalValue = horizontal === 'center' ? 'left: 50%;' : ''
+    const verticalValue = vertical === 'center' ? 'top: 50%;' : ''
+    const horizontalOffset = horizontal === 'center' ? 'translateX(-50%)' : ''
+    const verticalOffset = vertical === 'center' ? 'translateY(-50%)' : ''
+
+    return `
+    ${horizontalValue}
+    ${verticalValue}
+    transform: ${horizontalOffset} ${verticalOffset};
     `
-    left: 50vw;
-    transform: translateX(-50%);
-  `}
-  ${({ vertical }) =>
-    vertical === 'center' &&
-    `
-    top: 50vh;
-    transform: translateY(-50%);
-  `}
+  }}
 `
 
 export default PositionWrapper
