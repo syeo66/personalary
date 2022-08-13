@@ -1,13 +1,14 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import AdminLayout from '../components/admin/AdminLayout'
+import AdminLayout from '../../components/admin/AdminLayout'
+import Home from './Home'
 
 const Admin: React.FC = () => {
   return (
     <AdminLayout>
       <Routes>
-        <Route path="/" element={<>... Admin ...</>} />
+        <Route path="/" element={<Home />} />
         <Route path="/clock" element={<>... Clock ...</>} />
         <Route path="/background" element={<>... Background ...</>} />
         <Route path="/messages" element={<>... Message ...</>} />
