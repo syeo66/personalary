@@ -6,6 +6,7 @@ export const MessageType = {
   SetBackground: 'SetBackground',
   SetClockConfig: 'SetClockConfig',
   ShowMessage: 'ShowMessage',
+  SetMusicPlayer: 'SetMusicPlayer',
 }
 
 const useWsMessage = (type: keyof typeof MessageType, callback: (event: MessageEvent) => void) => {

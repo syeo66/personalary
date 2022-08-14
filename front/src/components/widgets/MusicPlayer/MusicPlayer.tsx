@@ -1,36 +1,51 @@
-import React from 'react'
+import { format } from 'date-fns'
+import React, { memo, useCallback, useState } from 'react'
 import styled from 'styled-components'
 
+import useWsMessage from '../../../hooks/useWsMessage'
 import Pause from '../../../icons/Pause'
 import Play from '../../../icons/Play'
 import PositionWrapper from '../../PositionWrapper'
 import Progress from '../../Progress'
-
-const config = { enabled: true, position: 'bottom-left' }
+import { MusicPlayerDataType } from './MusicPlayerData'
 
 const MusicPlayer: React.FC = () => {
-  const isPlaying = false
-  const progress = 40
-  const maxTime = '3:35'
+  const [config, setConfig] = useState<MusicPlayerDataType>({ enabled: false })
+
+  const messageHandler = useCallback((event: MessageEvent) => {
+    try {
+      const value = JSON.parse(event.data?.replace('SetMusicPlayer ', ''))
+      setConfig(value)
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log('could not parse message', event.data, error)
+    }
+  }, [])
+
+  useWsMessage('SetMusicPlayer', messageHandler)
 
   if (!config?.enabled) {
     return null
   }
+
+  const isPlaying = config.player.playing
+  const progress = (config.player.position * 100) / config.track.length
+  const maxTime = format(new Date(config.track.length * 1000), 'mm:ss')
 
   const [vertical, horizontal] = config.position.split('-')
 
   return (
     <PositionWrapper vertical={vertical} horizontal={horizontal}>
       <Player>
-        <Artwork src="https://www.metalkingdom.net/album-cover-artwork/2021/06/2/149894-Lorna-Shore-And-I-Return-to-Nothingness.jpg" />
+        <Artwork src={config.album.image} />
         <Button>
           {!isPlaying && <Play size="90%" />}
           {isPlaying && <Pause size="90%" />}
         </Button>
         <Info>
-          <Title>The Title Of The Track</Title>
-          <Album>The Awesome Album</Album>
-          <Artist>The Band</Artist>
+          <Title>{config.track.title}</Title>
+          <Album>{config.album.title}</Album>
+          <Artist>{config.artist.name}</Artist>
         </Info>
         <Progress progress={progress} labelRight={maxTime} />
       </Player>
@@ -81,4 +96,4 @@ const Title = styled.div`
   font-weight: bold;
 `
 
-export default MusicPlayer
+export default memo(MusicPlayer)

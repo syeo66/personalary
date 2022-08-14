@@ -31,7 +31,7 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': 'error',
-    'sort-keys': 'error',
-    'sort-vars': 'error',
+    'sort-keys': 'off',
+    'sort-vars': 'off',
   },
 }
