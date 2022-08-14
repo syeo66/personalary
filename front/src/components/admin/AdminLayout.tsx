@@ -25,7 +25,7 @@ const HeaderLink = styled(Link)`
 `
 
 const NavLink = styled(Link)`
-  color: rgba(16, 16, 214, 0.5);
+  color: rgb(16, 16, 214);
   font-weight: bold;
   text-decoration: none;
   margin-right: 0.5rem;
