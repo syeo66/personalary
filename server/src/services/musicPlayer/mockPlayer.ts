@@ -1,6 +1,9 @@
 import { distinctUntilChanged, map, timer } from 'rxjs'
 
+import loadConfig from '../../loadConfig'
 import MusicPlayerData, { MusicPlayerDataType } from './MusicPlayerData'
+
+const { musicPlayer: config } = loadConfig()
 
 const MockPlayer = () => {
   return timer(500, 1000).pipe(
@@ -17,7 +20,8 @@ const MockPlayer = () => {
         },
         track: { title: 'Wooohooo!', length: 360 },
         player: { playing: true, position: Math.round(v / 10) % 360 },
-        enabled: true,
+        enabled: !!config.enabled,
+        position: config.position,
       }
 
       const playerData = MusicPlayerData.parse(data)

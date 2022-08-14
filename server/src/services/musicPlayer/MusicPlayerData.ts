@@ -21,6 +21,17 @@ const MusicPlayerData = z.discriminatedUnion('enabled', [
       position: z.number(),
     }),
     enabled: z.literal(true),
+    position: z.enum([
+      'top-left',
+      'top-center',
+      'top-right',
+      'center-left',
+      'center-center',
+      'center-right',
+      'bottom-left',
+      'bottom-center',
+      'bottom-right',
+    ]),
   }),
   z.object({ enabled: z.literal(false) }),
 ])
