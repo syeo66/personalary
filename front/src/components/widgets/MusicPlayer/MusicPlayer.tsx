@@ -4,12 +4,14 @@ import styled from 'styled-components'
 import Pause from '../../../icons/Pause'
 import Play from '../../../icons/Play'
 import PositionWrapper from '../../PositionWrapper'
+import Progress from '../../Progress'
 
-const config = { enabled: false, position: 'bottom-left' }
+const config = { enabled: true, position: 'bottom-left' }
 
 const MusicPlayer: React.FC = () => {
   const isPlaying = false
-  const progress = 50
+  const progress = 40
+  const maxTime = '3:35'
 
   if (!config?.enabled) {
     return null
@@ -30,7 +32,7 @@ const MusicPlayer: React.FC = () => {
           <Album>The Awesome Album</Album>
           <Artist>The Band</Artist>
         </Info>
-        <Progress progress={progress} />
+        <Progress progress={progress} labelRight={maxTime} />
       </Player>
     </PositionWrapper>
   )
@@ -67,26 +69,6 @@ const Button = styled.div`
   grid-area: button;
   justify-content: center;
   pointer: cursor;
-`
-
-interface ProgressProps {
-  progress: number
-}
-const Progress = styled.div<ProgressProps>`
-  border-radius: 0.25rem;
-  border: 1px solid white;
-  grid-area: progress;
-  height: 1rem;
-  overflow: hidden;
-
-  &:before {
-    background: white;
-    content: ' ';
-    display: block;
-    height: 100%;
-    width: ${({ progress }) => progress}%;
-    transition: width 0.5s linear;
-  }
 `
 
 const Info = styled.div`
