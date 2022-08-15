@@ -34,7 +34,7 @@ const config: () => ConfigType = () => {
       url: process.env.CSV_DOWNLOAD_URL || '',
     },
     musicPlayer: {
-      client_id: process.env.SPOTIFY_API_CLIENT_ID || '',
+      clientId: process.env.SPOTIFY_API_CLIENT_ID || '',
     },
   }
 

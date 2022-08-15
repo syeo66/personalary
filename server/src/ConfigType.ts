@@ -106,7 +106,12 @@ const Config = z.object({
     /**
      * The client id for using the Spotify API
      */
-    client_id: z.string(),
+    clientId: z.string(),
+
+    /**
+     * Is Spotify connected and authorized
+     */
+    isAuthorized: z.boolean().optional().default(false),
   }),
 })
 
