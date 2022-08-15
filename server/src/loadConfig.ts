@@ -33,6 +33,9 @@ const config: () => ConfigType = () => {
     messages: {
       url: process.env.CSV_DOWNLOAD_URL || '',
     },
+    musicPlayer: {
+      client_id: process.env.SPOTIFY_API_CLIENT_ID || '',
+    },
   }
 
   const mergedConfig = pipe(mergeDeepLeft(envConfig), mergeDeepLeft(userConfig), Config.parse)(parsedConfig)

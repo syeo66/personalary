@@ -4,8 +4,8 @@ import path from 'path'
 import { merge, Subject, takeUntil } from 'rxjs'
 import ws from 'ws'
 
-import loadConfig from './loadConfig'
 import providers from './providers'
+import adminGet from './routes/adminGet'
 
 // Initialize the express engine
 const app: express.Application = express()
@@ -50,9 +50,7 @@ app.get('/', (_req, res) => {
   res.send('Personalary Background Service')
 })
 
-app.get('/admin', (_req, res) => {
-  res.send(loadConfig())
-})
+app.get('/admin', adminGet)
 
 // Server setup
 const server = app.listen(PORT, () => {

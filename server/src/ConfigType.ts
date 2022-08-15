@@ -102,6 +102,11 @@ const Config = z.object({
      * Enable or disable the music player.
      */
     enabled: z.boolean().optional(),
+
+    /**
+     * The client id for using the Spotify API
+     */
+    client_id: z.string(),
   }),
 })
 
