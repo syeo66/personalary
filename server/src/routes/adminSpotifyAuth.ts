@@ -1,12 +1,9 @@
 import axios from 'axios'
 import { RequestHandler } from 'express'
 import fs from 'fs'
-import os from 'os'
 
+import { configFilePath, configPath } from '../configs/spotifyRemoteConfig'
 import loadConfig from '../loadConfig'
-
-const configPath = `${os.homedir()}/.personalary`
-export const configFilePath = `${configPath}/spotify.json`
 
 const clientSecret = process.env.SPOTIFY_API_SECRET_KEY
 

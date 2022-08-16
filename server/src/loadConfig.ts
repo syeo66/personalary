@@ -5,8 +5,8 @@ import os from 'os'
 import { mergeDeepLeft, pipe } from 'ramda'
 
 import configuration from './config.json'
+import spotifyRemoteConfig from './configs/spotifyRemoteConfig'
 import Config, { ConfigType } from './ConfigType'
-import { configFilePath } from './routes/adminSpotifyAuth'
 
 const USER_CONFIG_PATH = process.env.USER_CONFIG_PATH || `${os.homedir()}/.personalary/config.json`
 
@@ -39,18 +39,16 @@ const loadConfig: () => ConfigType = () => {
     },
   }
 
+  // TODO spotify stuff. refactore
   let isAuthorized = false
 
-  // TODO make this modular to allow for different services
-  if (fs.existsSync(configFilePath)) {
-    const configFile = fs.readFileSync(configFilePath)
-    const configFileParsed = JSON.parse(configFile.toString())
-    const { timestamp, expires_in } = configFileParsed
-    const now = Math.floor(Date.now() / 1000)
-    if (now < timestamp + expires_in) {
-      isAuthorized = true
-    }
+  const { timestamp, expires_in } = spotifyRemoteConfig() || {}
+  const now = Math.floor(Date.now() / 1000)
+
+  if (now < timestamp + expires_in) {
+    isAuthorized = true
   }
+  // ---------
 
   const dynamicConfig = { musicPlayer: { isAuthorized } }
 

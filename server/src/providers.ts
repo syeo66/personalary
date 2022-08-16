@@ -4,7 +4,7 @@ import { Observable } from 'rxjs'
 import nasaApotd from './services/background/nasaApotd'
 import clockConfig from './services/clock/config'
 import csvDownload from './services/messages/csvDownload'
-import spotifyRemote from './services/musicPlayer/mockPlayer'
+import spotifyRemote from './services/musicPlayer/spotifyRemote'
 
 type Service = Observable<string>
 
