@@ -6,6 +6,7 @@ import ws from 'ws'
 
 import providers from './providers'
 import adminGet from './routes/adminGet'
+import adminSpotifyAuth from './routes/adminSpotifyAuth'
 
 // Initialize the express engine
 const app: express.Application = express()
@@ -51,6 +52,7 @@ app.get('/', (_req, res) => {
 })
 
 app.get('/admin', adminGet)
+app.get('/admin/spotify/auth', adminSpotifyAuth)
 
 // Server setup
 const server = app.listen(PORT, () => {
