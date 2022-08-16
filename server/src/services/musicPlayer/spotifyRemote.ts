@@ -14,7 +14,8 @@ const SpotifyRemote = () => {
   return timer(500, 1000).pipe(
     concatMap(() => {
       const spotifyConfig = spotifyRemoteConfig()
-      const { access_token } = spotifyConfig
+
+      const { access_token } = spotifyConfig || {}
 
       if (!access_token) {
         return from([null])
@@ -27,14 +28,19 @@ const SpotifyRemote = () => {
         responseType: 'json' as const,
         withCredentials: true,
       }
-      return from(axios.get(url, authOptions))
-    }),
-    catchError((err, caught) => {
-      console.error(err.response.statusText)
-      return caught
+      return from(axios.get(url, authOptions)).pipe(
+        catchError((err) => {
+          console.error(err?.response?.statusText || err?.response)
+          return from([null])
+        })
+      )
     }),
     map((v) => {
       const spotifyConfig = spotifyRemoteConfig()
+
+      if (!spotifyConfig) {
+        return 'SetMusicPlayer {"enabled":false}'
+      }
 
       const { timestamp, expires_in, refresh_token } = spotifyConfig
       const now = Math.floor(Date.now() / 1000)
@@ -43,7 +49,7 @@ const SpotifyRemote = () => {
       }
 
       if (!v?.data?.item) {
-        return 'SetMusicPlayer {"enabled":false }'
+        return 'SetMusicPlayer {"enabled":false}'
       }
 
       const { is_playing, progress_ms, item } = v.data
