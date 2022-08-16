@@ -1,6 +1,6 @@
 import axios from 'axios'
 import fs from 'fs'
-import { distinctUntilChanged, map, timer } from 'rxjs'
+import { catchError, concatMap, distinctUntilChanged, from, map, timer } from 'rxjs'
 
 import spotifyRemoteConfig, { configFilePath, configPath } from '../../configs/spotifyRemoteConfig'
 import loadConfig from '../../loadConfig'
@@ -8,14 +8,33 @@ import MusicPlayerData, { MusicPlayerDataType } from './MusicPlayerData'
 
 const { musicPlayer: config } = loadConfig()
 
+const url = 'https://api.spotify.com/v1/me/player'
+
 const SpotifyRemote = () => {
   return timer(500, 1000).pipe(
+    concatMap(() => {
+      const spotifyConfig = spotifyRemoteConfig()
+      const { access_token } = spotifyConfig
+
+      if (!access_token) {
+        return from([null])
+      }
+
+      const authOptions = {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+        responseType: 'json' as const,
+        withCredentials: true,
+      }
+      return from(axios.get(url, authOptions))
+    }),
+    catchError((err, caught) => {
+      console.error(err.response.statusText)
+      return caught
+    }),
     map((v) => {
       const spotifyConfig = spotifyRemoteConfig()
-
-      if (!spotifyConfig?.access_token) {
-        return { enabled: false }
-      }
 
       const { timestamp, expires_in, refresh_token } = spotifyConfig
       const now = Math.floor(Date.now() / 1000)
@@ -23,18 +42,26 @@ const SpotifyRemote = () => {
         refresh(refresh_token)
       }
 
+      if (!v?.data) {
+        return 'SetMusicPlayer {"enabled":false }'
+      }
+
+      const { is_playing, progress_ms, item } = v.data
+
       const data: MusicPlayerDataType = {
         artist: {
-          name: 'Red Ochsenbein',
+          name: item.artists?.map((a: { name: string }) => a.name).join(', '),
         },
         album: {
-          title: 'Wooohoooo!',
-          year: 2020,
-          image:
-            'https://www.metalkingdom.net/album-cover-artwork/2021/06/2/149894-Lorna-Shore-And-I-Return-to-Nothingness.jpg',
+          title: item.album.name,
+          year: Number(item.album.release_date.split('-')[0]),
+          image: item.album.images[0].url,
         },
-        track: { title: 'Wooohooo!', length: 360 },
-        player: { playing: true, position: v % 360 },
+        track: { title: item.name, length: item.duration_ms / 1000 },
+        player: {
+          playing: is_playing,
+          position: progress_ms / 1000,
+        },
         enabled: !!config.enabled && !!config.isAuthorized,
         position: config.position,
       }
