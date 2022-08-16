@@ -42,7 +42,7 @@ const SpotifyRemote = () => {
         refresh(refresh_token)
       }
 
-      if (!v?.data) {
+      if (!v?.data?.item) {
         return 'SetMusicPlayer {"enabled":false }'
       }
 
