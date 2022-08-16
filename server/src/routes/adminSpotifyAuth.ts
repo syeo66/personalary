@@ -1,13 +1,17 @@
 import axios from 'axios'
 import { RequestHandler } from 'express'
+import fs from 'fs'
+import os from 'os'
 
 import loadConfig from '../loadConfig'
 
-const { clientId } = loadConfig().musicPlayer
+const configPath = `${os.homedir()}/.personalary`
+export const configFilePath = `${configPath}/spotify.json`
 
 const clientSecret = process.env.SPOTIFY_API_SECRET_KEY
 
 const adminSpotifyAuth: RequestHandler = async (req, res) => {
+  const { clientId } = loadConfig().musicPlayer
   const code = req.query.code || null
   const redirect_uri = req.query.redirect_uri || null
 
@@ -34,10 +38,18 @@ const adminSpotifyAuth: RequestHandler = async (req, res) => {
       new URLSearchParams({ code: `${code}`, redirect_uri: `${redirect_uri}`, grant_type: 'authorization_code' }),
       authOptions
     )
-    console.log(JSON.stringify(resp.data, null, '  '))
+
+    if (!fs.existsSync(configPath)) {
+      fs.mkdirSync(configPath)
+    }
+    fs.writeFileSync(
+      configFilePath,
+      JSON.stringify({ ...resp.data, timestamp: Math.floor(Date.now() / 1000) }, null, '  ')
+    )
+
     res.json({ status: 'OK' })
   } catch (err) {
-    console.error(err)
+    res.status(500).json({ status: 500, error: 'something went wrong' })
   }
 }
 
