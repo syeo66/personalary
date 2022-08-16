@@ -19,9 +19,11 @@ const Progress: React.FC<ProgressProps> = ({ progress, labelLeft, labelRight }) 
 
 const LabelLeft = styled.div`
   margin-right: 0.25rem;
+  font-size: 75%;
 `
 const LabelRight = styled.div`
   margin-left: 0.25rem;
+  font-size: 75%;
 `
 
 const ProgressWrapper = styled.div`
