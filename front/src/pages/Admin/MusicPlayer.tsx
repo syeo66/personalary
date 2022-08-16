@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react'
 import { useMutation } from 'react-query'
+import { useNavigate } from 'react-router-dom'
 
 import Button from '../../components/Button'
 import Loader from '../../components/Loader'
@@ -8,9 +9,11 @@ import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 const API_URL = process.env.REACT_APP_ADMIN_URL || `//${document.location.host}/admin`
 
 const MusicPlayer: React.FC = () => {
-  const { data, isLoading } = useAdminDataQuery()
+  const navigate = useNavigate()
 
   const isSending = useRef(false)
+
+  const { data, isLoading, refetch } = useAdminDataQuery()
 
   const { clientId, isAuthorized } = data?.musicPlayer || {}
 
@@ -21,7 +24,8 @@ const MusicPlayer: React.FC = () => {
     {
       onSettled: () => {
         isSending.current = false
-        document.location.href = `//${document.location.host}/admin/musicplayer`
+        refetch()
+        navigate('/admin/musicplayer')
       },
     }
   )
@@ -40,8 +44,6 @@ const MusicPlayer: React.FC = () => {
 
     isSending.current = true
 
-    console.log(code)
-    // send code to server
     sendAuth.mutate({
       code,
       redirect_uri: `${document.location.protocol}//${document.location.host}${document.location.pathname}`,

@@ -35,6 +35,7 @@ const adminSpotifyAuth: RequestHandler = async (req, res) => {
       authOptions
     )
     console.log(JSON.stringify(resp.data, null, '  '))
+    res.json({ status: 'OK' })
   } catch (err) {
     console.error(err)
   }
