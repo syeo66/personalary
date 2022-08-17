@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import useWsMessage from '../../../hooks/useWsMessage'
 import Pause from '../../../icons/Pause'
 import Play from '../../../icons/Play'
+import SpotifyLogo from '../../../icons/SpotifyLogo'
 import PositionWrapper from '../../PositionWrapper'
 import Progress from '../../Progress'
 import { MusicPlayerDataType } from './MusicPlayerData'
@@ -48,10 +49,21 @@ const MusicPlayer: React.FC = () => {
           <Artist>{config.artist.name}</Artist>
         </Info>
         <Progress progress={progress} labelRight={maxTime} />
+        {config.logo && <Logos>{config.logo === 'Spotify' && <SpotifyLogo width="70px" />}</Logos>}
       </Player>
     </PositionWrapper>
   )
 }
+
+const Logos = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  grid-area: logos;
+
+  & > svg {
+    flex-shrink: 0;
+  }
+`
 
 const Player = styled.div`
   border: 1px solid white;
@@ -65,7 +77,8 @@ const Player = styled.div`
   grid-template-areas:
     "artwork artwork"
     "button info"
-    "progress progress";
+    "progress progress"
+    "logos logos";
 `
 
 const Artwork = styled.img`

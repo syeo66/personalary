@@ -32,6 +32,7 @@ const MusicPlayerData = z.discriminatedUnion('enabled', [
       'bottom-center',
       'bottom-right',
     ]),
+    logo: z.enum(['Spotify']).optional().nullable(),
   }),
   z.object({ enabled: z.literal(false) }),
 ])

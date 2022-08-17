@@ -2,7 +2,13 @@ import { z } from 'zod'
 
 const MusicPlayerData = z.discriminatedUnion('enabled', [
   z.object({
+    /**
+     * Some track data
+     */
     track: z.object({
+      /**
+       * The tracks title
+       */
       title: z.string(),
 
       /**
@@ -32,6 +38,7 @@ const MusicPlayerData = z.discriminatedUnion('enabled', [
       'bottom-center',
       'bottom-right',
     ]),
+    logo: z.enum(['Spotify']).nullable().optional(),
   }),
   z.object({ enabled: z.literal(false) }),
 ])

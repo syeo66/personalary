@@ -70,6 +70,7 @@ const SpotifyRemote = () => {
         },
         enabled: !!config.enabled && !!config.isAuthorized,
         position: config.position,
+        logo: 'Spotify',
       }
 
       const playerData = MusicPlayerData.parse(data)
