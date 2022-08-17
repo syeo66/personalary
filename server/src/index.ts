@@ -46,13 +46,18 @@ wsServer.on('connection', (socket) => {
 app.use(express.static(path.join(__dirname, '../public')))
 app.use(cors())
 
+app.get('/api/admin', adminGet)
+app.get('/api/admin/spotify/auth', adminSpotifyAuth)
+
+/* final catch-all route to index.html defined last */
+app.get('/*', (_req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'))
+})
+
 // Handling '/' Request
 app.get('/', (_req, res) => {
   res.send('Personalary Background Service')
 })
-
-app.get('/admin', adminGet)
-app.get('/admin/spotify/auth', adminSpotifyAuth)
 
 // Server setup
 const server = app.listen(PORT, () => {
