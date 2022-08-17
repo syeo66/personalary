@@ -107,7 +107,7 @@ const refresh = async (refresh_token: string) => {
     }
     fs.writeFileSync(
       configFilePath,
-      JSON.stringify({ ...resp.data, timestamp: Math.floor(Date.now() / 1000) }, null, '  ')
+      JSON.stringify({ ...resp.data, refresh_token, timestamp: Math.floor(Date.now() / 1000) }, null, '  ')
     )
   } catch (err) {
     console.log(err)
