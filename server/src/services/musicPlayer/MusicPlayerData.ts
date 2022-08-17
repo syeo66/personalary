@@ -16,6 +16,9 @@ const MusicPlayerData = z.discriminatedUnion('enabled', [
        */
       length: z.number(),
     }),
+    /**
+     * Some album data
+     */
     album: z.object({ title: z.string(), year: z.number(), image: z.string() }),
     artist: z.object({ name: z.string() }),
     player: z.object({
@@ -39,6 +42,7 @@ const MusicPlayerData = z.discriminatedUnion('enabled', [
       'bottom-right',
     ]),
     logo: z.enum(['Spotify']).nullable().optional(),
+    small: z.boolean().optional(),
   }),
   z.object({ enabled: z.literal(false) }),
 ])

@@ -23,6 +23,7 @@
   "musicPlayer": {
     "service": "SpotifyRemote",
     "position": "bottom-left",
+    "small": false,
     "enabled": true
   }
 }

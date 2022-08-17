@@ -37,7 +37,7 @@ const MusicPlayer: React.FC = () => {
 
   return (
     <PositionWrapper vertical={vertical} horizontal={horizontal}>
-      <Player>
+      <Player small={config.small}>
         <Artwork src={config.album.image} />
         <Button>
           {!isPlaying && <Play size="90%" />}
@@ -65,20 +65,36 @@ const Logos = styled.div`
   }
 `
 
-const Player = styled.div`
+interface PlayerProps {
+  small?: boolean
+}
+const Player = styled.div<PlayerProps>`
   border: 1px solid white;
   padding 1rem;
   border-radius: 0.5rem;
   background-color: rgba(0, 0, 0, 0.75);
   gap: 0.5rem;
-  width: clamp(220px,25vw,400px);
+  width: ;
+  width: ${({ small }) => (small ? 'clamp(320px,40vw,550px)' : 'clamp(220px,25vw,400px)')};
   display: grid;
-  grid-template-columns: 3.5rem 1fr;
+  grid-template-columns: ${({ small }) => (small ? '7rem 3.5rem 1fr' : '3.5rem 1fr')};
+  ${({ small }) =>
+    !small &&
+    `
   grid-template-areas:
     "artwork artwork"
     "button info"
     "progress progress"
     "logos logos";
+  `}
+  ${({ small }) =>
+    small &&
+    `
+  grid-template-areas:
+    "artwork button info"
+    "artwork progress progress"
+    "logos logos logos";
+  `}
 `
 
 const Artwork = styled.img`

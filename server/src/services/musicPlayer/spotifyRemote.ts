@@ -70,6 +70,7 @@ const SpotifyRemote = () => {
         },
         enabled: !!config.enabled && !!config.isAuthorized,
         position: config.position,
+        small: config.small,
         logo: 'Spotify',
       }
 

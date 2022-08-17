@@ -112,6 +112,11 @@ const Config = z.object({
      * Is Spotify connected and authorized
      */
     isAuthorized: z.boolean().optional().default(false),
+
+    /**
+     * Set the player to be smaller
+     */
+    small: z.boolean().optional().default(false),
   }),
 })
 

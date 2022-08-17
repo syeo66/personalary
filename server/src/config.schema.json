@@ -91,6 +91,11 @@
           "description": "Enable or disable the music player",
           "type": "boolean",
           "default": true
+        },
+        "small": {
+          "description": "Enable or disable the small music player",
+          "type": "boolean",
+          "default": false
         }
       },
       "required": ["service", "position"]
