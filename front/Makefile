@@ -11,7 +11,7 @@ build: node_modules $(SRCFILES)
 	touch build
 
 start: node_modules
-	yarn start
+	PORT=8001 yarn start
 
 clean: node_modules
 	rm -rf build
