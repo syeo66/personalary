@@ -112,6 +112,7 @@ const Button = styled.div`
   display: flex;
   grid-area: button;
   justify-content: center;
+  max-width: 100%;
   pointer: cursor;
 `
 
