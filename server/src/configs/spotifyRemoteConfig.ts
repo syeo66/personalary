@@ -1,7 +1,7 @@
 import fs from 'fs'
 import os from 'os'
 
-export const configPath = `${os.homedir()}/.personalary`
+export const configPath = process.env.CONFIG_PATH || `${os.homedir()}/.personalary`
 export const configFilePath = `${configPath}/spotify.json`
 
 const spotifyRemoteConfig = () => {

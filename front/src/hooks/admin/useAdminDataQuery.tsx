@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query'
 
-const API_URL = process.env.REACT_APP_ADMIN_URL || `//${document.location.host}/admin`
+const API_URL = process.env.REACT_APP_ADMIN_URL || `//${document.location.host}/api/admin`
 
 const useAdminDataQuery = () => {
   return useQuery(adminDataQuery.key(), () => adminDataQuery.query())
