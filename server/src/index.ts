@@ -7,6 +7,7 @@ import ws from 'ws'
 import providers from './providers'
 import adminGet from './routes/adminGet'
 import adminSpotifyAuth from './routes/adminSpotifyAuth'
+import adminSpotifyRemoveAuth from './routes/adminSpotifyRemoveAuth'
 
 // Initialize the express engine
 const app: express.Application = express()
@@ -48,6 +49,7 @@ app.use(cors())
 
 app.get('/api/admin', adminGet)
 app.get('/api/admin/spotify/auth', adminSpotifyAuth)
+app.get('/api/admin/spotify/removeAuth', adminSpotifyRemoveAuth)
 
 /* final catch-all route to index.html defined last */
 app.get('/*', (_req, res) => {

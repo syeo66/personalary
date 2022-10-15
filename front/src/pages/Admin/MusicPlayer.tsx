@@ -1,8 +1,8 @@
+import { Button } from 'dracula-ui'
 import React, { useCallback, useEffect, useRef } from 'react'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 
-import Button from '../../components/Button'
 import Loader from '../../components/Loader'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 
@@ -29,6 +29,16 @@ const MusicPlayer: React.FC = () => {
       },
     }
   )
+  const removeAuth = useMutation(
+    () => {
+      return fetch(`${API_URL}/spotify/removeAuth`)
+    },
+    {
+      onSettled: () => {
+        refetch()
+      },
+    }
+  )
 
   useEffect(() => {
     const params = new URLSearchParams(document.location.search)
@@ -49,6 +59,8 @@ const MusicPlayer: React.FC = () => {
       redirect_uri: `${document.location.protocol}//${document.location.host}${document.location.pathname}`,
     })
   }, [sendAuth])
+
+  const handleDisconnectClick = useCallback(() => removeAuth.mutate(), [removeAuth])
 
   const handleClick = useCallback(() => {
     if (!clientId) {
@@ -74,7 +86,11 @@ const MusicPlayer: React.FC = () => {
   return (
     <>
       {!isAuthorized && <Button onClick={handleClick}>Connect Spotify</Button>}
-      {isAuthorized && <Button onClick={handleClick}>Disconnect Spotify</Button>}
+      {isAuthorized && (
+        <Button onClick={handleDisconnectClick} variant="outline">
+          Disconnect Spotify
+        </Button>
+      )}
       <pre>{JSON.stringify(data.musicPlayer, null, '  ')}</pre>
     </>
   )
