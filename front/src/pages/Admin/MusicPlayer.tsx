@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import Loader from '../../components/Loader'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 
-const API_URL = process.env.REACT_APP_ADMIN_URL || `//${document.location.host}/admin`
+const API_URL = process.env.REACT_APP_ADMIN_URL || `//${document.location.host}/api/admin`
 
 const MusicPlayer: React.FC = () => {
   const navigate = useNavigate()
