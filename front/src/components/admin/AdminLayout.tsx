@@ -1,18 +1,28 @@
+import 'dracula-ui/styles/dracula-ui.css'
+
 import React, { PropsWithChildren } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => (
   <AdminPage>
-    <AdminHeader>
+    <AdminHeader className="drac-bg-yellow-pink">
       <HeaderLink to="/admin">Personalary Admin</HeaderLink>
     </AdminHeader>
 
-    <AdminSidebar>
-      <NavLink to="clock">Clock</NavLink>
-      <NavLink to="background">Background</NavLink>
-      <NavLink to="messages">Messages</NavLink>
-      <NavLink to="musicplayer">Music Player</NavLink>
+    <AdminSidebar className="drac-text-orange">
+      <StyledNavLink className="drac-text-orange" to="clock">
+        Clock
+      </StyledNavLink>
+      <StyledNavLink className="drac-text-orange" to="background">
+        Background
+      </StyledNavLink>
+      <StyledNavLink className="drac-text-orange" to="messages">
+        Messages
+      </StyledNavLink>
+      <StyledNavLink className="drac-text-orange" to="musicplayer">
+        Music Player
+      </StyledNavLink>
     </AdminSidebar>
 
     <AdminContent>{children}</AdminContent>
@@ -24,11 +34,14 @@ const HeaderLink = styled(Link)`
   text-decoration: none;
 `
 
-const NavLink = styled(Link)`
-  color: rgb(16, 16, 214);
+const StyledNavLink = styled(NavLink)`
   font-weight: bold;
   text-decoration: none;
   margin-right: 0.5rem;
+
+  &.active {
+    color: var(--pink);
+  }
 
   @media (min-width: 768px) {
     font-size: 1.5rem;
@@ -49,28 +62,25 @@ const AdminPage = styled.div`
     grid-template-areas:
       'header header'
       'sidebar content';
-    height: 100vh;
   }
+
+  height: 100vh;
+  background-color: #333;
+  color: #fff;
 `
 
 const AdminHeader = styled.header`
-  background: rgb(0, 5, 36);
-  background: linear-gradient(34deg, rgba(0, 5, 36, 1) 0%, rgba(16, 16, 214, 1) 35%, rgba(0, 212, 255, 1) 100%);
-  border-bottom: rgba(16, 16, 214, 0.5) solid 1px;
-  box-shadow: 0 0 20px rgba(16, 16, 214, 0.5), 0 0 10px rgba(16, 16, 214, 0.4);
-  color: rgba(0, 212, 255, 1);
   font-size: 1.75rem;
+  color: #333;
   font-weight: bold;
   grid-area: header;
-  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5), 1px 1px 0px rgba(0, 0, 0, 0.9), -1px -1px 0px rgba(0, 0, 0, 0.9);
 `
 
 const AdminSidebar = styled.nav`
   @media (min-width: 768px) {
     grid-area: sidebar;
-    box-shadow: 0 0 20px rgba(16, 16, 214, 0.4);
-    border-right: rgba(0, 0, 0, 0.3) solid 1px;
   }
+  background-color: #222;
 `
 
 const AdminContent = styled.main`
