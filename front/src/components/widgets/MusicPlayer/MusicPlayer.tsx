@@ -35,6 +35,10 @@ const MusicPlayer: React.FC = () => {
 
   const [vertical, horizontal] = config.position.split('-')
 
+  if (!isPlaying) {
+    return null
+  }
+
   return (
     <PositionWrapper vertical={vertical} horizontal={horizontal}>
       <Player small={config.small}>
