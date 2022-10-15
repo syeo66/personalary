@@ -8,9 +8,13 @@ import configuration from './config.json'
 import spotifyRemoteConfig from './configs/spotifyRemoteConfig'
 import Config, { ConfigType } from './ConfigType'
 
-const USER_CONFIG_PATH = process.env.USER_CONFIG_PATH || `${os.homedir()}/.personalary/config.json`
+export const CONFIG_DIR = process.env.CONFIG_PATH || `${os.homedir()}/.personalary`
+export const USER_CONFIG_PATH =
+  process.env.USER_CONFIG_PATH ||
+  (process.env.CONFIG_PATH && `${process.env.CONFIG_PATH}/config.json`) ||
+  `${os.homedir()}/.personalary/config.json`
 
-const loadConfig: () => ConfigType = () => {
+export const loadRawConfig = () => {
   const parsedConfig = configuration
 
   let userConfig = {}
@@ -39,7 +43,7 @@ const loadConfig: () => ConfigType = () => {
     },
   }
 
-  // TODO spotify stuff. refactore
+  // TODO spotify stuff. refactor
   let isAuthorized = false
 
   const { timestamp, expires_in } = spotifyRemoteConfig() || {}
@@ -55,11 +59,14 @@ const loadConfig: () => ConfigType = () => {
   const mergedConfig = pipe(
     mergeDeepLeft(envConfig),
     mergeDeepLeft(userConfig),
-    mergeDeepLeft(dynamicConfig),
-    Config.parse
+    mergeDeepLeft(dynamicConfig)
   )(parsedConfig)
 
   return mergedConfig
+}
+
+export const loadConfig: () => ConfigType = () => {
+  return Config.parse(loadRawConfig())
 }
 
 export default loadConfig

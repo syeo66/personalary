@@ -6,6 +6,7 @@ import ws from 'ws'
 
 import providers from './providers'
 import adminGet from './routes/adminGet'
+import adminPut from './routes/adminPut'
 import adminSpotifyAuth from './routes/adminSpotifyAuth'
 import adminSpotifyRemoveAuth from './routes/adminSpotifyRemoveAuth'
 
@@ -44,12 +45,14 @@ wsServer.on('connection', (socket) => {
   })
 })
 
+app.use(express.json())
 app.use(express.static(path.join(__dirname, '../public')))
 app.use(cors())
 
 app.get('/api/admin', adminGet)
 app.get('/api/admin/spotify/auth', adminSpotifyAuth)
 app.get('/api/admin/spotify/removeAuth', adminSpotifyRemoveAuth)
+app.put('/api/admin', adminPut)
 
 /* final catch-all route to index.html defined last */
 app.get('/*', (_req, res) => {
