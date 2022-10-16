@@ -121,7 +121,14 @@ const MusicPlayer: React.FC = () => {
       </Box>
       <Box p="md" color="black" mt="md" rounded="lg">
         <Box>
-          <Switch color="orange" defaultChecked={enabled} id="enabled" name="enabled" onChange={handleEnabledChange} />
+          <Switch
+            checked={enabled}
+            color="orange"
+            defaultChecked={enabled}
+            id="enabled"
+            name="enabled"
+            onChange={handleEnabledChange}
+          />
           <label htmlFor="enabled" className="drac-text drac-text-white">
             Enabled
           </label>
