@@ -1,5 +1,5 @@
-import { Box, Button, Switch } from 'dracula-ui'
-import React, { MouseEventHandler, useCallback, useEffect, useRef } from 'react'
+import { Box, Button, Select, Switch } from 'dracula-ui'
+import React, { ChangeEventHandler, useCallback, useEffect, useRef } from 'react'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 
@@ -15,7 +15,7 @@ const MusicPlayer: React.FC = () => {
 
   const { data, isLoading, refetch } = useAdminDataQuery()
 
-  const { clientId, isAuthorized, enabled } = data?.musicPlayer || {}
+  const { clientId, isAuthorized, enabled, position } = data?.musicPlayer || {}
 
   const sendAuth = useMutation(
     ({ code, redirect_uri }: { code: string; redirect_uri: string }) => {
@@ -95,9 +95,15 @@ const MusicPlayer: React.FC = () => {
     document.location = url
   }, [clientId])
 
-  const handleEnabledClick: MouseEventHandler<HTMLInputElement> = (e) => {
-    sendSettings.mutate({ musicPlayer: { enabled: e.currentTarget.checked } })
-  }
+  const handleEnabledChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => sendSettings.mutate({ musicPlayer: { enabled: e.target.checked } }),
+    [sendSettings]
+  )
+
+  const handlePositionChange: ChangeEventHandler<HTMLSelectElement> = useCallback(
+    (e) => sendSettings.mutate({ musicPlayer: { position: e.target.value } }),
+    [sendSettings]
+  )
 
   if (isLoading) {
     return <Loader />
@@ -105,18 +111,45 @@ const MusicPlayer: React.FC = () => {
 
   return (
     <>
-      {!isAuthorized && <Button onClick={handleClick}>Connect Spotify</Button>}
-      {isAuthorized && (
-        <Button onClick={handleDisconnectClick} variant="outline">
-          Disconnect Spotify
-        </Button>
-      )}
-      <Box p="md" color="grey" mt="md" rounded="lg">
+      <Box p="md" color="black" mt="md" rounded="lg">
+        {!isAuthorized && <Button onClick={handleClick}>Connect Spotify</Button>}
+        {isAuthorized && (
+          <Button onClick={handleDisconnectClick} variant="outline">
+            Disconnect Spotify
+          </Button>
+        )}
+      </Box>
+      <Box p="md" color="black" mt="md" rounded="lg">
         <Box>
-          <Switch color="orange" defaultChecked={enabled} id="enabled" name="enabled" onClick={handleEnabledClick} />
+          <Switch color="orange" defaultChecked={enabled} id="enabled" name="enabled" onChange={handleEnabledChange} />
           <label htmlFor="enabled" className="drac-text drac-text-white">
             Enabled
           </label>
+        </Box>
+
+        <Box mt="md">
+          <label htmlFor="position">Position</label>
+          <Select
+            color="white"
+            defaultValue="default"
+            id="position"
+            name="position"
+            onChange={handlePositionChange}
+            value={position}
+          >
+            <option value="default" disabled={true}>
+              Select option
+            </option>
+            <option value="top-left">Top-Left</option>
+            <option value="top-center">Top-Center</option>
+            <option value="top-right">Top-Right</option>
+            <option value="center-left">Center-Left</option>
+            <option value="center-center">Center-Center</option>
+            <option value="center-right">Center-Right</option>
+            <option value="bottom-left">Bottom-Left</option>
+            <option value="bottom-center">Bottom-Center</option>
+            <option value="bottom-right">Bottom-Right</option>
+          </Select>
         </Box>
       </Box>
       <pre>{JSON.stringify(data.musicPlayer, null, '  ')}</pre>

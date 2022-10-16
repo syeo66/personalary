@@ -67,4 +67,3 @@ const loadConfig: () => ConfigType = () => {
 }
 
 export default loadConfig
-

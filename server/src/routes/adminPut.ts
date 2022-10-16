@@ -2,7 +2,7 @@ import type { RequestHandler } from 'express'
 import fs from 'fs'
 import { mergeDeepLeft, pipe } from 'ramda'
 
-import loadConfig, { CONFIG_DIR, USER_CONFIG_PATH } from '../loadConfig'
+import { CONFIG_DIR, USER_CONFIG_PATH } from '../loadConfig'
 
 const adminPut: RequestHandler = (req, res) => {
   let userConfig = {}
@@ -27,9 +27,6 @@ const adminPut: RequestHandler = (req, res) => {
   fs.writeFileSync(USER_CONFIG_PATH, JSON.stringify({ ...merged }, null, '  '))
 
   res.json({ status: 'OK' })
-
-  const config = loadConfig()
-  return res.send(config)
 }
 
 export default adminPut

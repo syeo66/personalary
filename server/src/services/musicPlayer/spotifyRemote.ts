@@ -6,8 +6,6 @@ import spotifyRemoteConfig, { configFilePath, configPath } from '../../configs/s
 import loadConfig from '../../loadConfig'
 import MusicPlayerData, { MusicPlayerDataType } from './MusicPlayerData'
 
-const { musicPlayer: config } = loadConfig()
-
 const url = 'https://api.spotify.com/v1/me/player'
 
 const SpotifyRemote = () => {
@@ -54,6 +52,7 @@ const SpotifyRemote = () => {
       }
 
       const { is_playing, progress_ms, item } = v.data
+      const { musicPlayer: config } = loadConfig()
 
       const data: MusicPlayerDataType = {
         artist: {
