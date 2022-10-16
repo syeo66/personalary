@@ -67,13 +67,21 @@ const AdminPage = styled.div`
   height: 100vh;
   background-color: #333;
   color: #fff;
+
+  & a {
+    color: var(--orange);
+    text-decoration: none;
+  }
 `
 
 const AdminHeader = styled.header`
   font-size: 1.75rem;
-  color: #333;
   font-weight: bold;
   grid-area: header;
+
+  & a {
+    color: #333;
+  }
 `
 
 const AdminSidebar = styled.nav`

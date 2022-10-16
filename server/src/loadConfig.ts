@@ -14,7 +14,7 @@ export const USER_CONFIG_PATH =
   (process.env.CONFIG_PATH && `${process.env.CONFIG_PATH}/config.json`) ||
   `${os.homedir()}/.personalary/config.json`
 
-export const loadRawConfig = () => {
+const loadConfig: () => ConfigType = () => {
   const parsedConfig = configuration
 
   let userConfig = {}
@@ -43,7 +43,7 @@ export const loadRawConfig = () => {
     },
   }
 
-  // TODO spotify stuff. refactor
+  // TODO spotify stuff. refactore
   let isAuthorized = false
 
   const { timestamp, expires_in } = spotifyRemoteConfig() || {}
@@ -59,14 +59,12 @@ export const loadRawConfig = () => {
   const mergedConfig = pipe(
     mergeDeepLeft(envConfig),
     mergeDeepLeft(userConfig),
-    mergeDeepLeft(dynamicConfig)
+    mergeDeepLeft(dynamicConfig),
+    Config.parse
   )(parsedConfig)
 
   return mergedConfig
 }
 
-export const loadConfig: () => ConfigType = () => {
-  return Config.parse(loadRawConfig())
-}
-
 export default loadConfig
+

@@ -14,10 +14,11 @@ const SpotifyRemote = () => {
   return timer(500, 1000).pipe(
     concatMap(() => {
       const spotifyConfig = spotifyRemoteConfig()
+      const { enabled } = loadConfig().musicPlayer
 
       const { access_token } = spotifyConfig || {}
 
-      if (!access_token) {
+      if (!access_token || !enabled) {
         return from([null])
       }
 

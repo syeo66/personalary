@@ -1,5 +1,5 @@
-import { Button } from 'dracula-ui'
-import React, { useCallback, useEffect, useRef } from 'react'
+import { Box, Button, Switch } from 'dracula-ui'
+import React, { MouseEventHandler, useCallback, useEffect, useRef } from 'react'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 
@@ -15,7 +15,7 @@ const MusicPlayer: React.FC = () => {
 
   const { data, isLoading, refetch } = useAdminDataQuery()
 
-  const { clientId, isAuthorized } = data?.musicPlayer || {}
+  const { clientId, isAuthorized, enabled } = data?.musicPlayer || {}
 
   const sendAuth = useMutation(
     ({ code, redirect_uri }: { code: string; redirect_uri: string }) => {
@@ -29,9 +29,25 @@ const MusicPlayer: React.FC = () => {
       },
     }
   )
+
   const removeAuth = useMutation(
     () => {
       return fetch(`${API_URL}/spotify/removeAuth`)
+    },
+    {
+      onSettled: () => {
+        refetch()
+      },
+    }
+  )
+
+  const sendSettings = useMutation(
+    (settings: Record<string, Record<string, string | boolean | number>>) => {
+      return fetch(`${API_URL}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(settings),
+      })
     },
     {
       onSettled: () => {
@@ -79,6 +95,10 @@ const MusicPlayer: React.FC = () => {
     document.location = url
   }, [clientId])
 
+  const handleEnabledClick: MouseEventHandler<HTMLInputElement> = (e) => {
+    sendSettings.mutate({ musicPlayer: { enabled: e.currentTarget.checked } })
+  }
+
   if (isLoading) {
     return <Loader />
   }
@@ -91,6 +111,14 @@ const MusicPlayer: React.FC = () => {
           Disconnect Spotify
         </Button>
       )}
+      <Box p="md" color="grey" mt="md" rounded="lg">
+        <Box>
+          <Switch color="orange" defaultChecked={enabled} id="enabled" name="enabled" onClick={handleEnabledClick} />
+          <label htmlFor="enabled" className="drac-text drac-text-white">
+            Enabled
+          </label>
+        </Box>
+      </Box>
       <pre>{JSON.stringify(data.musicPlayer, null, '  ')}</pre>
     </>
   )
