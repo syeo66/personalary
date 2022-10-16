@@ -64,7 +64,7 @@ const AdminPage = styled.div`
       'sidebar content';
   }
 
-  height: 100vh;
+  min-height: 100vh;
   background-color: #333;
   color: #fff;
 
