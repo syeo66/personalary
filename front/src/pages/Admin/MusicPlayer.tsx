@@ -5,8 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import Loader from '../../components/Loader'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
-
-const API_URL = process.env.REACT_APP_ADMIN_URL || `//${document.location.host}/api/admin`
+import useSendSettings, { API_URL } from './hooks/useSendSettings'
 
 const MusicPlayer: React.FC = () => {
   const navigate = useNavigate()
@@ -41,20 +40,7 @@ const MusicPlayer: React.FC = () => {
     }
   )
 
-  const sendSettings = useMutation(
-    (settings: Record<string, Record<string, string | boolean | number>>) => {
-      return fetch(`${API_URL}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(settings),
-      })
-    },
-    {
-      onSettled: () => {
-        refetch()
-      },
-    }
-  )
+  const sendSettings = useSendSettings()
 
   useEffect(() => {
     const params = new URLSearchParams(document.location.search)

@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const Position = z.enum([
+export const Position = z.enum([
   'top-left',
   'top-center',
   'top-right',
@@ -74,7 +74,7 @@ const Config = z.object({
        * The format of the date portion of the clock. See https://date-fns.org/v2.29.1/docs/format
        */
       dateFormat: z.string(),
-      enabled: z.boolean().optional(),
+      enabled: z.boolean().optional().default(true),
       position: Position,
       smooth: z.boolean().optional().default(false),
       style: z.enum(['light', 'dark']),

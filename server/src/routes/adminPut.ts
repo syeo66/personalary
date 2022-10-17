@@ -3,6 +3,7 @@ import fs from 'fs'
 import { mergeDeepLeft, pipe } from 'ramda'
 
 import { CONFIG_DIR, USER_CONFIG_PATH } from '../loadConfig'
+import { InputParamSchema } from './types'
 
 const adminPut: RequestHandler = (req, res) => {
   let userConfig = {}
@@ -19,7 +20,8 @@ const adminPut: RequestHandler = (req, res) => {
     }
   }
 
-  const merged = pipe(mergeDeepLeft(req.body))(userConfig)
+  const body = InputParamSchema.parse(req.body)
+  const merged = pipe(mergeDeepLeft(body))(userConfig)
 
   if (!fs.existsSync(CONFIG_DIR)) {
     fs.mkdirSync(CONFIG_DIR)
