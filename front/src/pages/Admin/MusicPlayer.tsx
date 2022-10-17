@@ -15,7 +15,7 @@ const MusicPlayer: React.FC = () => {
 
   const { data, isLoading, refetch } = useAdminDataQuery()
 
-  const { clientId, isAuthorized, enabled, position } = data?.musicPlayer || {}
+  const { clientId, isAuthorized, enabled, position, small } = data?.musicPlayer || {}
 
   const sendAuth = useMutation(
     ({ code, redirect_uri }: { code: string; redirect_uri: string }) => {
@@ -100,6 +100,11 @@ const MusicPlayer: React.FC = () => {
     [sendSettings]
   )
 
+  const handleSmallChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => sendSettings.mutate({ musicPlayer: { small: e.target.checked } }),
+    [sendSettings]
+  )
+
   const handlePositionChange: ChangeEventHandler<HTMLSelectElement> = useCallback(
     (e) => sendSettings.mutate({ musicPlayer: { position: e.target.value } }),
     [sendSettings]
@@ -157,6 +162,20 @@ const MusicPlayer: React.FC = () => {
             <option value="bottom-center">Bottom-Center</option>
             <option value="bottom-right">Bottom-Right</option>
           </Select>
+        </Box>
+
+        <Box mt="md">
+          <Switch
+            checked={small}
+            color="orange"
+            defaultChecked={small}
+            id="small"
+            name="small"
+            onChange={handleSmallChange}
+          />
+          <label htmlFor="small" className="drac-text drac-text-white">
+            Small player interface
+          </label>
         </Box>
       </Box>
       <pre>{JSON.stringify(data.musicPlayer, null, '  ')}</pre>
