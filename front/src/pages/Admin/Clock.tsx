@@ -1,6 +1,7 @@
-import { Box, Select, Switch } from 'dracula-ui'
+import { Box, Select } from 'dracula-ui'
 import React, { ChangeEventHandler, useCallback } from 'react'
 
+import ConfigSwitch from '../../components/admin/ConfigSwitch'
 import Loader from '../../components/Loader'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 import useSendSettings from './hooks/useSendSettings'
@@ -8,19 +9,9 @@ import useSendSettings from './hooks/useSendSettings'
 const Clock: React.FC = () => {
   const { data, isLoading } = useAdminDataQuery()
 
-  const { smooth, enabled, style, type, position } = data?.clock || {}
+  const { style, type, position } = data?.clock || {}
 
   const sendSettings = useSendSettings()
-
-  const handleEnabledChange: ChangeEventHandler<HTMLInputElement> = useCallback(
-    (e) => sendSettings.mutate({ clock: { enabled: e.target.checked, type } }),
-    [sendSettings, type]
-  )
-
-  const handleSmoothChange: ChangeEventHandler<HTMLInputElement> = useCallback(
-    (e) => sendSettings.mutate({ clock: { smooth: e.target.checked, type } }),
-    [sendSettings, type]
-  )
 
   const handlePositionChange: ChangeEventHandler<HTMLSelectElement> = useCallback(
     (e) => sendSettings.mutate({ clock: { position: e.target.value, type } }),
@@ -32,6 +23,8 @@ const Clock: React.FC = () => {
     [sendSettings, type]
   )
 
+  const additionalData = { type }
+
   if (isLoading) {
     return <Loader />
   }
@@ -39,19 +32,7 @@ const Clock: React.FC = () => {
   return (
     <>
       <Box p="md" color="black" mt="md" rounded="lg">
-        <Box>
-          <Switch
-            checked={enabled}
-            color="orange"
-            defaultChecked={enabled}
-            id="enabled"
-            name="enabled"
-            onChange={handleEnabledChange}
-          />
-          <label htmlFor="enabled" className="drac-text drac-text-white">
-            Enabled
-          </label>
-        </Box>
+        <ConfigSwitch label="Enabled" name="enabled" context="clock" additionalData={additionalData} />
 
         <Box mt="md">
           <label htmlFor="position">Position</label>
@@ -81,22 +62,10 @@ const Clock: React.FC = () => {
 
       {type === 'analog' && (
         <Box p="md" color="black" mt="md" rounded="lg">
-          <Box>
-            <Switch
-              checked={smooth}
-              color="orange"
-              defaultChecked={smooth}
-              id="smooth"
-              name="smooth"
-              onChange={handleSmoothChange}
-            />
-            <label htmlFor="smoot" className="drac-text drac-text-white">
-              Smooth seconds movement
-            </label>
-          </Box>
+          <ConfigSwitch label="Smooth seconds movement" name="smooth" context="clock" additionalData={additionalData} />
 
           <Box mt="md">
-            <label htmlFor="position">Style</label>
+            <label htmlFor="style">Style</label>
             <Select
               color="white"
               defaultValue="default"

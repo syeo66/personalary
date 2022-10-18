@@ -1,8 +1,9 @@
-import { Box, Button, Select, Switch } from 'dracula-ui'
+import { Box, Button, Select } from 'dracula-ui'
 import React, { ChangeEventHandler, useCallback, useEffect, useRef } from 'react'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 
+import ConfigSwitch from '../../components/admin/ConfigSwitch'
 import Loader from '../../components/Loader'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 import useSendSettings, { API_URL } from './hooks/useSendSettings'
@@ -14,7 +15,7 @@ const MusicPlayer: React.FC = () => {
 
   const { data, isLoading, refetch } = useAdminDataQuery()
 
-  const { clientId, isAuthorized, enabled, position, small } = data?.musicPlayer || {}
+  const { clientId, isAuthorized, position } = data?.musicPlayer || {}
 
   const sendAuth = useMutation(
     ({ code, redirect_uri }: { code: string; redirect_uri: string }) => {
@@ -81,16 +82,6 @@ const MusicPlayer: React.FC = () => {
     document.location = url
   }, [clientId])
 
-  const handleEnabledChange: ChangeEventHandler<HTMLInputElement> = useCallback(
-    (e) => sendSettings.mutate({ musicPlayer: { enabled: e.target.checked } }),
-    [sendSettings]
-  )
-
-  const handleSmallChange: ChangeEventHandler<HTMLInputElement> = useCallback(
-    (e) => sendSettings.mutate({ musicPlayer: { small: e.target.checked } }),
-    [sendSettings]
-  )
-
   const handlePositionChange: ChangeEventHandler<HTMLSelectElement> = useCallback(
     (e) => sendSettings.mutate({ musicPlayer: { position: e.target.value } }),
     [sendSettings]
@@ -111,21 +102,9 @@ const MusicPlayer: React.FC = () => {
         )}
       </Box>
       <Box p="md" color="black" mt="md" rounded="lg">
-        <Box>
-          <Switch
-            checked={enabled}
-            color="orange"
-            defaultChecked={enabled}
-            id="enabled"
-            name="enabled"
-            onChange={handleEnabledChange}
-          />
-          <label htmlFor="enabled" className="drac-text drac-text-white">
-            Enabled
-          </label>
-        </Box>
+        <ConfigSwitch label="Enabled" name="enabled" context="musicPlayer" />
 
-        <Box mt="md">
+        <Box mt="md" mb="md">
           <label htmlFor="position">Position</label>
           <Select
             color="white"
@@ -150,19 +129,7 @@ const MusicPlayer: React.FC = () => {
           </Select>
         </Box>
 
-        <Box mt="md">
-          <Switch
-            checked={small}
-            color="orange"
-            defaultChecked={small}
-            id="small"
-            name="small"
-            onChange={handleSmallChange}
-          />
-          <label htmlFor="small" className="drac-text drac-text-white">
-            Small player interface
-          </label>
-        </Box>
+        <ConfigSwitch label="Small player interface" name="small" context="musicPlayer" last />
       </Box>
       <pre>{JSON.stringify(data.musicPlayer, null, '  ')}</pre>
     </>
