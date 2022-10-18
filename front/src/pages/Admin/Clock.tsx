@@ -8,7 +8,7 @@ import useSendSettings from './hooks/useSendSettings'
 const Clock: React.FC = () => {
   const { data, isLoading } = useAdminDataQuery()
 
-  const { enabled, type, position } = data?.clock || {}
+  const { smooth, enabled, style, type, position } = data?.clock || {}
 
   const sendSettings = useSendSettings()
 
@@ -17,8 +17,18 @@ const Clock: React.FC = () => {
     [sendSettings, type]
   )
 
+  const handleSmoothChange: ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => sendSettings.mutate({ clock: { smooth: e.target.checked, type } }),
+    [sendSettings, type]
+  )
+
   const handlePositionChange: ChangeEventHandler<HTMLSelectElement> = useCallback(
     (e) => sendSettings.mutate({ clock: { position: e.target.value, type } }),
+    [sendSettings, type]
+  )
+
+  const handleStyleChange: ChangeEventHandler<HTMLSelectElement> = useCallback(
+    (e) => sendSettings.mutate({ clock: { style: e.target.value, type } }),
     [sendSettings, type]
   )
 
@@ -68,6 +78,42 @@ const Clock: React.FC = () => {
           </Select>
         </Box>
       </Box>
+
+      {type === 'analog' && (
+        <Box p="md" color="black" mt="md" rounded="lg">
+          <Box>
+            <Switch
+              checked={smooth}
+              color="orange"
+              defaultChecked={smooth}
+              id="smooth"
+              name="smooth"
+              onChange={handleSmoothChange}
+            />
+            <label htmlFor="smoot" className="drac-text drac-text-white">
+              Smooth seconds movement
+            </label>
+          </Box>
+
+          <Box mt="md">
+            <label htmlFor="position">Style</label>
+            <Select
+              color="white"
+              defaultValue="default"
+              id="style"
+              name="style"
+              onChange={handleStyleChange}
+              value={style}
+            >
+              <option value="default" disabled={true}>
+                Select option
+              </option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </Select>
+          </Box>
+        </Box>
+      )}
       <pre>{JSON.stringify(data.clock, null, '  ')}</pre>
     </>
   )
