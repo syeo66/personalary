@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { Box, Select } from 'dracula-ui'
 import React, { ChangeEventHandler, useCallback } from 'react'
 
@@ -9,12 +10,17 @@ import useSendSettings from './hooks/useSendSettings'
 const Clock: React.FC = () => {
   const { data, isLoading } = useAdminDataQuery()
 
-  const { style, type, position } = data?.clock || {}
+  const { style, type, position, dateFormat } = data?.clock || {}
 
   const sendSettings = useSendSettings()
 
   const handlePositionChange: ChangeEventHandler<HTMLSelectElement> = useCallback(
     (e) => sendSettings.mutate({ clock: { position: e.target.value, type } }),
+    [sendSettings, type]
+  )
+
+  const handleDateFormatChange: ChangeEventHandler<HTMLSelectElement> = useCallback(
+    (e) => sendSettings.mutate({ clock: { dateFormat: e.target.value, type } }),
     [sendSettings, type]
   )
 
@@ -28,6 +34,8 @@ const Clock: React.FC = () => {
   if (isLoading) {
     return <Loader />
   }
+
+  const now = new Date()
 
   return (
     <>
@@ -56,6 +64,31 @@ const Clock: React.FC = () => {
             <option value="bottom-left">Bottom-Left</option>
             <option value="bottom-center">Bottom-Center</option>
             <option value="bottom-right">Bottom-Right</option>
+          </Select>
+        </Box>
+
+        <Box mt="md">
+          <label htmlFor="position">Date Format</label>
+          <Select
+            color="white"
+            defaultValue="default"
+            id="dateFormat"
+            name="dateForma"
+            onChange={handleDateFormatChange}
+            value={dateFormat}
+          >
+            <option value="default" disabled={true}>
+              Select option
+            </option>
+            <option value="dd.MM.yyyy">{format(now, 'dd.MM.yyyy')}</option>x
+            <option value="MM/dd/yyyy">{format(now, 'MM/dd/yyyy')}</option>x
+            <option value="E, dd.MM.yyyy">{format(now, 'E, dd.MM.yyyy')}</option>x
+            <option value="E, MM/dd/yyyy">{format(now, 'E, MM/dd/yyyy')}</option>x
+            <option value="MMMM, do ''yy">{format(now, "MMMM, do ''yy")}</option>x
+            <option value="EEEE 'of the 'wo 'week '''yy, BBBBB">
+              {format(now, "EEEE 'of the 'wo 'week '''yy, BBBBB")}
+            </option>
+            x<option value="EEEE, dd. MMMM yyyy">{format(now, 'EEEE, dd. MMMM yyyy')}</option>x
           </Select>
         </Box>
       </Box>
