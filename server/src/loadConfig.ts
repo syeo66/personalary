@@ -43,7 +43,7 @@ const loadConfig: () => ConfigType = () => {
     },
   }
 
-  // TODO spotify stuff. refactore
+  // TODO spotify stuff. refactor
   let isAuthorized = false
 
   const { timestamp, expires_in } = spotifyRemoteConfig() || {}
