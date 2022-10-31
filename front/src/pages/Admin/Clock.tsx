@@ -23,6 +23,7 @@ const Clock: React.FC = () => {
     <>
       <Box p="md" color="black" mt="md" rounded="lg">
         <ConfigSwitch label="Enabled" name="enabled" context="clock" additionalData={additionalData} />
+        <ConfigSelect context="clock" label="Clock type" name="type" options={clockTypes} />
         <ConfigSelect
           additionalData={additionalData}
           context="clock"
@@ -39,6 +40,19 @@ const Clock: React.FC = () => {
           last
         />
       </Box>
+
+      {type === 'digital' && (
+        <Box p="md" color="black" mt="md" rounded="lg">
+          <ConfigSelect
+            additionalData={additionalData}
+            context="clock"
+            label="Time Format"
+            name="timeFormat"
+            options={timeFormats}
+            last
+          />
+        </Box>
+      )}
 
       {type === 'analog' && (
         <Box p="md" color="black" mt="md" rounded="lg">
@@ -58,6 +72,11 @@ const Clock: React.FC = () => {
   )
 }
 
+const clockTypes = [
+  { value: 'analog', label: 'Analog' },
+  { value: 'digital', label: 'Digital' },
+]
+
 const clockStyles = [
   { value: 'light', label: 'Light' },
   { value: 'dark', label: 'Dark' },
@@ -72,6 +91,15 @@ const dateFormats = [
   { value: "MMMM, do ''yy", label: format(now, "MMMM, do ''yy") },
   { value: "EEEE 'of the 'wo 'week '''yy, BBBBB", label: format(now, "EEEE 'of the 'wo 'week '''yy, BBBBB") },
   { value: 'EEEE, dd. MMMM yyyy', label: format(now, 'EEEE, dd. MMMM yyyy') },
+]
+
+const timeFormats = [
+  { value: 'HH:mm', label: format(now, 'HH:mm') },
+  { value: 'HH:mm:ss', label: format(now, 'HH:mm:ss') },
+  { value: 'hh:mm bbb', label: format(now, 'hh:mm bbb') },
+  { value: 'pp', label: format(now, 'pp') },
+  { value: 't', label: format(now, 't') },
+  { value: 'hh:mm B', label: format(now, 'hh:mm B') },
 ]
 
 export default Clock
