@@ -21,7 +21,6 @@ wsServer.on('connection', (socket) => {
   const connectionIsClosed$ = new Subject<boolean>()
 
   socket.on('message', (message) => {
-    // eslint-disable-next-line no-console
     console.log('Received message:', message.toString())
   })
 
@@ -34,13 +33,10 @@ wsServer.on('connection', (socket) => {
 
   workload$.pipe(takeUntil(connectionIsClosed$)).subscribe({
     next: (message) => {
-      // eslint-disable-next-line no-console
       console.log('Sending message:', message)
       socket.send(message)
     },
-    // eslint-disable-next-line no-console
     error: (error) => console.error(error),
-    // eslint-disable-next-line no-console
     complete: () => console.log('---------------------------------------------------'),
   })
 })
@@ -66,9 +62,7 @@ app.get('/', (_req, res) => {
 
 // Server setup
 const server = app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`App listening on ${PORT}`)
-  // eslint-disable-next-line no-console
   console.log('Press Ctrl+C to quit.')
 })
 
