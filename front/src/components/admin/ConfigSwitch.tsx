@@ -30,7 +30,7 @@ const ConfigSwitch: React.FC<ConfigSwitchProps> = ({ name, context, additionalDa
   return (
     <Box mb={last ? 'none' : 'md'}>
       <Switch checked={enabled} color="orange" defaultChecked={enabled} id={name} name={name} onChange={handleChange} />
-      <label htmlFor="enabled" className="drac-text drac-text-white">
+      <label htmlFor={name} className="drac-text drac-text-white">
         {label}
       </label>
     </Box>
