@@ -120,6 +120,11 @@ const Config = z.object({
   }),
   weather: z.object({
     /**
+     * Enable or disable the weather data.
+     */
+    enabled: z.boolean().optional(),
+
+    /**
      * The service to use for the weather data.
      *
      * Currently only OpenWeatherMap exists.

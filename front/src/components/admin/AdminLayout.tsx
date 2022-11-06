@@ -20,6 +20,9 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => (
       <StyledNavLink className="drac-text-orange" to="messages">
         Messages
       </StyledNavLink>
+      <StyledNavLink className="drac-text-orange" to="weather">
+        Weather
+      </StyledNavLink>
       <StyledNavLink className="drac-text-orange" to="musicplayer">
         Music Player
       </StyledNavLink>

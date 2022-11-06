@@ -29,4 +29,11 @@ export const InputParamSchema = z.object({
       small: z.boolean().optional(),
     })
     .optional(),
+  weather: z
+    .object({
+      enabled: z.boolean().optional(),
+      position: Position.optional(),
+      apiKey: z.string().optional(),
+    })
+    .optional(),
 })

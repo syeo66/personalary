@@ -6,7 +6,7 @@ import useSendSettings from '../../pages/Admin/hooks/useSendSettings'
 
 interface ConfigSwitchProps {
   additionalData?: Record<string, string | number | boolean>
-  context: 'clock' | 'musicPlayer'
+  context: 'clock' | 'musicPlayer' | 'weather'
   label: string
   last?: boolean
   name: string

@@ -7,16 +7,18 @@ import Clock from './Clock'
 import Home from './Home'
 import Messages from './Messages'
 import MusicPlayer from './MusicPlayer'
+import Weather from './Weather'
 
 const Admin: React.FC = () => {
   return (
     <AdminLayout>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/clock" element={<Clock />} />
         <Route path="/background" element={<Background />} />
+        <Route path="/clock" element={<Clock />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/musicplayer" element={<MusicPlayer />} />
+        <Route path="/weather" element={<Weather />} />
       </Routes>
     </AdminLayout>
   )
