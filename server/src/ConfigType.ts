@@ -118,6 +118,38 @@ const Config = z.object({
      */
     small: z.boolean().optional().default(false),
   }),
+  weather: z.object({
+    /**
+     * The service to use for the weather data.
+     *
+     * Currently only OpenWeatherMap exists.
+     *
+     * See https://openweathermap.org/api
+     */
+    service: z.literal('OpenWeatherMap'),
+
+    /**
+     * OpenWeatherMap API key
+     *
+     * https://home.openweathermap.org/api_keys
+     */
+    apiKey: z.string().default('NO_KEY'),
+
+    /**
+     * The position of the weather widget.
+     */
+    position: Position,
+
+    /**
+     * Interval in seconds to refetch the weather data.
+     */
+    refetchInterval: z.number(),
+
+    /**
+     * Interval in seconds to refresh the weather data.
+     */
+    rotationInterval: z.number(),
+  }),
 })
 
 export type ConfigType = z.infer<typeof Config>

@@ -96,6 +96,43 @@
           "description": "Enable or disable the small music player",
           "type": "boolean",
           "default": false
+        },
+        "refetchInterval": {
+          "description": "The interval in seconds to refetch the csv file.",
+          "type": "number"
+        },
+        "rotationInterval": {
+          "description": "The interval in seconds to recheck for current messages.",
+          "type": "number"
+        }
+      },
+      "required": ["service", "position"]
+    },
+    "weather": {
+      "description": "Configuration for the weather widget.",
+      "type": "object",
+      "properties": {
+        "service": {
+          "description": "Type of the weather widget.",
+          "type": "string",
+          "enum": ["OpenWeatherMap"]
+        },
+        "position": {
+          "description": "The position of the weather widget.",
+          "$ref": "#/$defs/enums/position"
+        },
+        "enabled": {
+          "description": "Enable or disable the music player",
+          "type": "boolean",
+          "default": true
+        },
+        "refetchInterval": {
+          "description": "The interval in seconds to refetch the weather data.",
+          "type": "number"
+        },
+        "rotationInterval": {
+          "description": "The interval in seconds to refresh the widget.",
+          "type": "number"
         }
       },
       "required": ["service", "position"]

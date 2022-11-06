@@ -26,5 +26,12 @@
     "position": "bottom-left",
     "small": false,
     "enabled": true
+  },
+  "weather": {
+    "enabled": true,
+    "position": "bottom-right",
+    "refetchInterval": 600,
+    "rotationInterval": 1,
+    "service": "OpenWeatherMap"
   }
 }
