@@ -5,8 +5,9 @@ import useWebsocket from './useWebsocket'
 export const MessageType = {
   SetBackground: 'SetBackground',
   SetClockConfig: 'SetClockConfig',
-  ShowMessage: 'ShowMessage',
   SetMusicPlayer: 'SetMusicPlayer',
+  SetWeather: 'SetWeather',
+  ShowMessage: 'ShowMessage',
 }
 
 const useWsMessage = (type: keyof typeof MessageType, callback: (event: MessageEvent) => void) => {
