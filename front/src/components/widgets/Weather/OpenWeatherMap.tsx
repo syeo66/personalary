@@ -31,7 +31,10 @@ const OpenWeatherMap: React.FC = () => {
   return (
     <PositionWrapper vertical={vertical} horizontal={horizontal}>
       <Image src={`https://openweathermap.org/img/wn/${config.icon}@4x.png`} alt={config.description} />
-      <Temperature>{Math.round(config.feels_like * 10) / 10}°C</Temperature>
+      <Weather>
+        <Description>{config.description}</Description>
+        <Temperature>🌡{Math.round(config.feels_like * 10) / 10}°C</Temperature>
+      </Weather>
     </PositionWrapper>
   )
 }
@@ -42,7 +45,7 @@ const Image = styled.img`
   transform: scale(0.8);
 `
 
-const Temperature = styled.div`
+const Weather = styled.div`
   bottom: 0;
   font-size: 2.5rem;
   font-weight: bold;
@@ -51,6 +54,10 @@ const Temperature = styled.div`
   text-align: right;
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 0, 0, 0.3);
   width: 100%;
+`
+const Temperature = styled.div``
+const Description = styled.div`
+  font-size: 1rem;
 `
 
 export default OpenWeatherMap
