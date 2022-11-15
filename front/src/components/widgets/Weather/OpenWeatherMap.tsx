@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 
 import useWsMessage from '../../../hooks/useWsMessage'
+import Temperature from '../../icons/Temperature'
 import PositionWrapper from '../../PositionWrapper'
 import type { WeatherDataType } from './WeatherData'
 
@@ -33,7 +34,10 @@ const OpenWeatherMap: React.FC = () => {
       <Image src={`https://openweathermap.org/img/wn/${config.icon}@4x.png`} alt={config.description} />
       <Weather>
         <Description>{config.description}</Description>
-        <Temperature>🌡{Math.round(config.feels_like * 10) / 10}°C</Temperature>
+        <Temp>
+          {Math.round(config.feels_like * 10) / 10}
+          <Temperature />
+        </Temp>
       </Weather>
     </PositionWrapper>
   )
@@ -55,7 +59,11 @@ const Weather = styled.div`
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 0, 0, 0.3);
   width: 100%;
 `
-const Temperature = styled.div``
+const Temp = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`
 const Description = styled.div`
   font-size: 1rem;
 `
