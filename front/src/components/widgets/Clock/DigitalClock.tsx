@@ -36,15 +36,15 @@ interface Props {
 const Time = styled.div<Props>`
   display: flex;
   font-size: 4rem;
-  justify-content: ${({ align }) => (align === 'right' ? 'flex-end' : 'flex-start')};
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 0, 0, 0.3);
+  justify-content: ${({ align }) => (align === 'right' ? 'flex-end' : 'flex-start')};
 `
 
 const DateView = styled.div<Props>`
   display: flex;
   font-size: 1.5rem;
-  justify-content: ${({ align }) => (align === 'right' ? 'flex-end' : 'flex-start')};
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 0, 0, 0.3);
+  justify-content: ${({ align }) => (align === 'right' ? 'flex-end' : 'flex-start')};
 `
 
 export default memo(DigitalClock)

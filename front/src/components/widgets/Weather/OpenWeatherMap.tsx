@@ -43,13 +43,14 @@ const Image = styled.img`
 `
 
 const Temperature = styled.div`
-  font-weight: bold;
-  font-size: 2.5rem;
-  text-align: right;
-  position: absolute;
-  width: 100%;
   bottom: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+  position: absolute;
   right: 0;
+  text-align: right;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
 `
 
 export default OpenWeatherMap
