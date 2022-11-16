@@ -32,6 +32,8 @@
     "position": "bottom-right",
     "refetchInterval": 600,
     "rotationInterval": 1,
-    "service": "OpenWeatherMap"
+    "service": "OpenWeatherMap",
+    "longitude": 7.6253,
+    "latitude": 47.05534
   }
 }

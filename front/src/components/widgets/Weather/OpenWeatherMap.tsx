@@ -14,7 +14,6 @@ const OpenWeatherMap: React.FC = () => {
       const value = JSON.parse(event.data?.replace('SetWeather ', ''))
       setConfig(value)
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.log('could not parse message', event.data, error)
     }
   }, [])

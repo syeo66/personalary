@@ -154,6 +154,9 @@ const Config = z.object({
      * Interval in seconds to refresh the weather data.
      */
     rotationInterval: z.number(),
+
+    longitude: z.number(),
+    latitude: z.number(),
   }),
 })
 

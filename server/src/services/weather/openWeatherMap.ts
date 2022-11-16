@@ -4,6 +4,7 @@ import { z } from 'zod'
 
 import loadConfig from '../../loadConfig'
 import { WeatherDataType } from './WeatherData'
+
 const { refetchInterval } = loadConfig().weather
 
 const OpenWeatherData = z.object({
@@ -26,11 +27,9 @@ const OpenWeatherData = z.object({
 const OpenWeatherMap = () => {
   return timer(0, refetchInterval * 1000).pipe(
     concatMap(() => {
-      const { apiKey } = loadConfig().weather
-      const lat = 47.05534
-      const lon = 7.6253
+      const { apiKey, latitude, longitude } = loadConfig().weather
       const units = 'metric'
-      const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`
+      const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}`
 
       return from(axios.get(url))
     }),
@@ -38,26 +37,32 @@ const OpenWeatherMap = () => {
       console.error(err.response.statusText)
       return caught
     }),
-    map((res) => {
-      const { enabled, position } = loadConfig().weather
-      const data = OpenWeatherData.safeParse(res.data)
+    concatMap((res) => {
+      const { rotationInterval } = loadConfig().weather
 
-      if (!data.success) {
-        return 'SetWeather {"enabled":false}'
-      }
+      return timer(0, rotationInterval * 1000).pipe(
+        map(() => {
+          const { enabled, position } = loadConfig().weather
+          const data = OpenWeatherData.safeParse(res.data)
 
-      const response: WeatherDataType = !enabled
-        ? { enabled: false }
-        : {
-            enabled: true,
-            position,
-            temp: data.data.list[0].main.temp,
-            feels_like: data.data.list[0].main.feels_like,
-            description: data.data.list[0].weather[0].description,
-            icon: data.data.list[0].weather[0].icon,
+          if (!data.success) {
+            return 'SetWeather {"enabled":false}'
           }
 
-      return `SetWeather ${JSON.stringify(response)}`
+          const response: WeatherDataType = !enabled
+            ? { enabled: false }
+            : {
+                enabled: true,
+                position,
+                temp: data.data.list[0].main.temp,
+                feels_like: data.data.list[0].main.feels_like,
+                description: data.data.list[0].weather[0].description,
+                icon: data.data.list[0].weather[0].icon,
+              }
+
+          return `SetWeather ${JSON.stringify(response)}`
+        })
+      )
     }),
     filter(Boolean),
     distinctUntilChanged()
