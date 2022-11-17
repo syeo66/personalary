@@ -60,10 +60,10 @@ const OpenWeatherMap = () => {
             : {
                 enabled: true,
                 position,
-                temp: data.data.list[0].main.temp,
-                feels_like: data.data.list[0].main.feels_like,
-                description: data.data.list[0].weather[0].description,
-                icon: data.data.list[0].weather[0].icon,
+                temp: found.main.temp,
+                feels_like: found.main.feels_like,
+                description: found.weather[0].description,
+                icon: found.weather[0].icon,
               }
 
           return `SetWeather ${JSON.stringify(response)}`
