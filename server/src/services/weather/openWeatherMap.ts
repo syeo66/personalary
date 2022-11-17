@@ -49,6 +49,12 @@ const OpenWeatherMap = () => {
             return 'SetWeather {"enabled":false}'
           }
 
+          const found = data.data.list.find((e) => e.dt * 1000 > Date.now())
+
+          if (!found) {
+            return 'SetWeather {"enabled":false}'
+          }
+
           const response: WeatherDataType = !enabled
             ? { enabled: false }
             : {
