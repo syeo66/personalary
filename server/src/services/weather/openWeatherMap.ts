@@ -29,7 +29,7 @@ const OpenWeatherMap = () => {
     concatMap(() => {
       const { apiKey, latitude, longitude } = loadConfig().weather
       const units = 'metric'
-      const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}`
+      const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}&timestamp=${new Date().getTime()}`
 
       return from(axios.get(url))
     }),
