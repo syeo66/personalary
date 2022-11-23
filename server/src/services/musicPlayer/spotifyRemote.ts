@@ -29,7 +29,7 @@ const SpotifyRemote = () => {
       }
       return from(axios.get(url, authOptions)).pipe(
         catchError((err) => {
-          console.error(err?.response?.statusText || err?.response)
+          console.error('SpotifyRemote', err?.response?.statusText || err?.response)
           return from([null])
         })
       )

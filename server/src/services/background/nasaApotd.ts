@@ -21,15 +21,13 @@ const nasaApotd = () => {
   return timer(0, refetchInterval * 1000).pipe(
     concatMap(() => from(axios.get(url))),
     catchError((err, caught) => {
-      // eslint-disable-next-line no-console
-      console.error(err.response.statusText)
+      console.error('NasaApotd', err.response.statusText)
       return caught
     }),
     map((res): BackgroundData[] => {
       const data = ApodDataArray.safeParse(res.data)
 
       if (!data.success) {
-        // eslint-disable-next-line no-console
         console.warn(data.error)
         return []
       }

@@ -20,8 +20,6 @@ const OpenWeatherMap: React.FC = () => {
 
   useWsMessage('SetWeather', messageHandler)
 
-  console.log(config)
-
   if (!config?.enabled) {
     return null
   }

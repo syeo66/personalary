@@ -31,11 +31,12 @@ const OpenWeatherMap = () => {
       const units = 'metric'
       const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}&timestamp=${new Date().getTime()}`
 
-      return from(axios.get(url))
-    }),
-    catchError((err, caught) => {
-      console.error(err.response.statusText)
-      return caught
+      return from(axios.get(url)).pipe(
+        catchError((err) => {
+          console.error('OpenWeatherMap', err?.response?.statusText || err?.response)
+          return from([null])
+        })
+      )
     }),
     concatMap((res) => {
       const { rotationInterval } = loadConfig().weather
@@ -43,6 +44,11 @@ const OpenWeatherMap = () => {
       return timer(0, rotationInterval * 1000).pipe(
         map(() => {
           const { enabled, position } = loadConfig().weather
+
+          if (!res) {
+            return 'SetWeather {"enabled":false}'
+          }
+
           const data = OpenWeatherData.safeParse(res.data)
 
           if (!data.success) {
