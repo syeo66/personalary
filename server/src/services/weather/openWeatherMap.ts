@@ -7,29 +7,30 @@ import { WeatherDataType } from './WeatherData'
 
 const { refetchInterval } = loadConfig().weather
 
-const OpenWeatherData = z.object({
-  list: z.array(
+const WeatherData = z.object({
+  dt: z.number(),
+  main: z.object({ temp: z.number(), feels_like: z.number() }),
+  weather: z.array(
     z.object({
-      dt: z.number(),
-      main: z.object({ temp: z.number(), feels_like: z.number() }),
-      weather: z.array(
-        z.object({
-          id: z.number(),
-          main: z.string(),
-          description: z.string(),
-          icon: z.string(),
-        })
-      ),
+      id: z.number(),
+      main: z.string(),
+      description: z.string(),
+      icon: z.string(),
     })
   ),
+})
+
+const PredictedWeatherData = z.object({
+  list: z.array(WeatherData),
 })
 
 const OpenWeatherMap = () => {
   return timer(0, refetchInterval * 1000).pipe(
     concatMap(() => {
-      const { apiKey, latitude, longitude } = loadConfig().weather
+      const { apiKey, latitude, longitude, prediction } = loadConfig().weather
       const units = 'metric'
-      const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}&timestamp=${new Date().getTime()}`
+      const endpoint = prediction ? 'forecast' : 'weather'
+      const url = `https://api.openweathermap.org/data/2.5/${endpoint}?lat=${latitude}&lon=${longitude}&units=${units}&appid=${apiKey}&timestamp=${new Date().getTime()}`
 
       return from(axios.get(url)).pipe(
         catchError((err) => {
@@ -39,7 +40,7 @@ const OpenWeatherMap = () => {
       )
     }),
     concatMap((res) => {
-      const { rotationInterval } = loadConfig().weather
+      const { rotationInterval, prediction } = loadConfig().weather
 
       return timer(0, rotationInterval * 1000).pipe(
         map(() => {
@@ -49,13 +50,15 @@ const OpenWeatherMap = () => {
             return 'SetWeather {"enabled":false}'
           }
 
-          const data = OpenWeatherData.safeParse(res.data)
+          const data = prediction ? PredictedWeatherData.safeParse(res.data) : WeatherData.safeParse(res.data)
 
           if (!data.success) {
             return 'SetWeather {"enabled":false}'
           }
 
-          const found = data.data.list.find((e) => e.dt * 1000 > Date.now())
+          const currentData = data.data
+
+          const found = 'list' in currentData ? currentData.list.find((e) => e.dt * 1000 > Date.now()) : currentData
 
           if (!found) {
             return 'SetWeather {"enabled":false}'

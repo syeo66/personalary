@@ -32,6 +32,7 @@ export const InputParamSchema = z.object({
   weather: z
     .object({
       enabled: z.boolean().optional(),
+      prediction: z.boolean().optional(),
       position: Position.optional(),
       apiKey: z.string().optional(),
     })

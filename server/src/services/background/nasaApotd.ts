@@ -19,12 +19,19 @@ const ApodDataArray = z.array(ApodData)
 
 const nasaApotd = () => {
   return timer(0, refetchInterval * 1000).pipe(
-    concatMap(() => from(axios.get(url))),
-    catchError((err, caught) => {
-      console.error('NasaApotd', err.response.statusText)
-      return caught
-    }),
+    concatMap(() =>
+      from(axios.get(url)).pipe(
+        catchError((err) => {
+          console.error('NasaApotd', err.response.statusText)
+          return [null]
+        })
+      )
+    ),
     map((res): BackgroundData[] => {
+      if (!res) {
+        return []
+      }
+
       const data = ApodDataArray.safeParse(res.data)
 
       if (!data.success) {

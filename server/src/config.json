@@ -29,11 +29,12 @@
   },
   "weather": {
     "enabled": true,
+    "latitude": 47.05534,
+    "longitude": 7.6253,
     "position": "bottom-right",
+    "prediction": true,
     "refetchInterval": 600,
     "rotationInterval": 1,
-    "service": "OpenWeatherMap",
-    "longitude": 7.6253,
-    "latitude": 47.05534
+    "service": "OpenWeatherMap"
   }
 }

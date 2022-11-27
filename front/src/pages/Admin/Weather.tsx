@@ -20,6 +20,7 @@ const Weather: React.FC = () => {
       <Box p="md" color="black" mt="md" rounded="lg">
         <ConfigSwitch label="Enabled" name="enabled" context="weather" />
         <ConfigSelect context="weather" label="Position" name="position" options={positions} />
+        <ConfigSwitch label="Prediction" name="prediction" context="weather" />
         <ConfigInput context="weather" name="apiKey" placeholder="Your OpenWeatherMap API Key" label="API key" />
       </Box>
       <pre>{JSON.stringify(data.weather, null, '  ')}</pre>

@@ -155,6 +155,11 @@ const Config = z.object({
      */
     rotationInterval: z.number(),
 
+    /**
+     * Should it show the current weather or a prediction.
+     */
+    prediction: z.boolean(),
+
     longitude: z.number(),
     latitude: z.number(),
   }),
