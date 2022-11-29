@@ -84,6 +84,16 @@ const Config = z.object({
        */
       type: z.literal('analog'),
     }),
+    z.object({
+      enabled: z.boolean().optional().default(true),
+      position: Position,
+      style: z.enum(['light', 'dark']),
+
+      /**
+       * Type of clock to be displayed
+       */
+      type: z.literal('binary'),
+    }),
   ]),
   musicPlayer: z.object({
     /**

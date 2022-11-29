@@ -50,7 +50,7 @@
         "type": {
           "description": "Type of clock to be displayed",
           "type": "string",
-          "enum": ["digital", "analog"]
+          "enum": ["digital", "analog", "binary"]
         },
         "position": {
           "description": "The position of the clock.",
@@ -71,6 +71,10 @@
         {
           "if": { "properties": { "type": { "const": "analog" } } },
           "then": { "$ref": "#/$defs/clock/analog" }
+        },
+        {
+          "if": { "properties": { "type": { "const": "binary" } } },
+          "then": { "$ref": "#/$defs/clock/binary" }
         }
       ]
     },
@@ -223,6 +227,21 @@
           }
         },
         "required": ["dateFormat", "timeFormat"]
+      },
+      "binary": {
+        "type": "object",
+        "properties": {
+          "dateFormat": {
+            "description": "The format of the date portion of the clock. See https://date-fns.org/v2.29.1/docs/format",
+            "type": "string"
+          },
+          "style": {
+            "description": "The style of the clock.",
+            "type": "string",
+            "enum": ["light", "dark"]
+          }
+        },
+        "required": ["dateFormat", "style"]
       }
     },
     "enums": {

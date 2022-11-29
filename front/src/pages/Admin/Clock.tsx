@@ -67,6 +67,20 @@ const Clock: React.FC = () => {
           />
         </Box>
       )}
+
+      {type === 'binary' && (
+        <Box p="md" color="black" mt="md" rounded="lg">
+          <ConfigSelect
+            additionalData={additionalData}
+            context="clock"
+            label="Style"
+            name="style"
+            options={clockStyles}
+            last
+          />
+        </Box>
+      )}
+
       <pre>{JSON.stringify(data.clock, null, '  ')}</pre>
     </>
   )
@@ -75,6 +89,7 @@ const Clock: React.FC = () => {
 const clockTypes = [
   { value: 'analog', label: 'Analog' },
   { value: 'digital', label: 'Digital' },
+  { value: 'binary', label: 'Binary' },
 ]
 
 const clockStyles = [

@@ -20,6 +20,13 @@ export const InputParamSchema = z.object({
         style: z.enum(['light', 'dark']).optional(),
         type: z.literal('analog'),
       }),
+      z.object({
+        dateFormat: z.string().optional(),
+        enabled: z.boolean().optional(),
+        position: Position.optional(),
+        style: z.enum(['light', 'dark']).optional(),
+        type: z.literal('binary'),
+      }),
     ])
     .optional(),
   musicPlayer: z
