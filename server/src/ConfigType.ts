@@ -85,6 +85,10 @@ const Config = z.object({
       type: z.literal('analog'),
     }),
     z.object({
+      /**
+       * The format of the date portion of the clock. See https://date-fns.org/v2.29.1/docs/format
+       */
+      dateFormat: z.string(),
       enabled: z.boolean().optional().default(true),
       position: Position,
       style: z.enum(['light', 'dark']),

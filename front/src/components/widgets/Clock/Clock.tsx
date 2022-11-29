@@ -4,8 +4,9 @@ import useWsMessage from '../../../hooks/useWsMessage'
 import PositionWrapper from '../../PositionWrapper'
 import { ClockConfigType } from './ClockType'
 
-const DigitalClock = lazy(() => import('./DigitalClock'))
 const AnalogClock = lazy(() => import('./AnalogClock'))
+const BinaryClock = lazy(() => import('./BinaryClock'))
+const DigitalClock = lazy(() => import('./DigitalClock'))
 
 const Clock: React.FC = () => {
   const [config, setConfig] = useState<ClockConfigType | null>(null)
@@ -33,6 +34,7 @@ const Clock: React.FC = () => {
       <PositionWrapper vertical={vertical} horizontal={horizontal}>
         {config?.type === 'digital' && <DigitalClock config={config} />}
         {config?.type === 'analog' && <AnalogClock config={config} />}
+        {config?.type === 'binary' && <BinaryClock config={config} />}
       </PositionWrapper>
     </Suspense>
   )
