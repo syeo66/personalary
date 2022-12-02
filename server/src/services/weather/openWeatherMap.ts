@@ -3,7 +3,7 @@ import { catchError, concatMap, distinctUntilChanged, filter, from, map, timer }
 import { z } from 'zod'
 
 import loadConfig from '../../loadConfig'
-import { WeatherDataType } from './WeatherData'
+import type { WeatherDataType } from './WeatherData'
 
 const { refetchInterval } = loadConfig().weather
 
@@ -25,7 +25,7 @@ const PredictedWeatherData = z.object({
 })
 
 const OpenWeatherMap = () => {
-  return timer(0, refetchInterval * 1000).pipe(
+  return timer(2000, refetchInterval * 1000).pipe(
     concatMap(() => {
       const { apiKey, latitude, longitude, prediction } = loadConfig().weather
       const units = 'metric'
