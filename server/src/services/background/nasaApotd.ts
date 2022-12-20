@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { catchError, concatMap, distinctUntilChanged, filter, from, map, take, timer } from 'rxjs'
+import { catchError, concatMap, distinctUntilChanged, filter, from, map, switchMap, take, timer } from 'rxjs'
 import { z } from 'zod'
 
 import loadConfig from '../../loadConfig'
@@ -43,7 +43,7 @@ const nasaApotd = () => {
         ?.map<BackgroundData | null>(({ hdurl, copyright }) => (hdurl ? { url: hdurl, credits: copyright } : null))
         .filter((e): e is BackgroundData => Boolean(e))
     }),
-    concatMap((ev) =>
+    switchMap((ev) =>
       timer(0, rotationInterval * 1000).pipe(
         take(Math.ceil(rotationCount)),
         map((i) => (ev[i % ev.length] ? `SetBackground ${JSON.stringify(ev[i % ev.length])}` : null))

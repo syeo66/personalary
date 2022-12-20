@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { catchError, concatMap, distinctUntilChanged, filter, from, map, timer } from 'rxjs'
+import { catchError, concatMap, distinctUntilChanged, filter, from, map, switchMap, timer } from 'rxjs'
 import { z } from 'zod'
 
 import loadConfig from '../../loadConfig'
@@ -25,7 +25,7 @@ const PredictedWeatherData = z.object({
 })
 
 const OpenWeatherMap = () => {
-  return timer(2000, refetchInterval * 1000).pipe(
+  return timer(500, refetchInterval * 1000).pipe(
     concatMap(() => {
       const { apiKey, latitude, longitude, prediction } = loadConfig().weather
       const units = 'metric'
@@ -39,12 +39,12 @@ const OpenWeatherMap = () => {
         })
       )
     }),
-    concatMap((res) => {
-      const { rotationInterval, prediction } = loadConfig().weather
+    switchMap((res) => {
+      const { rotationInterval } = loadConfig().weather
 
       return timer(0, rotationInterval * 1000).pipe(
         map(() => {
-          const { enabled, position } = loadConfig().weather
+          const { enabled, position, prediction } = loadConfig().weather
 
           if (!res) {
             return 'SetWeather {"enabled":false}'
