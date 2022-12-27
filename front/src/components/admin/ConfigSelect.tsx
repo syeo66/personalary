@@ -35,8 +35,10 @@ const ConfigSelect: React.FC<ConfigSelectProps> = ({ context, name, additionalDa
         <option value="default" disabled={true}>
           Select option
         </option>
-        {options.map(({ label: l, value }) => (
-          <option value={value}>{l}</option>
+        {options.map(({ label: l, value }, i) => (
+          <option value={value} key={i}>
+            {l}
+          </option>
         ))}
       </Select>
     </Box>

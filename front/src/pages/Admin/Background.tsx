@@ -1,5 +1,6 @@
 import React from 'react'
 
+import DataDebug from '../../components/admin/DataDebug'
 import Loader from '../../components/Loader'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 
@@ -10,7 +11,7 @@ const Background: React.FC = () => {
     return <Loader />
   }
 
-  return <pre>{JSON.stringify(data.background, null, '  ')}</pre>
+  return <DataDebug data={data.background} />
 }
 
 export default Background

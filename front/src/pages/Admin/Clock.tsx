@@ -4,6 +4,7 @@ import React from 'react'
 
 import ConfigSelect from '../../components/admin/ConfigSelect'
 import ConfigSwitch from '../../components/admin/ConfigSwitch'
+import DataDebug from '../../components/admin/DataDebug'
 import Loader from '../../components/Loader'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 import { positions } from './data'
@@ -81,7 +82,7 @@ const Clock: React.FC = () => {
         </Box>
       )}
 
-      <pre>{JSON.stringify(data.clock, null, '  ')}</pre>
+      <DataDebug data={data.clock} />
     </>
   )
 }

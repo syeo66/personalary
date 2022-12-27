@@ -1,5 +1,6 @@
 import React from 'react'
 
+import DataDebug from '../../components/admin/DataDebug'
 import Loader from '../../components/Loader'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 
@@ -10,7 +11,7 @@ const Messages: React.FC = () => {
     return <Loader />
   }
 
-  return <pre>{JSON.stringify(data.messages, null, '  ')}</pre>
+  return <DataDebug data={data.messages} />
 }
 
 export default Messages

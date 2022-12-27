@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import ConfigSelect from '../../components/admin/ConfigSelect'
 import ConfigSwitch from '../../components/admin/ConfigSwitch'
+import DataDebug from '../../components/admin/DataDebug'
 import Loader from '../../components/Loader'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 import { positions } from './data'
@@ -101,7 +102,7 @@ const MusicPlayer: React.FC = () => {
         <ConfigSelect context="musicPlayer" label="Position" name="position" options={positions} />
         <ConfigSwitch label="Small player interface" name="small" context="musicPlayer" last />
       </Box>
-      <pre>{JSON.stringify(data.musicPlayer, null, '  ')}</pre>
+      <DataDebug data={data.musicPlayer} />
     </>
   )
 }
