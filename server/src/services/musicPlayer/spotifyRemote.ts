@@ -1,6 +1,6 @@
 import axios from 'axios'
 import fs from 'fs'
-import { catchError, concatMap, distinctUntilChanged, from, map, timer } from 'rxjs'
+import { catchError, concatMap, defer, distinctUntilChanged, from, map, retry, timer } from 'rxjs'
 
 import spotifyRemoteConfig, { configFilePath, configPath } from '../../configs/spotifyRemoteConfig'
 import loadConfig from '../../loadConfig'
@@ -27,11 +27,15 @@ const SpotifyRemote = () => {
         responseType: 'json' as const,
         withCredentials: true,
       }
-      return from(axios.get(url, authOptions)).pipe(
-        catchError((err) => {
-          console.error('SpotifyRemote', err)
-          return from([null])
-        })
+
+      return defer(() =>
+        from(axios.get(url, authOptions)).pipe(
+          retry({ count: 3, delay: 1000 }),
+          catchError((err) => {
+            console.error('SpotifyRemote', err)
+            return from([null])
+          })
+        )
       )
     }),
     map((v) => {
