@@ -9,7 +9,7 @@ import MusicPlayerData, { MusicPlayerDataType } from './MusicPlayerData'
 const url = 'https://api.spotify.com/v1/me/player'
 
 const SpotifyRemote = () => {
-  return timer(500, 1000).pipe(
+  return timer(500, 1500).pipe(
     concatMap(() => {
       const spotifyConfig = spotifyRemoteConfig()
       const { enabled } = loadConfig().musicPlayer
