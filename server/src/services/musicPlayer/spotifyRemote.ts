@@ -9,7 +9,7 @@ import MusicPlayerData, { MusicPlayerDataType } from './MusicPlayerData'
 const url = 'https://api.spotify.com/v1/me/player'
 
 const SpotifyRemote = () => {
-  return timer(500, 1500).pipe(
+  return timer(500, 3000).pipe(
     concatMap(() => {
       const spotifyConfig = spotifyRemoteConfig()
       const { enabled } = loadConfig().musicPlayer
@@ -29,7 +29,7 @@ const SpotifyRemote = () => {
       }
       return from(axios.get(url, authOptions)).pipe(
         catchError((err) => {
-          console.error('SpotifyRemote', err?.response?.statusText || err?.response)
+          console.error('SpotifyRemote', err)
           return from([null])
         })
       )
