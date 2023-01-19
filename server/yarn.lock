@@ -382,7 +382,7 @@ array.prototype.flat@^1.3.1:
     es-abstract "^1.20.4"
     es-shim-unscopables "^1.0.0"
 
-array.prototype.flatmap@^1.3.0, array.prototype.flatmap@^1.3.1:
+array.prototype.flatmap@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/array.prototype.flatmap/-/array.prototype.flatmap-1.3.1.tgz#1aae7903c2100433cb8261cd4ed310aab5c4a183"
   integrity sha512-8UGn9O1FDVvMNB0UlLv4voxRMze7+FpHyF5mSMRjWHUMlpoDViniy05870VlxhfgTnLbpuwTzvD76MTtWxB/mQ==
@@ -414,9 +414,9 @@ available-typed-arrays@^1.0.5:
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
 axios@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.2.2.tgz#72681724c6e6a43a9fea860fc558127dbe32f9f1"
-  integrity sha512-bz/J4gS2S3I7mpN/YZfGFTqhXTYzRho8Ay38w2otuuDR322KzFIWm/4W2K6gIwvWaws5n+mnb7D1lN9uD+QH6Q==
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.2.3.tgz#31a3d824c0ebf754a004b585e5f04a5f87e6c4ff"
+  integrity sha512-pdDkMYJeuXLZ6Xj/Q5J3Phpe+jbGdsSzlQaFVkMQzRUL05+6+tetX8TV3p4HrU4kzuO9bt+io/yGQxuyxA/xcw==
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"
@@ -804,13 +804,13 @@ eslint-module-utils@^2.7.4:
     debug "^3.2.7"
 
 eslint-plugin-import@^2.26.0:
-  version "2.27.4"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.27.4.tgz#319c2f6f6580e1678d674a258ee5e981c10cc25b"
-  integrity sha512-Z1jVt1EGKia1X9CnBCkpAOhWy8FgQ7OmJ/IblEkT82yrFU/xJaxwujaTzLWqigewwynRQ9mmHfX9MtAfhxm0sA==
+  version "2.27.5"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.27.5.tgz#876a6d03f52608a3e5bb439c2550588e51dd6c65"
+  integrity sha512-LmEt3GVofgiGuiE+ORpnvP+kAm3h6MLZJ4Q5HCyHADofsb4VzXFsRiWj3c0OFiV+3DWFh0qg3v9gcPlfc3zRow==
   dependencies:
     array-includes "^3.1.6"
     array.prototype.flat "^1.3.1"
-    array.prototype.flatmap "^1.3.0"
+    array.prototype.flatmap "^1.3.1"
     debug "^3.2.7"
     doctrine "^2.1.0"
     eslint-import-resolver-node "^0.3.7"
@@ -837,9 +837,9 @@ eslint-plugin-react-hooks@^4.6.0:
   integrity sha512-oFc7Itz9Qxh2x4gNHStv3BqJq54ExXmfC+a1NjAta66IAN87Wu0R/QArgIS9qKzX3dXKPI9H5crl9QchNMY9+g==
 
 eslint-plugin-react@^7.30.1:
-  version "7.32.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.32.0.tgz#d80f794a638c5770f952ba2ae793f0a516be7c09"
-  integrity sha512-vSBi1+SrPiLZCGvxpiZIa28fMEUaMjXtCplrvxcIxGzmFiYdsXQDwInEjuv5/i/2CTTxbkS87tE8lsQ0Qxinbw==
+  version "7.32.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.32.1.tgz#88cdeb4065da8ca0b64e1274404f53a0f9890200"
+  integrity sha512-vOjdgyd0ZHBXNsmvU+785xY8Bfe57EFbTYYk8XrROzWpr9QBvpjITvAXt9xqcE6+8cjR/g1+mfumPToxsl1www==
   dependencies:
     array-includes "^3.1.6"
     array.prototype.flatmap "^1.3.1"
@@ -857,10 +857,10 @@ eslint-plugin-react@^7.30.1:
     semver "^6.3.0"
     string.prototype.matchall "^4.0.8"
 
-eslint-plugin-simple-import-sort@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-simple-import-sort/-/eslint-plugin-simple-import-sort-8.0.0.tgz#9d9a2372b0606e999ea841b10458a370a6ccc160"
-  integrity sha512-bXgJQ+lqhtQBCuWY/FUWdB27j4+lqcvXv5rUARkzbeWLwea+S5eBZEQrhnO+WgX3ZoJHVj0cn943iyXwByHHQw==
+eslint-plugin-simple-import-sort@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-simple-import-sort/-/eslint-plugin-simple-import-sort-9.0.0.tgz#04c97f06a2e526afd40e0ac694b70d1aaaec1aef"
+  integrity sha512-PtrLjyXP8kjRneWT1n0b99y/2Fyup37we7FVoWsI61/O7x4ztLohzhep/pxI/cYlECr/cQ2j6utckdvWpVwXNA==
 
 eslint-scope@^5.1.1:
   version "5.1.1"
@@ -1906,9 +1906,9 @@ pstree.remy@^1.1.8:
   integrity sha512-77DZwxQmxKnu3aR542U+X8FypNzbfJ+C5XQDk3uWjWxn6151aIMGthWYRXTqT1E5oJvg+ljaa2OJi+VfvCOQ8w==
 
 punycode@^2.1.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.2.0.tgz#2092cc57cd2582c38e4e7e8bb869dc8d3148bc74"
-  integrity sha512-LN6QV1IJ9ZhxWTNdktaPClrNfp8xdSAYS0Zk2ddX7XsXZAxckMHPCBcHRo0cTcEIgYPRiGEkmji3Idkh2yFtYw==
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
+  integrity sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==
 
 qs@6.11.0:
   version "6.11.0"
