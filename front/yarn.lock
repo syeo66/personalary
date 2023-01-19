@@ -3864,10 +3864,10 @@ dotenv@^10.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
-dracula-ui@^1.0.3:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/dracula-ui/-/dracula-ui-1.0.4.tgz#9473715baee44494680220f909c431aeb4a5cc48"
-  integrity sha512-DluExrKbMPAIsZn9F4dJhd2TbBP3fXofhRNdQmYKQJKpNGaQatdxDY0iiYM/cmRbK2Wom03reOU/eEHhEceN+g==
+dracula-ui@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/dracula-ui/-/dracula-ui-1.0.3.tgz#1775b48343bf23d8071fde83df1136ce47b95063"
+  integrity sha512-x+VTUGh9BI9Buo77L58IM8VWJDgqxEv8D/597Z+lt1LMkPb4Y9C53UA+Y0gZ770grFNAswQwsJVuHwvSf7bwJA==
   dependencies:
     classnames "^2.2.6"
     lodash "^4.17.20"
