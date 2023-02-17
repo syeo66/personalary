@@ -91,11 +91,7 @@ const MusicPlayer: React.FC = () => {
     <>
       <Box p="md" color="black" mt="md" rounded="lg">
         {!isAuthorized && <Button onClick={handleClick}>Connect Spotify</Button>}
-        {isAuthorized && (
-          <Button onClick={handleDisconnectClick} variant="outline">
-            Disconnect Spotify
-          </Button>
-        )}
+        {isAuthorized && <Button onClick={handleDisconnectClick}>Disconnect Spotify</Button>}
       </Box>
       <Box p="md" color="black" mt="md" rounded="lg">
         <ConfigSwitch label="Enabled" name="enabled" context="musicPlayer" />
