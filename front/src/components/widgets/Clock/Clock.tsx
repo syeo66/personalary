@@ -5,6 +5,7 @@ import PositionWrapper from '../../PositionWrapper'
 import { ClockConfigType } from './ClockType'
 
 const AnalogClock = lazy(() => import('./AnalogClock'))
+const SVGClock = lazy(() => import('./SVGClock'))
 const BinaryClock = lazy(() => import('./BinaryClock'))
 const DigitalClock = lazy(() => import('./DigitalClock'))
 
