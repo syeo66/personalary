@@ -550,7 +550,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
           }}
         />
       </g>
-      <g id="minutes" style={{ rotate: `${minutesDeg}deg`, transformOrigin: 'center' }}>
+      <g id="minutes" style={{ transform: `rotateZ(${minutesDeg}deg)`, transformOrigin: 'center' }}>
         <rect
           id="mc"
           x={23.253}
@@ -588,7 +588,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
           }}
         />
       </g>
-      <g id="hours" style={{ rotate: `${hoursDeg}deg`, transformOrigin: 'center' }}>
+      <g id="hours" style={{ transform: `rotateZ(${hoursDeg}deg)`, transformOrigin: 'center' }}>
         <rect
           id="nc"
           x={23.253}
@@ -626,7 +626,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
           }}
         />
       </g>
-      <g id="seconds" style={{ rotate: `${secondsDeg}deg`, transformOrigin: 'center' }}>
+      <g id="seconds" style={{ transform: `rotateZ(${secondsDeg}deg)`, transformOrigin: 'center' }}>
         <rect
           id="secc"
           x={23.253}
