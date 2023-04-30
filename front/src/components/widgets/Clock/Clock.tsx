@@ -34,7 +34,7 @@ const Clock: React.FC = () => {
     <Suspense>
       <PositionWrapper vertical={vertical} horizontal={horizontal}>
         {config?.type === 'digital' && <DigitalClock config={config} />}
-        {config?.type === 'analog' && <AnalogClock config={config} />}
+        {config?.type === 'analog' && <SVGClock config={config} />}
         {config?.type === 'binary' && <BinaryClock config={config} />}
       </PositionWrapper>
     </Suspense>
