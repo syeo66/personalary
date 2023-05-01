@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { format } from 'date-fns'
 import React, { memo, useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -55,7 +56,8 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
             cy={527.828}
             r={457.885}
             style={{
-              fill: 'white',
+              fill: isDark ? 'black' : 'white',
+              stroke: isDark ? 'white' : 'black',
             }}
           />
           <clipPath id="_clip1">
@@ -69,7 +71,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 width={977.493}
                 height={977.493}
                 style={{
-                  fill: 'white',
+                  fill: 'none',
                   fillOpacity: 0,
                 }}
               />
@@ -78,7 +80,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                   d="M512,700.897L512,753.023"
                   style={{
                     fill: 'none',
-                    stroke: 'rgb(0,1,0)',
+                    stroke: isDark ? 'white' : 'black',
                     strokeWidth: 5,
                   }}
                 />
@@ -90,7 +92,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 height={977.493}
                 style={{
                   fill: 'none',
-                  stroke: 'rgb(0,1,0)',
+                  stroke: isDark ? 'white' : 'black',
                   strokeOpacity: 0,
                   strokeWidth: 5,
                 }}
@@ -103,7 +105,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 width={977.493}
                 height={977.493}
                 style={{
-                  fill: 'white',
+                  fill: 'none',
                   fillOpacity: 0,
                 }}
               />
@@ -112,7 +114,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                   d="M512,700.897L512,753.023"
                   style={{
                     fill: 'none',
-                    stroke: 'rgb(0,1,0)',
+                    stroke: isDark ? 'white' : 'black',
                     strokeWidth: 5,
                   }}
                 />
@@ -124,7 +126,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 height={977.493}
                 style={{
                   fill: 'none',
-                  stroke: 'rgb(0,1,0)',
+                  stroke: isDark ? 'white' : 'black',
                   strokeOpacity: 0,
                   strokeWidth: 5,
                 }}
@@ -137,7 +139,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 width={977.493}
                 height={977.493}
                 style={{
-                  fill: 'white',
+                  fill: 'none',
                   fillOpacity: 0,
                 }}
               />
@@ -146,7 +148,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                   d="M512,700.897L512,753.023"
                   style={{
                     fill: 'none',
-                    stroke: 'rgb(0,1,0)',
+                    stroke: isDark ? 'white' : 'black',
                     strokeWidth: 5,
                   }}
                 />
@@ -158,7 +160,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 height={977.493}
                 style={{
                   fill: 'none',
-                  stroke: 'rgb(0,1,0)',
+                  stroke: isDark ? 'white' : 'black',
                   strokeOpacity: 0,
                   strokeWidth: 5,
                 }}
@@ -171,7 +173,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 width={977.493}
                 height={977.493}
                 style={{
-                  fill: 'white',
+                  fill: 'none',
                   fillOpacity: 0,
                 }}
               />
@@ -180,7 +182,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                   d="M512,700.897L512,753.023"
                   style={{
                     fill: 'none',
-                    stroke: 'rgb(0,1,0)',
+                    stroke: isDark ? 'white' : 'black',
                     strokeWidth: 5,
                   }}
                 />
@@ -192,7 +194,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 height={977.493}
                 style={{
                   fill: 'none',
-                  stroke: 'rgb(0,1,0)',
+                  stroke: isDark ? 'white' : 'black',
                   strokeOpacity: 0,
                   strokeWidth: 5,
                 }}
@@ -205,7 +207,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 width={977.493}
                 height={977.493}
                 style={{
-                  fill: 'white',
+                  fill: 'none',
                   fillOpacity: 0,
                 }}
               />
@@ -214,7 +216,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                   d="M512,700.897L512,753.023"
                   style={{
                     fill: 'none',
-                    stroke: 'rgb(0,1,0)',
+                    stroke: isDark ? 'white' : 'black',
                     strokeWidth: 5,
                   }}
                 />
@@ -226,7 +228,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 height={977.493}
                 style={{
                   fill: 'none',
-                  stroke: 'rgb(0,1,0)',
+                  stroke: isDark ? 'white' : 'black',
                   strokeOpacity: 0,
                   strokeWidth: 5,
                 }}
@@ -239,7 +241,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 width={977.493}
                 height={977.493}
                 style={{
-                  fill: 'white',
+                  fill: 'none',
                   fillOpacity: 0,
                 }}
               />
@@ -248,7 +250,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                   d="M512,700.897L512,753.023"
                   style={{
                     fill: 'none',
-                    stroke: 'rgb(0,1,0)',
+                    stroke: isDark ? 'white' : 'black',
                     strokeWidth: 5,
                   }}
                 />
@@ -260,7 +262,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 height={977.493}
                 style={{
                   fill: 'none',
-                  stroke: 'rgb(0,1,0)',
+                  stroke: isDark ? 'white' : 'black',
                   strokeOpacity: 0,
                   strokeWidth: 5,
                 }}
@@ -273,7 +275,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 width={977.493}
                 height={977.493}
                 style={{
-                  fill: 'white',
+                  fill: 'none',
                   fillOpacity: 0,
                 }}
               />
@@ -282,7 +284,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                   d="M512,700.897L512,753.023"
                   style={{
                     fill: 'none',
-                    stroke: 'rgb(0,1,0)',
+                    stroke: isDark ? 'white' : 'black',
                     strokeWidth: 5,
                   }}
                 />
@@ -294,7 +296,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 height={977.493}
                 style={{
                   fill: 'none',
-                  stroke: 'rgb(0,1,0)',
+                  stroke: isDark ? 'white' : 'black',
                   strokeOpacity: 0,
                   strokeWidth: 5,
                 }}
@@ -307,7 +309,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 width={977.493}
                 height={977.493}
                 style={{
-                  fill: 'white',
+                  fill: 'none',
                   fillOpacity: 0,
                 }}
               />
@@ -316,7 +318,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                   d="M512,700.897L512,753.023"
                   style={{
                     fill: 'none',
-                    stroke: 'rgb(0,1,0)',
+                    stroke: isDark ? 'white' : 'black',
                     strokeWidth: 5,
                   }}
                 />
@@ -328,7 +330,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 height={977.493}
                 style={{
                   fill: 'none',
-                  stroke: 'rgb(0,1,0)',
+                  stroke: isDark ? 'white' : 'black',
                   strokeOpacity: 0,
                   strokeWidth: 5,
                 }}
@@ -341,7 +343,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 width={977.493}
                 height={977.493}
                 style={{
-                  fill: 'white',
+                  fill: 'none',
                   fillOpacity: 0,
                 }}
               />
@@ -350,7 +352,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                   d="M512,700.897L512,753.023"
                   style={{
                     fill: 'none',
-                    stroke: 'rgb(0,1,0)',
+                    stroke: isDark ? 'white' : 'black',
                     strokeWidth: 5,
                   }}
                 />
@@ -362,7 +364,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 height={977.493}
                 style={{
                   fill: 'none',
-                  stroke: 'rgb(0,1,0)',
+                  stroke: isDark ? 'white' : 'black',
                   strokeOpacity: 0,
                   strokeWidth: 5,
                 }}
@@ -375,7 +377,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 width={977.493}
                 height={977.493}
                 style={{
-                  fill: 'white',
+                  fill: 'none',
                   fillOpacity: 0,
                 }}
               />
@@ -384,7 +386,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                   d="M512,700.897L512,753.023"
                   style={{
                     fill: 'none',
-                    stroke: 'rgb(0,1,0)',
+                    stroke: isDark ? 'white' : 'black',
                     strokeWidth: 5,
                   }}
                 />
@@ -396,7 +398,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 height={977.493}
                 style={{
                   fill: 'none',
-                  stroke: 'rgb(0,1,0)',
+                  stroke: isDark ? 'white' : 'black',
                   strokeOpacity: 0,
                   strokeWidth: 5,
                 }}
@@ -409,7 +411,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 width={977.493}
                 height={977.493}
                 style={{
-                  fill: 'white',
+                  fill: 'none',
                   fillOpacity: 0,
                 }}
               />
@@ -418,7 +420,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                   d="M512,700.897L512,753.023"
                   style={{
                     fill: 'none',
-                    stroke: 'rgb(0,1,0)',
+                    stroke: isDark ? 'white' : 'black',
                     strokeWidth: 5,
                   }}
                 />
@@ -430,7 +432,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 height={977.493}
                 style={{
                   fill: 'none',
-                  stroke: 'rgb(0,1,0)',
+                  stroke: isDark ? 'white' : 'black',
                   strokeOpacity: 0,
                   strokeWidth: 5,
                 }}
@@ -443,7 +445,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 width={977.493}
                 height={977.493}
                 style={{
-                  fill: 'white',
+                  fill: 'none',
                   fillOpacity: 0,
                 }}
               />
@@ -452,7 +454,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                   d="M512,700.897L512,753.023"
                   style={{
                     fill: 'none',
-                    stroke: 'rgb(0,1,0)',
+                    stroke: isDark ? 'white' : 'black',
                     strokeWidth: 5,
                   }}
                 />
@@ -464,7 +466,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 height={977.493}
                 style={{
                   fill: 'none',
-                  stroke: 'rgb(0,1,0)',
+                  stroke: isDark ? 'white' : 'black',
                   strokeOpacity: 0,
                   strokeWidth: 5,
                 }}
@@ -548,7 +550,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
             r={457.885}
             style={{
               fill: 'none',
-              stroke: 'black',
+              stroke: isDark ? 'white' : 'black',
               strokeWidth: '4.68px',
             }}
           />
@@ -561,7 +563,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
             width={977.493}
             height={977.493}
             style={{
-              fill: 'white',
+              fill: 'none',
               fillOpacity: 0,
             }}
           />
@@ -571,7 +573,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 d="M526.104,71.246L526.104,573.46"
                 style={{
                   fill: 'none',
-                  stroke: 'black',
+                  stroke: isDark ? 'white' : 'black',
                   strokeWidth: '27.94px',
                 }}
               />
@@ -585,7 +587,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
             height={977.493}
             style={{
               fill: 'none',
-              stroke: 'rgb(255,1,0)',
+              stroke: 'rgb(255,0,0)',
               strokeOpacity: 0,
               strokeWidth: 5,
             }}
@@ -609,7 +611,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 d="M526.104,71.246L526.104,573.46"
                 style={{
                   fill: 'none',
-                  stroke: 'black',
+                  stroke: isDark ? 'white' : 'black',
                   strokeWidth: '27.94px',
                 }}
               />
@@ -623,7 +625,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
             height={977.493}
             style={{
               fill: 'none',
-              stroke: 'rgb(255,1,0)',
+              stroke: 'none',
               strokeOpacity: 0,
               strokeWidth: 5,
             }}
@@ -637,7 +639,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
             width={977.493}
             height={977.493}
             style={{
-              fill: 'white',
+              fill: 'none',
               fillOpacity: 0,
             }}
           />
@@ -647,7 +649,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
                 d="M526.104,71.246L526.104,573.46"
                 style={{
                   fill: 'none',
-                  stroke: 'rgb(255,1,0)',
+                  stroke: 'rgb(255,0,0)',
                   strokeWidth: '4.66px',
                 }}
               />
@@ -661,7 +663,7 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
             height={977.493}
             style={{
               fill: 'none',
-              stroke: 'rgb(255,1,0)',
+              stroke: 'none',
               strokeOpacity: 0,
               strokeWidth: 5,
             }}
