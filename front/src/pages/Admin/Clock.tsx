@@ -57,7 +57,7 @@ const Clock: React.FC = () => {
 
       {type === 'analog' && (
         <Box p="md" color="black" mt="md" rounded="lg">
-          <ConfigSwitch label="Smooth seconds movement" name="smooth" context="clock" additionalData={additionalData} />
+          {/*<ConfigSwitch label="Smooth seconds movement" name="smooth" context="clock" additionalData={additionalData} />*/}
           <ConfigSelect
             additionalData={additionalData}
             context="clock"
