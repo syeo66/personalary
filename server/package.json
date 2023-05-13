@@ -15,7 +15,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
-    "@types/node": "^18.11.9",
+    "@types/node": "18.16.8",
     "@types/ramda": "^0.28.15",
     "@types/ws": "^8.5.3",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
