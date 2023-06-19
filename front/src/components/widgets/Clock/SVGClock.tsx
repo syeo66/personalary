@@ -31,7 +31,6 @@ const SVGClock: React.FC<SVGClockProps> = ({ config }) => {
   const hoursDeg = ((time.getHours() % 12) * 60 + time.getMinutes()) * 0.5
   const minutesDeg = (time.getMinutes() * 60 + time.getSeconds()) * 0.1
   const secondsDeg = time.getSeconds() * 6
-  console.log(time, time.getSeconds(), secondsDeg)
 
   return (
     <Clock>
