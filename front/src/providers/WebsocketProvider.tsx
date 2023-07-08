@@ -16,9 +16,7 @@ const WebsocketProvider: React.FC<PropsWithChildren> = ({ children }) => {
     }
 
     isConnecting.current = true
-    const socket = new WebSocket(
-      import.meta.env.VITE_APP_WS_URL || process.env.REACT_APP_WS_URL || `ws://${document.location.host}`
-    )
+    const socket = new WebSocket(import.meta.env.VITE_APP_WS_URL || `ws://${document.location.host}`)
 
     socket.onopen = () => {
       setWs(socket)

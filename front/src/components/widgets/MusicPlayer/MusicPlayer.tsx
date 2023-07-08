@@ -74,7 +74,7 @@ interface PlayerProps {
 }
 const Player = styled.div<PlayerProps>`
   border: 1px solid white;
-  padding 1rem;
+  padding: 1rem;
   border-radius: 0.5rem;
   background-color: rgba(0, 0, 0, 0.75);
   gap: 0.5rem;
