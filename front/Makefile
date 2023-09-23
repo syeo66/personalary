@@ -7,11 +7,11 @@ help:
 SRCFILES=$(shell find src -type f)
 
 build: node_modules $(SRCFILES)
-	yarn build
+	npm run build
 	touch build
 
 start: node_modules
-	PORT=8001 yarn start
+	PORT=8001 npm run start
 
 clean: node_modules
 	rm -rf build
@@ -20,10 +20,10 @@ distclean: clean
 	rm -rf node_modules
 
 test: node_modules
-	yarn test
+	npm run test
 
 ######################################################################
 
-node_modules : yarn.lock package.json
-	yarn install
+node_modules : package-lock.json package.json
+	npm install
 	touch node_modules

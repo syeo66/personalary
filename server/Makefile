@@ -6,18 +6,18 @@ help:
 build: build/index.js
 
 build/index.js: node_modules
-	yarn build
+	npm run build
 	touch build
 
 clean:
 	rm -rf build/*
 
 serve: build
-	yarn serve
+	npm run serve
 
 start: node_modules
-	yarn dev
+	npm run dev
 
-node_modules : yarn.lock package.json
-	yarn
+node_modules : package-lock.json package.json
+	npm install
 	touch node_modules
