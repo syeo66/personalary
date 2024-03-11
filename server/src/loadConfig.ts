@@ -2,7 +2,7 @@ import 'dotenv/config'
 
 import fs from 'fs'
 import os from 'os'
-import { mergeDeepLeft, pipe } from 'ramda'
+import { mergeDeepLeft } from 'ramda'
 
 import configuration from './config.json'
 import spotifyRemoteConfig from './configs/spotifyRemoteConfig'
@@ -56,12 +56,9 @@ const loadConfig: () => ConfigType = () => {
 
   const dynamicConfig = { musicPlayer: { isAuthorized } }
 
-  const mergedConfig = pipe(
-    mergeDeepLeft(envConfig),
-    mergeDeepLeft(userConfig),
-    mergeDeepLeft(dynamicConfig),
-    Config.parse
-  )(parsedConfig)
+  const mergedConfig = Config.parse(
+    mergeDeepLeft(dynamicConfig)(mergeDeepLeft(userConfig)(mergeDeepLeft(envConfig)(parsedConfig)))
+  )
 
   return mergedConfig
 }
