@@ -5,6 +5,15 @@
     "rotationInterval": 180,
     "service": "NasaApotd"
   },
+  "clock": {
+    "dateFormat": "E, dd.MM.yyyy",
+    "enabled": true,
+    "position": "bottom-right",
+    "smooth": false,
+    "style": "light",
+    "timeFormat": "HH:mm",
+    "type": "analog"
+  },
   "messages": {
     "dateFormat": "dd.MM.yyyy HH:mm:ss",
     "refetchInterval": 600,
@@ -12,20 +21,11 @@
     "service": "CsvDownload",
     "url": ""
   },
-  "clock": {
-    "enabled": true,
-    "type": "analog",
-    "style": "light",
-    "dateFormat": "E, dd.MM.yyyy",
-    "position": "bottom-right",
-    "timeFormat": "HH:mm",
-    "smooth": false
-  },
   "musicPlayer": {
-    "service": "SpotifyRemote",
+    "enabled": true,
     "position": "bottom-left",
-    "small": false,
-    "enabled": true
+    "service": "SpotifyRemote",
+    "small": false
   },
   "weather": {
     "enabled": true,
