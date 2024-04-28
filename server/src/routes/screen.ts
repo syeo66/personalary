@@ -15,6 +15,9 @@ export const screenGet: RequestHandler = async (req, res) => {
   const { id } = req.params
   const db = await connectDb()
   const result = await db.get<Screen>('SELECT * FROM Screen WHERE id = ?', [id])
+  if (!result) {
+    return res.status(404).send({ message: 'Screen not found' })
+  }
   return res.send(result)
 }
 
