@@ -1,5 +1,4 @@
 import os from 'os'
-import path from 'path'
 import { open } from 'sqlite'
 import sqlite3 from 'sqlite3'
 
@@ -18,7 +17,6 @@ const connectDb = async () =>
   const db = await connectDb()
 
   console.log('Connected to database', DB_PATH)
-  console.log(path.join(process.cwd(), 'migrations'))
 
   await db.migrate()
 })()
