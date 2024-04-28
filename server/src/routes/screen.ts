@@ -30,7 +30,6 @@ export const screenCreate: RequestHandler = async (req, res) => {
 
 export const screenDelete: RequestHandler = async (req, res) => {
   const { id } = req.params
-  console.log(id)
   const db = await connectDb()
   await db.run('DELETE FROM Screen WHERE id = ?', [id])
   return res.send({ status: 'OK' })
