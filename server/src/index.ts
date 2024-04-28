@@ -9,7 +9,7 @@ import adminGet from './routes/adminGet'
 import adminPut from './routes/adminPut'
 import adminSpotifyAuth from './routes/adminSpotifyAuth'
 import adminSpotifyRemoveAuth from './routes/adminSpotifyRemoveAuth'
-import { screenCreate, screenDelete, screenList } from './routes/screen'
+import { screenCreate, screenDelete, screenGet, screenList, screenUpdate } from './routes/screen'
 
 // Initialize the express engine
 const app: express.Application = express()
@@ -53,6 +53,8 @@ app.put('/api/admin', adminPut)
 
 app.get('/api/admin/screen', screenList)
 app.post('/api/admin/screen', screenCreate)
+app.get('/api/admin/screen/:id', screenGet)
+app.put('/api/admin/screen/:id', screenUpdate)
 app.delete('/api/admin/screen/:id', screenDelete)
 
 /* final catch-all route to index.html defined last */

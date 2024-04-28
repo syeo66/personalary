@@ -1,0 +1,11 @@
+meta {
+  name: Get single screen
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{protocol}}://{{host}}/api/admin/screen/{{id}}
+  body: none
+  auth: none
+}
