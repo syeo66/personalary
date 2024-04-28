@@ -1,0 +1,15 @@
+meta {
+  name: Get screens
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{protocol}}://{{host}}/api/admin/screen
+  body: none
+  auth: none
+}
+
+vars:post-response {
+  id: res.body.items?.[0]?.id
+}

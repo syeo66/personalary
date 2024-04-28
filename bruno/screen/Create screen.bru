@@ -1,0 +1,22 @@
+meta {
+  name: Create screen
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{protocol}}://{{host}}/api/admin/screen
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Testscreen",
+    "type": "legacy"
+  }
+}
+
+vars:post-response {
+  id: res.body.id
+}
