@@ -1,7 +1,7 @@
 meta {
   name: Create screen
   type: http
-  seq: 2
+  seq: 3
 }
 
 post {
@@ -19,4 +19,8 @@ body:json {
 
 vars:post-response {
   id: res.body.id
+}
+
+assert {
+  res.body.name: eq Testscreen
 }
