@@ -40,7 +40,12 @@ export const sceneCreate: RequestHandler = async (req, res) => {
     triggerData,
     active,
   ])
-  return res.status(201).send({ id: result.lastID, name, triggerType, active })
+
+  if (!result.lastID) {
+    return res.status(500).send({ error: 'Could not create scene' })
+  }
+
+  return res.status(201).send({ id: result.lastID, name, triggerType, active, triggerData } satisfies Scene)
 }
 
 // ----------------------------------------------------------------------------
@@ -54,19 +59,17 @@ export const sceneUpdate: RequestHandler = async (req, res) => {
     return res.status(400).send(scene.error)
   }
 
-  const { name, triggerType, active } = scene.data
+  const { name, triggerType, triggerData, active } = scene.data
   const db = await connectDb()
-  const { changes } = await db.run('UPDATE Scene SET name = ?, triggerType = ?, active = ? WHERE id = ?', [
-    name,
-    triggerType,
-    active,
-    id,
-  ])
+  const { changes } = await db.run(
+    'UPDATE Scene SET name = ?, triggerType = ?, triggerData = ?, active = ? WHERE id = ?',
+    [name, triggerType, triggerData, active, id]
+  )
   if (!changes) {
     return res.status(404).send({ error: 'Scene not found' })
   }
 
-  return res.send({ id, name, triggerType, active })
+  return res.send({ id: Number(id), name, triggerType, triggerData, active } satisfies Scene)
 }
 
 // ----------------------------------------------------------------------------
