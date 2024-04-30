@@ -23,7 +23,6 @@ export const screenGet: RequestHandler = async (req, res) => {
 
 // ----------------------------------------------------------------------------
 
-// TODO: create an union type for different trigger types
 const updateScreenSchema = screenSchema.omit({ id: true })
 
 export const screenCreate: RequestHandler = async (req, res) => {
