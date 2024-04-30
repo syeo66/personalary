@@ -1,0 +1,15 @@
+meta {
+  name: Get scenes
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{protocol}}://{{host}}/api/admin/scene
+  body: none
+  auth: none
+}
+
+vars:post-response {
+  id: res.body.items?.[0]?.id
+}

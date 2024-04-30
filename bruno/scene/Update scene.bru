@@ -1,0 +1,20 @@
+meta {
+  name: Update scene
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{protocol}}://{{host}}/api/admin/scene/{{id}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Updated scene",
+    "triggerType": "datetime",
+    "triggerData": "",
+    "active": true
+  }
+}

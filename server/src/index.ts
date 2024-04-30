@@ -9,6 +9,7 @@ import adminGet from './routes/adminGet'
 import adminPut from './routes/adminPut'
 import adminSpotifyAuth from './routes/adminSpotifyAuth'
 import adminSpotifyRemoveAuth from './routes/adminSpotifyRemoveAuth'
+import { sceneCreate, sceneDelete, sceneGet, sceneList, sceneUpdate } from './routes/scene'
 import { screenCreate, screenDelete, screenGet, screenList, screenUpdate } from './routes/screen'
 
 // Initialize the express engine
@@ -56,6 +57,12 @@ app.post('/api/admin/screen', screenCreate)
 app.get('/api/admin/screen/:id', screenGet)
 app.put('/api/admin/screen/:id', screenUpdate)
 app.delete('/api/admin/screen/:id', screenDelete)
+
+app.get('/api/admin/scene', sceneList)
+app.post('/api/admin/scene', sceneCreate)
+app.get('/api/admin/scene/:id', sceneGet)
+app.put('/api/admin/scene/:id', sceneUpdate)
+app.delete('/api/admin/scene/:id', sceneDelete)
 
 /* final catch-all route to index.html defined last */
 app.get('/*', (_req, res) => {

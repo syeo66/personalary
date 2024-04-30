@@ -12,3 +12,14 @@ export const screenSchema = z.object({
   type: z.enum(['legacy']),
 })
 export type Screen = z.infer<typeof screenSchema>
+
+export const sceneSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+
+  triggerType: z.enum(['time', 'datetime']),
+  triggerData: z.string(),
+
+  active: z.boolean(),
+})
+export type Scene = z.infer<typeof sceneSchema>
