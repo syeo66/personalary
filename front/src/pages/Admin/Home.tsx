@@ -6,6 +6,15 @@ const Home: React.FC = () => {
     <>
       <h2>Personalary Admin Interface</h2>
       <p>Here you can customize your smart picture frame.</p>
+
+      <ul>
+        <li>
+          <Link to="scenes">Scenes</Link>: Manage your scenes.
+        </li>
+      </ul>
+
+      <hr />
+
       <ul>
         <li>
           <Link to="clock">Clock</Link>: Set the clock style.

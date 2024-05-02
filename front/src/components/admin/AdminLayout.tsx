@@ -11,6 +11,10 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => (
     </AdminHeader>
 
     <AdminSidebar className="drac-text-orange">
+      <StyledNavLink className="drac-text-orange" to="scenes">
+        Scenes
+      </StyledNavLink>
+      <hr />
       <StyledNavLink className="drac-text-orange" to="clock">
         Clock
       </StyledNavLink>
