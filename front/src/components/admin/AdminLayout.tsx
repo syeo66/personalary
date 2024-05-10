@@ -1,5 +1,3 @@
-import 'dracula-ui/styles/dracula-ui.css'
-
 import React, { PropsWithChildren } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import styled from 'styled-components'
@@ -47,7 +45,7 @@ const StyledNavLink = styled(NavLink)`
   margin-right: 0.5rem;
 
   &.active {
-    color: var(--pink);
+    color: var(--color-primary);
   }
 
   @media (min-width: 768px) {
@@ -76,7 +74,7 @@ const AdminPage = styled.div`
   color: #fff;
 
   & a {
-    color: var(--orange);
+    color: var(--color-secondary);
     text-decoration: none;
   }
 `
@@ -85,6 +83,7 @@ const AdminHeader = styled.header`
   font-size: 1.75rem;
   font-weight: bold;
   grid-area: header;
+  background: linear-gradient(in oklab 45deg, var(--color-primary), var(--color-tertiary));
 
   & a {
     color: #333;
