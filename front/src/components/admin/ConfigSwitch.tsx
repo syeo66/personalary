@@ -1,5 +1,5 @@
-import { Box, Switch } from 'dracula-ui'
 import React, { ChangeEventHandler, useCallback } from 'react'
+import styled from 'styled-components'
 
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 import useSendSettings from '../../pages/Admin/hooks/useSendSettings'
@@ -28,13 +28,59 @@ const ConfigSwitch: React.FC<ConfigSwitchProps> = ({ name, context, additionalDa
   }
 
   return (
-    <Box mb={last ? 'none' : 'md'}>
-      <Switch checked={enabled} color="orange" defaultChecked={enabled} id={name} name={name} onChange={handleChange} />
-      <label htmlFor={name} className="drac-text drac-text-white">
-        {label}
-      </label>
-    </Box>
+    <FieldContainer>
+      <Switch
+        checked={enabled}
+        defaultChecked={enabled}
+        id={name}
+        name={name}
+        onChange={handleChange}
+        type="checkbox"
+      />
+      <label htmlFor={name}>{label}</label>
+    </FieldContainer>
   )
 }
+
+const Switch = styled.input`
+  width: 2rem;
+  height: 1rem;
+  appearance: none;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    display: block;
+    background-color: white;
+    border-radius: 0.5rem;
+    width: 2rem;
+    height: 1rem;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    background-color: ${({ checked }) => (checked ? 'var(--color-primary)' : 'var(--color-secondary)')};
+    border-radius: 0.5rem;
+    width: calc(1rem - 2px);
+    height: calc(1rem - 2px);
+    border: white solid 1px;
+    transform: translateX(${({ checked }) => (checked ? 1 : 0)}rem) translateY(-100%);
+    transition:
+      transform 0.25s ease,
+      background 0.25s ease;
+  }
+`
+
+const FieldContainer = styled.div`
+  display: flex;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+  align-items: center;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`
 
 export default ConfigSwitch
