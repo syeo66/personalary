@@ -74,7 +74,7 @@ const AdminPage = styled.div`
   color: #fff;
 
   & a {
-    color: var(--color-secondary);
+    color: var(--color-primary);
     text-decoration: none;
   }
 `
