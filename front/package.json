@@ -18,7 +18,7 @@
     "react-router-dom": "6",
     "styled-components": "^6.0.2",
     "stylis": "^4.3.0",
-    "web-vitals": "^3.0.0",
+    "web-vitals": "^4.0.0",
     "zod": "^3.17.10"
   },
   "scripts": {
@@ -48,7 +48,7 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.10",
     "@testing-library/react": "^15.0.6",
     "@vitejs/plugin-react": "^4.0.0",
-    "eslint": "^8.20.0",
+    "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-import": "^2.26.0",
