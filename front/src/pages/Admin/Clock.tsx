@@ -43,7 +43,7 @@ const Clock: React.FC = () => {
       </Box>
 
       {type === 'digital' && (
-        <Box p="md" color="black" mt="md" rounded="lg">
+        <Box>
           <ConfigSelect
             additionalData={additionalData}
             context="clock"
@@ -56,7 +56,7 @@ const Clock: React.FC = () => {
       )}
 
       {type === 'analog' && (
-        <Box p="md" color="black" mt="md" rounded="lg">
+        <Box>
           {/*<ConfigSwitch label="Smooth seconds movement" name="smooth" context="clock" additionalData={additionalData} />*/}
           <ConfigSelect
             additionalData={additionalData}
@@ -70,7 +70,7 @@ const Clock: React.FC = () => {
       )}
 
       {type === 'binary' && (
-        <Box p="md" color="black" mt="md" rounded="lg">
+        <Box>
           <ConfigSelect
             additionalData={additionalData}
             context="clock"

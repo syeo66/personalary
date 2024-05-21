@@ -1,4 +1,3 @@
-import { Box, Select } from 'dracula-ui'
 import React, { ChangeEventHandler, useCallback } from 'react'
 import styled from 'styled-components'
 
@@ -13,7 +12,7 @@ interface ConfigSelectProps {
   name: string
   options: { label: string; value: string }[]
 }
-const ConfigSelect: React.FC<ConfigSelectProps> = ({ context, name, additionalData, options, label, last }) => {
+const ConfigSelect: React.FC<ConfigSelectProps> = ({ context, name, additionalData, options, label }) => {
   const { data, isLoading } = useAdminDataQuery()
 
   const sendSettings = useSendSettings()
@@ -29,9 +28,9 @@ const ConfigSelect: React.FC<ConfigSelectProps> = ({ context, name, additionalDa
   }
 
   return (
-    <Box mb={last ? 'none' : 'md'}>
-      <Label htmlFor="position">{label}</Label>
-      <Select color="white" id="position" name="position" onChange={handleChange} value={selected} mt="xs">
+    <FieldContainer>
+      <Label htmlFor={name}>{label}</Label>
+      <Select id={name} name={name} onChange={handleChange} value={selected}>
         <option value="default" disabled={true}>
           Select option
         </option>
@@ -41,10 +40,36 @@ const ConfigSelect: React.FC<ConfigSelectProps> = ({ context, name, additionalDa
           </option>
         ))}
       </Select>
-    </Box>
+    </FieldContainer>
   )
 }
 
-const Label = styled.label``
+const Label = styled.label`
+  display: block;
+  margin-bottom: 0.2rem;
+`
+const Select = styled.select`
+  padding: 0.2rem;
+  background: black;
+  border-radius: 0.2rem;
+  font-size: 1rem;
+  color: white;
+  border: 2px solid var(--color-secondary);
+  outline: none;
+  transition: border 0.2s ease-in-out;
+
+  &:focus {
+    border: 2px solid var(--color-primary);
+  }
+`
+const FieldContainer = styled.div`
+  display: block;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`
 
 export default ConfigSelect

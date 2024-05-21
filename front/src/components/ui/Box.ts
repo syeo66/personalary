@@ -6,6 +6,10 @@ const Box = styled.div`
   padding: 1rem;
   background: rgba(0, 0, 0, 0.8);
   border-radius: 0.5rem;
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
 `
 
 export default Box
