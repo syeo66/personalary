@@ -9,25 +9,13 @@ const AdminLayout: React.FC<PropsWithChildren> = ({ children }) => (
     </AdminHeader>
 
     <AdminSidebar className="drac-text-orange">
-      <StyledNavLink className="drac-text-orange" to="scenes">
-        Scenes
-      </StyledNavLink>
+      <StyledNavLink to="scenes">Scenes</StyledNavLink>
       <hr />
-      <StyledNavLink className="drac-text-orange" to="clock">
-        Clock
-      </StyledNavLink>
-      <StyledNavLink className="drac-text-orange" to="background">
-        Background
-      </StyledNavLink>
-      <StyledNavLink className="drac-text-orange" to="messages">
-        Messages
-      </StyledNavLink>
-      <StyledNavLink className="drac-text-orange" to="weather">
-        Weather
-      </StyledNavLink>
-      <StyledNavLink className="drac-text-orange" to="musicplayer">
-        Music Player
-      </StyledNavLink>
+      <StyledNavLink to="clock">Clock</StyledNavLink>
+      <StyledNavLink to="background">Background</StyledNavLink>
+      <StyledNavLink to="messages">Messages</StyledNavLink>
+      <StyledNavLink to="weather">Weather</StyledNavLink>
+      <StyledNavLink to="musicplayer">Music Player</StyledNavLink>
     </AdminSidebar>
 
     <AdminContent>{children}</AdminContent>
@@ -43,9 +31,18 @@ const StyledNavLink = styled(NavLink)`
   font-weight: bold;
   text-decoration: none;
   margin-right: 0.5rem;
+  transition: color 0.2s ease-in-out;
+
+  &:not(.active) {
+    color: var(--color-secondary);
+  }
 
   &.active {
     color: var(--color-primary);
+  }
+
+  &:hover {
+    color: var(--color-tertiary);
   }
 
   @media (min-width: 768px) {

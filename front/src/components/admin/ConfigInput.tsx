@@ -1,5 +1,5 @@
-import { Box, Input } from 'dracula-ui'
 import React, { ChangeEventHandler, FocusEventHandler, useCallback, useEffect, useRef, useState } from 'react'
+import styled from 'styled-components'
 
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 import useSendSettings from '../../pages/Admin/hooks/useSendSettings'
@@ -34,7 +34,7 @@ const ConfigInput: React.FC<ConfigInputProps> = ({ context, name, placeholder, l
   }, [])
 
   const handleBlur = useCallback<FocusEventHandler<HTMLInputElement>>(
-    (e) => sendSettings.mutate({ [context]: { [name]: value, ...additionalData } }),
+    () => sendSettings.mutate({ [context]: { [name]: value, ...additionalData } }),
     [additionalData, context, name, sendSettings, value]
   )
 
@@ -43,22 +43,51 @@ const ConfigInput: React.FC<ConfigInputProps> = ({ context, name, placeholder, l
   }
 
   return (
-    <Box mb="none">
-      <label htmlFor={name} className="drac-text drac-text-white">
-        {label}
-      </label>
+    <FieldContainer>
+      <Label htmlFor={name}>{label}</Label>
       <Input
-        color="white"
         id={name}
-        mt="xs"
         name={name}
         onBlur={handleBlur}
         onChange={handleChange}
         placeholder={placeholder}
         value={value}
       />
-    </Box>
+    </FieldContainer>
   )
 }
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 0.2rem;
+`
+
+const Input = styled.input`
+  padding: 0.2rem;
+  background: black;
+  border-radius: 0.2rem;
+  font-size: 1rem;
+  color: white;
+  border: 2px solid var(--color-secondary);
+  outline: none;
+  transition: border 0.2s ease-in-out;
+  min-width: 20rem;
+  transition: min-width 0.2s ease-in-out;
+
+  &:focus {
+    border: 2px solid var(--color-primary);
+    min-width: calc(100% - 1rem);
+  }
+`
+
+const FieldContainer = styled.div`
+  display: block;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`
 
 export default ConfigInput
