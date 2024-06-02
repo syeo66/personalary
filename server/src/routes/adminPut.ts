@@ -13,7 +13,9 @@ const adminPut: RequestHandler = (req, res) => {
     try {
       userConfig = JSON.parse(userConfigString)
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(`Could not parse user config file at ${USER_CONFIG_PATH}`)
+      // eslint-disable-next-line no-console
       console.error(err)
     }
   }
