@@ -1,4 +1,3 @@
-import { Box, Button } from 'dracula-ui'
 import React, { useCallback, useEffect, useRef } from 'react'
 import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
@@ -6,7 +5,9 @@ import { useNavigate } from 'react-router-dom'
 import ConfigSelect from '../../components/admin/ConfigSelect'
 import ConfigSwitch from '../../components/admin/ConfigSwitch'
 import DataDebug from '../../components/admin/DataDebug'
+import Button from '../../components/Button'
 import Loader from '../../components/Loader'
+import Box from '../../components/ui/Box'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 import { positions } from './data'
 import { API_URL } from './hooks/useSendSettings'
@@ -89,11 +90,11 @@ const MusicPlayer: React.FC = () => {
 
   return (
     <>
-      <Box p="md" color="black" mt="md" rounded="lg">
+      <Box>
         {!isAuthorized && <Button onClick={handleClick}>Connect Spotify</Button>}
         {isAuthorized && <Button onClick={handleDisconnectClick}>Disconnect Spotify</Button>}
       </Box>
-      <Box p="md" color="black" mt="md" rounded="lg">
+      <Box>
         <ConfigSwitch label="Enabled" name="enabled" context="musicPlayer" />
         <ConfigSelect context="musicPlayer" label="Position" name="position" options={positions} />
         <ConfigSwitch label="Small player interface" name="small" context="musicPlayer" last />

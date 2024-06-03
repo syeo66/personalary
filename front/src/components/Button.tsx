@@ -1,26 +1,29 @@
 import styled from 'styled-components'
 
 const Button = styled.button`
-  background: white;
+  background: var(--color-primary);
   border-radius: 0.25rem;
-  border: 2px solid rgb(16, 16, 214);
-  color: rgb(16, 16, 214);
+  border: 0 none transparent;
   cursor: pointer;
+  color: black;
   font-weight: bold;
-  padding: 0.25rem 0.5rem;
-  transition: transform 250ms, background 250ms, box-shadow 250ms;
-  box-shadow: 0 0 6px rgba(16, 16, 214, 0.8);
+  padding: 0.5rem 0.75rem;
+  transition:
+    transform 250ms,
+    background 250ms,
+    box-shadow 250ms;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
 
   &:hover {
     transform: translateY(-1px);
-    background: rgba(16, 16, 214, 0.1);
-    box-shadow: 0 4px 8px rgba(16, 16, 214, 0.6);
+    background: var(--color-tertiary);
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.4);
   }
 
   &:active {
     transform: translateY(2px);
-    background: rgba(16, 16, 214, 0.2);
-    box-shadow: 0 0 3px rgba(16, 16, 214, 0.9);
+    background: var(--color-secondary);
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.4);
   }
 `
 
