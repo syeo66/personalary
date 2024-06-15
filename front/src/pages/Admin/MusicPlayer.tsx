@@ -8,6 +8,7 @@ import DataDebug from '../../components/admin/DataDebug'
 import Button from '../../components/Button'
 import Loader from '../../components/Loader'
 import Box from '../../components/ui/Box'
+import PageTitle from '../../components/ui/PageTitle'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 import { positions } from './data'
 import { API_URL } from './hooks/useSendSettings'
@@ -90,6 +91,7 @@ const MusicPlayer: React.FC = () => {
 
   return (
     <>
+      <PageTitle>Music Player</PageTitle>
       <Box>
         {!isAuthorized && <Button onClick={handleClick}>Connect Spotify</Button>}
         {isAuthorized && <Button onClick={handleDisconnectClick}>Disconnect Spotify</Button>}

@@ -6,6 +6,7 @@ import ConfigSwitch from '../../components/admin/ConfigSwitch'
 import DataDebug from '../../components/admin/DataDebug'
 import Loader from '../../components/Loader'
 import Box from '../../components/ui/Box'
+import PageTitle from '../../components/ui/PageTitle'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 import { positions } from './data'
 
@@ -22,6 +23,8 @@ const Clock: React.FC = () => {
 
   return (
     <>
+      <PageTitle>Clock</PageTitle>
+
       <Box>
         <ConfigSwitch label="Enabled" name="enabled" context="clock" additionalData={additionalData} />
         <ConfigSelect context="clock" label="Clock type" name="type" options={clockTypes} />

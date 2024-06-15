@@ -6,6 +6,7 @@ import ConfigSwitch from '../../components/admin/ConfigSwitch'
 import DataDebug from '../../components/admin/DataDebug'
 import Loader from '../../components/Loader'
 import Box from '../../components/ui/Box'
+import PageTitle from '../../components/ui/PageTitle'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 import { positions } from './data'
 
@@ -18,6 +19,7 @@ const Weather: React.FC = () => {
 
   return (
     <>
+      <PageTitle>Weather</PageTitle>
       <Box>
         <ConfigSwitch label="Enabled" name="enabled" context="weather" />
         <ConfigSelect context="weather" label="Position" name="position" options={positions} />

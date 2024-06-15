@@ -1,27 +1,33 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import React, { lazy, Suspense } from 'react'
+import { Route, Routes } from 'react-router'
 
 import AdminLayout from '../../components/admin/AdminLayout'
-import Background from './Background'
-import Clock from './Clock'
-import Home from './Home'
-import Messages from './Messages'
-import MusicPlayer from './MusicPlayer'
-import Scenes from './Scenes'
-import Weather from './Weather'
+import Loader from '../../components/Loader'
+
+const Background = lazy(() => import('./Background'))
+const Clock = lazy(() => import('./Clock'))
+const Home = lazy(() => import('./Home'))
+const Messages = lazy(() => import('./Messages'))
+const MusicPlayer = lazy(() => import('./MusicPlayer'))
+const ScenesList = lazy(() => import('./ScenesList'))
+const SceneCreate = lazy(() => import('./SceneCreate'))
+const Weather = lazy(() => import('./Weather'))
 
 const Admin: React.FC = () => {
   return (
     <AdminLayout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/scenes" element={<Scenes />} />
-        <Route path="/background" element={<Background />} />
-        <Route path="/clock" element={<Clock />} />
-        <Route path="/messages" element={<Messages />} />
-        <Route path="/musicplayer" element={<MusicPlayer />} />
-        <Route path="/weather" element={<Weather />} />
-      </Routes>
+      <Suspense fallback={<Loader>Loading...</Loader>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/scenes" element={<ScenesList />} />
+          <Route path="/scenes/create" element={<SceneCreate />} />
+          <Route path="/background" element={<Background />} />
+          <Route path="/clock" element={<Clock />} />
+          <Route path="/messages" element={<Messages />} />
+          <Route path="/musicplayer" element={<MusicPlayer />} />
+          <Route path="/weather" element={<Weather />} />
+        </Routes>
+      </Suspense>
     </AdminLayout>
   )
 }

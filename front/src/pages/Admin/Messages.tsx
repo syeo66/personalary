@@ -2,6 +2,7 @@ import React from 'react'
 
 import DataDebug from '../../components/admin/DataDebug'
 import Loader from '../../components/Loader'
+import PageTitle from '../../components/ui/PageTitle'
 import useAdminDataQuery from '../../hooks/admin/useAdminDataQuery'
 
 const Messages: React.FC = () => {
@@ -11,7 +12,12 @@ const Messages: React.FC = () => {
     return <Loader />
   }
 
-  return <DataDebug data={data.messages} />
+  return (
+    <>
+      <PageTitle>Messages</PageTitle>
+      <DataDebug data={data.messages} />
+    </>
+  )
 }
 
 export default Messages
