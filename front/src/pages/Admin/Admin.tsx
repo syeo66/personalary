@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from 'react'
 import { Route, Routes } from 'react-router'
 
 import AdminLayout from '../../components/admin/AdminLayout'
-import Loader from '../../components/Loader'
 
 const Background = lazy(() => import('./Background'))
 const Clock = lazy(() => import('./Clock'))
@@ -16,7 +15,7 @@ const Weather = lazy(() => import('./Weather'))
 const Admin: React.FC = () => {
   return (
     <AdminLayout>
-      <Suspense fallback={<Loader>Loading...</Loader>}>
+      <Suspense fallback={<p>Loading...</p>}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/scenes" element={<ScenesList />} />
