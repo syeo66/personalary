@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export const API_URL =
   import.meta.env.VITE_APP_ADMIN_URL || process.env.REACT_APP_ADMIN_URL || `//${document.location.host}/api/admin`
@@ -6,20 +6,18 @@ export const API_URL =
 const useSendSettings = () => {
   const queryClient = useQueryClient()
 
-  const sendSettings = useMutation(
-    (settings: Record<string, Record<string, string | boolean | number>>) => {
+  const sendSettings = useMutation({
+    mutationFn: (settings: Record<string, Record<string, string | boolean | number>>) => {
       return fetch(`${API_URL}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(settings),
       })
     },
-    {
-      onSettled: () => {
-        queryClient.invalidateQueries(['admin-data'])
-      },
-    }
-  )
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-data'] })
+    },
+  })
 
   return sendSettings
 }

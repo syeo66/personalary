@@ -1,9 +1,7 @@
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 
 import adminDataQuery from '../../queries/adminDataQuery'
 
-const useAdminDataQuery = () => {
-  return useQuery(adminDataQuery.key(), () => adminDataQuery.query())
-}
+const useAdminDataQuery = () => useQuery({ queryKey: adminDataQuery.key(), queryFn: () => adminDataQuery.query() })
 
 export default useAdminDataQuery

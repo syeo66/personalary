@@ -1,5 +1,5 @@
+import { useMutation } from '@tanstack/react-query'
 import React, { useCallback, useEffect, useRef } from 'react'
-import { useMutation } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 
 import ConfigSelect from '../../components/admin/ConfigSelect'
@@ -22,29 +22,22 @@ const MusicPlayer: React.FC = () => {
 
   const { clientId, isAuthorized } = data?.musicPlayer || {}
 
-  const sendAuth = useMutation(
-    ({ code, redirect_uri }: { code: string; redirect_uri: string }) => {
-      return fetch(`${API_URL}/spotify/auth?${new URLSearchParams({ code, redirect_uri })}`)
+  const sendAuth = useMutation({
+    mutationFn: ({ code, redirect_uri }: { code: string; redirect_uri: string }) =>
+      fetch(`${API_URL}/spotify/auth?${new URLSearchParams({ code, redirect_uri })}`),
+    onSettled: () => {
+      isSending.current = false
+      refetch()
+      navigate('/admin/musicplayer')
     },
-    {
-      onSettled: () => {
-        isSending.current = false
-        refetch()
-        navigate('/admin/musicplayer')
-      },
-    }
-  )
+  })
 
-  const removeAuth = useMutation(
-    () => {
-      return fetch(`${API_URL}/spotify/removeAuth`)
+  const removeAuth = useMutation({
+    mutationFn: () => fetch(`${API_URL}/spotify/removeAuth`),
+    onSettled: () => {
+      refetch()
     },
-    {
-      onSettled: () => {
-        refetch()
-      },
-    }
-  )
+  })
 
   useEffect(() => {
     const params = new URLSearchParams(document.location.search)
