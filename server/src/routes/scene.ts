@@ -2,7 +2,7 @@ import type { RequestHandler } from 'express'
 import { z } from 'zod'
 
 import connectDb from '../db'
-import { Scene } from '../model'
+import { Scene, triggerTypeSchema } from '../model'
 
 export const sceneList: RequestHandler = async (_req, res) => {
   const db = await connectDb()
@@ -27,7 +27,7 @@ export const sceneGet: RequestHandler = async (req, res) => {
 const updateSceneSchema = z.object({
   name: z.string(),
 
-  triggerType: z.enum(['time', 'datetime']).default('time'),
+  triggerType: triggerTypeSchema.default('static'),
   triggerData: z.string().default(''),
 
   active: z.boolean().default(true),

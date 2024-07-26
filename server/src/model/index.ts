@@ -13,11 +13,14 @@ export const screenSchema = z.object({
 })
 export type Screen = z.infer<typeof screenSchema>
 
+export const triggerTypeSchema = z.enum(['periodic', 'timeout', 'datetime', 'static'])
+export type TriggerType = z.infer<typeof triggerTypeSchema>
+
 export const sceneSchema = z.object({
   id: z.number(),
   name: z.string(),
 
-  triggerType: z.enum(['time', 'datetime']),
+  triggerType: triggerTypeSchema,
   triggerData: z.string(),
 
   active: z.boolean(),
