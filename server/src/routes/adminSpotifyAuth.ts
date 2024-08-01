@@ -45,7 +45,7 @@ const adminSpotifyAuth: RequestHandler = async (req, res) => {
     )
 
     res.json({ status: 'OK' })
-  } catch (err) {
+  } catch {
     res.status(500).json({ status: 500, error: 'something went wrong' })
   }
 }
