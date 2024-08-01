@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router'
 
 import DataDebug from '../../components/admin/DataDebug'
+import EditorList from '../../components/admin/EditorList'
 import Button from '../../components/Button'
 import Box from '../../components/ui/Box'
 import PageTitle from '../../components/ui/PageTitle'
@@ -17,6 +18,7 @@ const Scenes: React.FC = () => {
   })
 
   const handleCreateScene = useCallback(() => navigate('/admin/scenes/create'), [navigate])
+  const entries = useMemo(() => (data?.items ?? []).map((item) => ({ id: item.id, title: item.name })), [data?.items])
 
   return (
     <>
@@ -29,7 +31,7 @@ const Scenes: React.FC = () => {
       <Box>
         {isLoading && <p>Loading...</p>}
         {!isLoading && !data?.items.length && <p>No scenes found</p>}
-        <ul>{data?.items.map((scene) => <li key={scene.id}>{scene.name}</li>)}</ul>
+        <EditorList entries={entries} />
       </Box>
 
       <DataDebug data={data} />
